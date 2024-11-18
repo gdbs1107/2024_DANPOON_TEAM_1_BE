@@ -19,6 +19,9 @@ import trend.project.web.dto.companyDTO.CompanyProfileFindDTO;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
