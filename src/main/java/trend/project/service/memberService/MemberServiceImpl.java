@@ -98,6 +98,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+
     @Override
     public MemberProfileFindDTO.FindMemberUsernameResponseDTO getUsernamesWithEmail(MemberProfileFindDTO.FindMemberUsernameWithEmailsRequestDTO request){
 
