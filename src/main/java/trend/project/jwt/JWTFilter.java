@@ -1,9 +1,6 @@
 package trend.project.jwt;
 
 
-import com.example.trend.domain.Member;
-import com.example.trend.domain.enumClass.Role;
-import com.example.trend.web.a.dto.CustomUserDetails;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+import trend.project.domain.Member;
+import trend.project.domain.Role;
 
 import java.io.IOException;
 
