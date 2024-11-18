@@ -3,9 +3,12 @@ package trend.project.web.controller.planController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanService;
+import trend.project.web.dto.planDTO.PlanDTO;
 import trend.project.web.dto.planDTO.PlanDetailDTO;
 
 @RestController
@@ -18,7 +21,10 @@ public class PlanController {
     
     @Operation(summary = "기획서 생성 API", description = "해당 API는 게시글의 정보를 입력받아 생성합니다.")
     @PostMapping
-    public void createPlan() {
+    public ApiResponse<PlanDTO.PlanCreateResponseDTO> createPlan(@RequestBody PlanDTO.PlanCreateRequestDTO req,
+                                                                 @AuthenticationPrincipal UserDetails user) {
+        PlanDTO.PlanCreateResponseDTO res = planService.planCreate(req, user.getUsername());
+        return ApiResponse.onSuccess(res);
     }
     
     @Operation(summary = "기획서 상세 조회 API", description = "해당 API는 게시글 상세 정보를 조회합니다.")

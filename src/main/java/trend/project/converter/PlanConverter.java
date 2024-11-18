@@ -1,9 +1,40 @@
 package trend.project.converter;
 
+import trend.project.api.code.status.ErrorStatus;
+import trend.project.api.exception.handler.PlanCategoryHandler;
 import trend.project.domain.*;
+import trend.project.domain.enumClass.Category;
+import trend.project.domain.enumClass.PlanStatus;
+import trend.project.web.dto.planDTO.PlanDTO;
 import trend.project.web.dto.planDTO.PlanDetailDTO;
 
 public class PlanConverter {
+    
+    public static Plan toCreatePlan(PlanDTO.PlanCreateRequestDTO planCreateRequestDTO) {
+        
+        if (planCreateRequestDTO.getStartDate().isAfter(planCreateRequestDTO.getEndDate())) {
+            throw new PlanCategoryHandler(ErrorStatus.PlAN_END_DATE_INVALID);
+        }
+        
+        Category category;
+        try{
+            category = Category.valueOf(planCreateRequestDTO.getCategory().toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            throw new PlanCategoryHandler(ErrorStatus.CATEGORY_INVALID);}
+        
+        return Plan.builder()
+                .title(planCreateRequestDTO.getTitle())
+                .category(category)
+                .startDate(planCreateRequestDTO.getStartDate())
+                .endDate(planCreateRequestDTO.getEndDate())
+                .target(planCreateRequestDTO.getTarget())
+                .cost(planCreateRequestDTO.getCost())
+                .bookingMethod(planCreateRequestDTO.getBookingMethod())
+                .content(planCreateRequestDTO.getContent())
+                .budget(planCreateRequestDTO.getBudget())
+                .status(PlanStatus.ON_HOLD)
+                .build();
+    }
     
     public static PlanDetailDTO.PlanDetailResponseDTO toPlanDetailResponseDTO(Plan plan,
                                                                               Member member,
