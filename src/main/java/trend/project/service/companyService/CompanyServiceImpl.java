@@ -14,6 +14,7 @@ import trend.project.domain.enumClass.Status;
 import trend.project.repository.AddressRepository;
 import trend.project.repository.CompanyRepository;
 import trend.project.web.dto.CompanyJoinDTO;
+import trend.project.web.dto.companyDTO.CompanyProfileFindDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
