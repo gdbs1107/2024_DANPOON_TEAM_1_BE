@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import trend.project.api.code.status.ErrorStatus;
+import trend.project.api.exception.handler.MemberCategoryHandler;
 import trend.project.domain.Address;
 import trend.project.domain.Member;
 import trend.project.domain.Role;
@@ -69,7 +71,7 @@ public class MemberServiceImpl implements MemberService {
     // username 중복 검사 메서드
     public void duplicateUsername(String username) {
         if (memberRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND);
         }
     }
 
