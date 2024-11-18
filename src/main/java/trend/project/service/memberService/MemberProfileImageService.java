@@ -3,6 +3,7 @@ package trend.project.service.memberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import trend.project.domain.Member;
 
 import java.io.File;
 import java.io.FileNotFoundException;

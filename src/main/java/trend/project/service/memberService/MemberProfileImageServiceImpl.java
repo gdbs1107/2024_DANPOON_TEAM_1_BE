@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import trend.project.api.code.status.ErrorStatus;
+import trend.project.api.exception.handler.ImageCategoryHandler;
 import trend.project.api.exception.handler.MemberCategoryHandler;
 import trend.project.domain.Member;
 import trend.project.domain.MemberProfileImage;
