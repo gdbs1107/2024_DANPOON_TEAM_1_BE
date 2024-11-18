@@ -3,6 +3,7 @@ package trend.project.service.memberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,9 @@ import trend.project.domain.enumClass.Status;
 import trend.project.repository.AddressRepository;
 import trend.project.repository.MemberRepository;
 import trend.project.web.dto.MemberJoinDTO;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -68,18 +72,120 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public void deleteMember(String username) {
+
+        Member findMember = getMemberByUsername(username);
+
+        findMember.setInactive();  // 객체의 status 필드 수정
+
+    }
+
+
+    @Override
+    public MemberProfileFindDTO.FindMemberUsernameResponseDTO getUsernamesWithPhone(MemberProfileFindDTO.FindMemberUsernameWithPhoneNumbersRequestDTO request){
+
+        Member byPhoneNumber = memberRepository.findByPhoneNumber(request.getPhoneNumber());
+
+        if (byPhoneNumber == null) {
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND);
+        }
+
+        return MemberProfileFindDTO.FindMemberUsernameResponseDTO.builder()
+                .username(byPhoneNumber.getUsername())
+                .build();
+
+    }
+
+    @Override
+    public MemberProfileFindDTO.FindMemberUsernameResponseDTO getUsernamesWithEmail(MemberProfileFindDTO.FindMemberUsernameWithEmailsRequestDTO request){
+
+
+        Member byEmail = memberRepository.findByEmail(request.getEmail());
+        if (byEmail == null) {
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND);
+        }
+
+
+        return MemberProfileFindDTO.FindMemberUsernameResponseDTO.builder()
+                .username(byEmail.getUsername())
+                .build();
+    }
+
+    // 비밀번호 재설정 메서드
+    @Override
+    public MemberProfileFindDTO.FindMemberPasswordResponseDTO getPassword(MemberProfileFindDTO.FindMemberPasswordRequestDTO request){
+
+        Member byUsername = getMemberByUsername(request.getUsername());
+
+        if (!request.getName().equals(byUsername.getName())) {
+            // username이 일치하지 않음 오류
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_VALID_USERNAME);
+        }
+
+        if (!request.getEmail().equals(byUsername.getEmail())) {
+            // email이 일치하지 않음 오류
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_VALID_EMAIL);
+        }
+
+        if (request.getPassword().equals(byUsername.getPassword())) {
+            // 비밀번호 중복 오류
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_VALID_PASSWORD);
+        }
+
+        String newPassword = encodePassword(request.getPassword());
+
+        byUsername.setPassword(newPassword);
+
+        return MemberProfileFindDTO.FindMemberPasswordResponseDTO.builder()
+                .password(byUsername.getPassword())
+                .build();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // 매일 자정에 실행
+    @Scheduled(cron = "0 0 0 * * ?")
+    @Override
+    public void deleteOldInactiveMembers() {
+
+        LocalDateTime cutoffDate = LocalDateTime.now().minusDays(30);  // 30일 이전 날짜 계산
+        List<Member> membersToDelete = memberRepository.findInactiveMembersForDeletion(Status.INACTIVE, cutoffDate);
+
+        // 30일 지난 회원 삭제
+        memberRepository.deleteAll(membersToDelete);
+
+    }
+
+
     // username 중복 검사 메서드
     public void duplicateUsername(String username) {
         if (memberRepository.existsByUsername(username)) {
-            throw new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND);
+            throw new MemberCategoryHandler(ErrorStatus.MEMBER_USERNAME_DUPLICATE);
         }
     }
 
 
+    // 회원 찾는 메서드
+    public Member getMemberByUsername(String username){
+        return memberRepository.findByUsername(username)
+                .orElseThrow(()-> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+    }
+
+
     public String encodePassword(String password) {
-
         return bCryptPasswordEncoder.encode(password);
-
     }
 
 }
