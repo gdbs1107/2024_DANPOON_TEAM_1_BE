@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
+import trend.project.filter.LoginFilter;
 import trend.project.jwt.JWTFilter;
 import trend.project.jwt.JWTUtil;
 import trend.project.repository.RefreshRepository;
