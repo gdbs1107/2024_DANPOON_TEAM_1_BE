@@ -71,4 +71,8 @@ public class Plan extends BaseEntity {
 
     @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
     private List<PlanLikes> planLikes=new ArrayList<>();
+    
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }
