@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import trend.project.validation.annotation.UsernameDuplicate;
 
 public class CompanyJoinDTO {
 
@@ -12,13 +13,17 @@ public class CompanyJoinDTO {
     public static class CompanyJoinRequestDTO{
 
 
+        @UsernameDuplicate
         @Email(message = "올바른 형식의 이메일을 입력해주세요")
         @Schema(description = "username 입니다 <br> +" +
                 "기업은 회원가입 시, username을 이메일로 사용합니다")
         String username;
 
         @Schema(description = "비밀번호는 8~12자의 영문, 숫자, 특수문자를 포함해야 합니다.")
-        @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[a-zA-Z\\d!@#$%^&*(),.?\":{}|<>]{8,12}$")
+        @Pattern(
+                regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[a-zA-Z\\d!@#$%^&*(),.?\":{}|<>]{8,12}$",
+                message = "비밀번호는 8~12자의 영문, 숫자, 특수문자를 포함해야 합니다."
+        )
         String password;
 
         @Schema(description = "담당자 이름 입니다")

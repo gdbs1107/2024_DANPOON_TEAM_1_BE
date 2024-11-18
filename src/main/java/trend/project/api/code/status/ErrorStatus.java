@@ -19,7 +19,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
 
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER2001", "사용자가 없습니다."),
-    COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "COMPANY3001", "사용자가 없습니다."),
+    MEMBER_USERNAME_DUPLICATE(HttpStatus.BAD_REQUEST,"MEMBER2002","중복된 ID 입니다"),
     
     //기획서 관련 오류
     PLAN_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4001", "기획서를 찾을 수 없습니다."),
