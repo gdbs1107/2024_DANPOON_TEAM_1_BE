@@ -1,4 +1,4 @@
-package trend.project.domain;
+package trend.project.domain.enumClass;
 
 public enum Role {
 
