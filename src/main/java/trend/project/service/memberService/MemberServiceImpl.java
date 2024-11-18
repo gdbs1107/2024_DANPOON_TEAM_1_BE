@@ -77,7 +77,9 @@ public class MemberServiceImpl implements MemberService {
 
 
     public String encodePassword(String password) {
+
         return bCryptPasswordEncoder.encode(password);
+
     }
 
 }
