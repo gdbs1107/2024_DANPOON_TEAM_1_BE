@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import trend.project.domain.RefreshEntity;
 import trend.project.jwt.JWTUtil;
 import trend.project.repository.RefreshRepository;
-import trend.project.web.dto.MemberJoinDTO;
+import trend.project.web.dto.memberDTO.MemberJoinDTO;
 
 import java.io.IOException;
 import java.util.Collection;

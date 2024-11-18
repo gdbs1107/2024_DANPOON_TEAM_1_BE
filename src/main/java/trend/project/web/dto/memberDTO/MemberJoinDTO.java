@@ -1,4 +1,4 @@
-package trend.project.web.dto;
+package trend.project.web.dto.memberDTO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
