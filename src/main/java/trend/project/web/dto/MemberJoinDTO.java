@@ -29,7 +29,8 @@ public class MemberJoinDTO {
         String username;
 
         @Schema(description = "비밀번호는 8~12자의 영문, 숫자, 특수문자를 포함해야 합니다.")
-        @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[a-zA-Z\\d!@#$%^&*(),.?\":{}|<>]{8,12}$")
+        @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>])[a-zA-Z\\d!@#$%^&*(),.?\":{}|<>]{8,12}$",
+        message = "비밀번호는 8~12자의 영문, 숫자, 특수문자를 포함해야 합니다.")
         String password;
 
         @Schema(description = "회원 닉네임 입니다")
