@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import trend.project.api.ApiResponse;
 import trend.project.service.memberService.MemberService;
-import trend.project.web.dto.MemberJoinDTO;
+import trend.project.web.dto.memberDTO.MemberJoinDTO;
 
 @RestController
 @RequiredArgsConstructor
