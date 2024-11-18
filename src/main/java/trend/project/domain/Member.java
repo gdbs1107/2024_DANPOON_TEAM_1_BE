@@ -6,6 +6,8 @@ import trend.project.domain.enumClass.Role;
 import trend.project.domain.enumClass.Status;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -56,5 +58,38 @@ public class Member {
     @Column(nullable = false)
     private Integer FollowerCount = 0;
 
+
+
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Address> address=new ArrayList<>();
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<MemberFollow> memberFollows=new ArrayList<>();
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<MemberFollower> memberFollowers=new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "agreement_id")
+    private Agreement agreement;
+
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<MemberProfileImage> memberProfileImages=new ArrayList<>();
+
+
+
+    /* 연관관계 메서드 */
+
+    // status를 INACTIVE로 변경하는 메서드
+    public void setInactive() {
+
+        this.status = Status.INACTIVE;
+        this.inactiveDate = LocalDateTime.now();  // 비활성화 날짜 기록
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }
