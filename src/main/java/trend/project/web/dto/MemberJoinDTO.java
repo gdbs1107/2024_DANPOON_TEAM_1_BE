@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
+import trend.project.validation.annotation.UsernameDuplicate;
 
 public class MemberJoinDTO {
 
@@ -23,6 +24,7 @@ public class MemberJoinDTO {
         String email;
 
         @Pattern(regexp = "^[a-zA-Z0-9]{6,20}$", message = "사용자 이름은 6~20자의 영문자와 숫자만 포함해야 합니다.")
+        @UsernameDuplicate
         @Schema(description = "ID입니다 <br> 6~20자의 영문,숫자")
         String username;
 
