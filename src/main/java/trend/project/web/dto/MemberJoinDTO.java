@@ -3,7 +3,7 @@ package trend.project.web.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
-import lombok.Getter;
+import lombok.*;
 
 public class MemberJoinDTO {
 
@@ -40,6 +40,16 @@ public class MemberJoinDTO {
 
         @Schema(description = "시/군/구 입니다")
         String city;
+    }
+
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class MemberJoinResponseDTO{
+
+        Long MemberId;
+
     }
 
 
