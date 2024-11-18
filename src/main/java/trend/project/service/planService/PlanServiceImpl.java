@@ -1,6 +1,7 @@
 package trend.project.service.planService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.api.code.status.ErrorStatus;
 import trend.project.api.exception.handler.PlanCategoryHandler;
@@ -12,6 +13,7 @@ import trend.project.repository.planRepository.PlanRepository;
 import trend.project.repository.planRepository.PosterImageRepository;
 import trend.project.web.dto.planDTO.PlanDetailDTO;
 
+@Service
 @RequiredArgsConstructor
 @Transactional
 public class PlanServiceImpl implements PlanService {
