@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import trend.project.api.code.status.ErrorStatus;
+import trend.project.api.exception.handler.CompanyCategoryHandler;
 import trend.project.domain.Address;
 import trend.project.domain.Company;
 import trend.project.domain.Role;
@@ -65,7 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
     // username 중복 검사 메서드
     public void duplicateUsername(String username) {
         if (companyRepository.existsByUsername(username)) {
-            throw new IllegalArgumentException("Username is already in use");
+            throw new CompanyCategoryHandler(ErrorStatus.COMPANY_NOT_FOUND);
         }
     }
 
