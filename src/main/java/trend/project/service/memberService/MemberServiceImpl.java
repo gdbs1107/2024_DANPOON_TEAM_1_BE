@@ -15,7 +15,8 @@ import trend.project.domain.enumClass.Role;
 import trend.project.domain.enumClass.Status;
 import trend.project.repository.AddressRepository;
 import trend.project.repository.MemberRepository;
-import trend.project.web.dto.MemberJoinDTO;
+import trend.project.web.dto.memberDTO.MemberJoinDTO;
+import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
