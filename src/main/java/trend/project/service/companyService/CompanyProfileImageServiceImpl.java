@@ -270,7 +270,6 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
 
 
 
-
     // 회원 찾는 메서드
     public Company getCompanyById(Long companyId){
         return companyRepository.findById(companyId)
