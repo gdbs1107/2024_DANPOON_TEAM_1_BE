@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 import trend.project.domain.Member;
 import trend.project.domain.Role;
+import trend.project.web.dto.CustomUserDetails;
 
 import java.io.IOException;
 

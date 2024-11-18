@@ -3,6 +3,7 @@ package trend.project.web.dto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import trend.project.domain.Company;
 import trend.project.domain.Member;
 
 import java.util.ArrayList;
