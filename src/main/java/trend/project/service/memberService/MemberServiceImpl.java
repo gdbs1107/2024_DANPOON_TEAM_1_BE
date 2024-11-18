@@ -3,16 +3,16 @@ package trend.project.service.memberService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import trend.project.domain.Address;
+import trend.project.domain.Member;
+import trend.project.domain.Role;
+import trend.project.domain.Status;
 import trend.project.repository.AddressRepository;
 import trend.project.repository.MemberRepository;
 import trend.project.web.dto.MemberJoinDTO;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @Transactional
@@ -66,6 +66,12 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    // username 중복 검사 메서드
+    public void duplicateUsername(String username) {
+        if (memberRepository.existsByUsername(username)) {
+            throw new IllegalArgumentException("Username already exists");
+        }
+    }
 
 
     public String encodePassword(String password) {
