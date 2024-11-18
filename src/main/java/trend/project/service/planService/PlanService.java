@@ -1,6 +1,7 @@
 package trend.project.service.planService;
 
 import org.springframework.stereotype.Service;
+import trend.project.web.dto.planDTO.PlanDTO;
 import trend.project.web.dto.planDTO.PlanDetailDTO;
 
 import java.util.List;
@@ -9,4 +10,6 @@ import java.util.List;
 public interface PlanService {
     
     PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId);
+    
+    PlanDTO.PlanCreateResponseDTO planCreate(PlanDTO.PlanCreateRequestDTO req, String username);
 }
