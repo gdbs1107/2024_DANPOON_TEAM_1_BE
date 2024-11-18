@@ -2,6 +2,8 @@ package trend.project.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import trend.project.domain.enumClass.Role;
+import trend.project.domain.enumClass.Status;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
