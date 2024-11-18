@@ -28,6 +28,8 @@ public enum ErrorStatus implements BaseErrorCode {
     PLAN_POSTER_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4002", "포스터를 찾을 수 없습니다."),
     PLAN_BANNER_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4003", "배너를 찾을 수 없습니다."),
     PLAN_LOCATION_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4004", "주소를 찾을 수 없습니다."),
+    CATEGORY_INVALID(HttpStatus.BAD_REQUEST, "PLAN4004", "일치하는 카테고리를 찾을 수 없습니다."),
+    PlAN_END_DATE_INVALID(HttpStatus.BAD_REQUEST, "PLAN4005", "종료일은 시작일 이후로 설정해 주세요."),
 
 
     // 이미지 관련
