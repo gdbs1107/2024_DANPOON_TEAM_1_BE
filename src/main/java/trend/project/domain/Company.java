@@ -59,6 +59,20 @@ public class Company {
 
 
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "agreement_id")
+    private Agreement agreement;
+
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
+    private List<CompanyProfileImage> companyProfileImages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
+
+
+
+
+
     /* 연관관계 메서드 */
 
     // status를 INACTIVE로 변경하는 메서드
@@ -67,6 +81,11 @@ public class Company {
         this.status = Status.INACTIVE;
         this.inactiveDate = LocalDateTime.now();  // 비활성화 날짜 기록
 
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
