@@ -73,6 +73,19 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+
+
+    public void getMemberProfile(String username) {
+
+        Member memberByUsername = getMemberByUsername(username);
+    }
+
+
+
+
+
+
+
     @Override
     public void deleteMember(String username) {
 
