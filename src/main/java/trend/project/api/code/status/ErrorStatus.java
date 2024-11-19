@@ -25,6 +25,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_VALID_USERNAME(HttpStatus.MULTI_STATUS,"MEMBER4003","username이 유효하지 않습니다."),
     MEMBER_VALID_EMAIL(HttpStatus.MULTI_STATUS,"MEMBER4004","email이 유효하지 않습니다."),
     MEMBER_VALID_PASSWORD(HttpStatus.MULTI_STATUS,"MEMBER4005","비밀번호가 변경되지 않았습니다"),
+    MEMBER_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "MEMBER4006", "권한이 없습니다."),
 
 
     // 기획서 관련 오류
@@ -51,6 +52,7 @@ public enum ErrorStatus implements BaseErrorCode {
     COMPANY_USERNAME_DUPLICATE(HttpStatus.MULTI_STATUS,"COMPANY4001","중복된 기업 username입니다"),
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "COMPANY4002", "사용자가 없습니다."),
     COMPANY_VALID_PASSWORD(HttpStatus.MULTI_STATUS,"COMPANY4003","비밀번호가 변경되지 않았습니다"),
+    COMPANY_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "COMPANY4004", "권한이 없습니다."),
     
     //댓글 관련 에러
     COMMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "COMMENT4001", "댓글을 찾을 수 없습니다.");
