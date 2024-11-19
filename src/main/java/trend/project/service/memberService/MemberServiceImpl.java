@@ -15,6 +15,7 @@ import trend.project.domain.enumClass.Role;
 import trend.project.domain.enumClass.Status;
 import trend.project.repository.AddressRepository;
 import trend.project.repository.MemberRepository;
+import trend.project.web.dto.memberDTO.MemberGetProfileDTO;
 import trend.project.web.dto.memberDTO.MemberJoinDTO;
 import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 
@@ -75,9 +76,11 @@ public class MemberServiceImpl implements MemberService {
 
 
 
-    public void getMemberProfile(String username) {
+    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfile(String username) {
 
         Member memberByUsername = getMemberByUsername(username);
+
+
     }
 
 
