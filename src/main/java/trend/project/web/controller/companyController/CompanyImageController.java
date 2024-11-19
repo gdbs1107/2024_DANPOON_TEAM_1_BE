@@ -1,4 +1,4 @@
-package trend.project.web.controller;
+package trend.project.web.controller.companyController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
