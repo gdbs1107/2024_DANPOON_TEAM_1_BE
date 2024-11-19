@@ -8,7 +8,7 @@ import trend.project.domain.PlanPosterImage;
 
 import java.util.Optional;
 
-public interface BannerImageRepository extends JpaRepository<PlanPosterImage, Long> {
+public interface BannerImageRepository extends JpaRepository<PlanBannerImage, Long> {
     
     @Query("SELECT bi FROM PlanBannerImage bi WHERE bi.plan.id = :planId")
     Optional<PlanBannerImage> findImagesByPlanId(@Param("planId") Long planId);
