@@ -34,5 +34,8 @@ public class Ranking {
     @Schema(description = "게시글 댓글 수 입니다")
     private Integer commentsCount;
 
+    @Schema(description = "게시글 포스터 이미지 링크입니다")
+    private String imageLink;
+
     
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanMainPageService;
-import trend.project.web.dto.planDTO.PlanBannerDTO;
+import trend.project.web.dto.planDTO.PlanMainPageDTO;
 
 import java.util.List;
 
@@ -25,9 +25,9 @@ public class PlanMainPageController {
     // 누적 좋아요수 순으로 4개 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수, startDate,endDate
     @Operation(summary = "상단 배너 조회 API", description = "해당 API는 게시글을 총 누적 좋아요의 갯수 순으로 조회합니다")
     @GetMapping("/banners")
-    public ApiResponse<List<PlanBannerDTO.PlanBannerResponseDTO>> getPlanBanners(){
+    public ApiResponse<List<PlanMainPageDTO.PlanBannerResponseDTO>> getPlanBanners(){
 
-        List<PlanBannerDTO.PlanBannerResponseDTO> planBanner = planMainPageService.getPlanBanner();
+        List<PlanMainPageDTO.PlanBannerResponseDTO> planBanner = planMainPageService.getPlanBanner();
 
         return ApiResponse.onSuccess(planBanner);
     }
