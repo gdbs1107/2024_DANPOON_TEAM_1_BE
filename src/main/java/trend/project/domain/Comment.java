@@ -3,7 +3,6 @@ package trend.project.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import trend.project.domain.common.BaseEntity;
-import trend.project.domain.enumClass.CommentType;
 
 import java.time.LocalDateTime;
 
@@ -22,18 +21,11 @@ public class Comment extends BaseEntity {
     private String body;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_comment_id")
-    private Comment parentComment;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
     
     @Column(nullable = false)
     private int likesCount = 0;
-    
-    @Column(nullable = false)
-    private Boolean haveParentComment = false;
     
     private LocalDateTime deletedAt;
     
@@ -41,10 +33,13 @@ public class Comment extends BaseEntity {
     private boolean deletedTrue = false;
     
     @Column(nullable = false)
-    private int depth = 0;
+    private Long hierarchy;
     
     @Column(nullable = false)
-    private int orderNumber;
+    private Long orders;
+    
+    @Column(nullable = false)
+    private Long groups;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
