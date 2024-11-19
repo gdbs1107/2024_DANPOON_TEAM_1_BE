@@ -61,7 +61,7 @@ public class PlanPosterServiceImpl implements PlanPosterService {
         removeNewFile(uploadFile);
         
         // Save metadata to the database
-        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(), plan);
+        saveFileMetadata(originalFileName, uploadImageUrl, multipartFile.getSize(), multipartFile.getContentType(), plan);
         
         return uploadImageUrl;
     }
@@ -200,7 +200,7 @@ public class PlanPosterServiceImpl implements PlanPosterService {
         removeNewFile(uploadFile);
         
         // 새로운 메타데이터 저장
-        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), findPlan);
+        saveFileMetadata(originalFileName, uploadImageUrl, newImageFile.getSize(), newImageFile.getContentType(), findPlan);
         
         return uploadImageUrl;
     }
