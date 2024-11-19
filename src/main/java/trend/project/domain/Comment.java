@@ -38,7 +38,7 @@ public class Comment extends BaseEntity {
     @Column(nullable = false)
     private Long orders;
     
-    @Column(nullable = false)
+    @Column(name = "comment_group", nullable = false)
     private Long groups;
     
     @ManyToOne(fetch = FetchType.LAZY)
