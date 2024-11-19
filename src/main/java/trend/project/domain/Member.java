@@ -77,6 +77,9 @@ public class Member {
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<MemberProfileImage> memberProfileImages=new ArrayList<>();
 
+    @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
+    private List<Plan> plan=new ArrayList<>();
+
 
 
     /* 연관관계 메서드 */
