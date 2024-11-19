@@ -24,4 +24,8 @@ public class PlanBannerImage extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
+    
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 }
