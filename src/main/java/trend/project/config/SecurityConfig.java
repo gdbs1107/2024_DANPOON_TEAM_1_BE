@@ -98,6 +98,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/comments/{id}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/poster/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/banner/{planId}").permitAll()
+                .requestMatchers("/plans/main/**","/plans/ranking").permitAll()
                 
                 
                 .anyRequest().authenticated());

@@ -21,8 +21,7 @@ public class PlanPosterImage extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String imageName;
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plan_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Plan plan;
     
     public void setPlan(Plan plan) {
