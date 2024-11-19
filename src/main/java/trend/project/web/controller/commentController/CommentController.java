@@ -14,7 +14,7 @@ import trend.project.web.dto.commentDTO.CommentDTO;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/plans/{planId}/comments")
 @RequiredArgsConstructor
 @Tag(name = "댓글 API")
 public class CommentController {
@@ -22,7 +22,7 @@ public class CommentController {
     private final CommentService commentService;
     
     @Operation(summary = "기획서 댓글 조회 API", description = "해당 API는 기획서에 달린 댓글들의 정보를 조회합니다.")
-    @GetMapping("/{planId}")
+    @GetMapping("/")
     public ApiResponse<List<CommentDTO.CommentResponseDTO>> getComments(@PathVariable Long planId) {
         List<CommentDTO.CommentResponseDTO> comments = commentService.getComments(planId);
         return ApiResponse.onSuccess(comments);
