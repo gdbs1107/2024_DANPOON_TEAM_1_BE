@@ -19,11 +19,14 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Schema(description = "순위에 있는 플랜의 식별자 입니다")
+    private Long planId;
+
     @Schema(description = "게시글 제목 입니다")
     private String title;
 
     @Schema(description = "게시글 작성자 닉네임 입니다")
-    private String nickName;
+    private String name;
 
     @Schema(description = "게시글 좋아요 수 입니다")
     private Integer likesCount;
