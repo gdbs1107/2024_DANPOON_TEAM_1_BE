@@ -1,6 +1,7 @@
 package trend.project.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.domain.Plan;
@@ -20,6 +21,7 @@ public class RankingService {
     private final RankingRepository rankingRepository;
 
 
+    @Scheduled(cron = "0 0 0 1 * *")
     public void calculateAndSaveMonthlyRanking() {
 
         // 한 달간 좋아요 수가 많은 5개의 Plan 가져오기
