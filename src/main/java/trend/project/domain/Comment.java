@@ -48,4 +48,12 @@ public class Comment extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+    
+    public void setBody(String body) {
+        this.body = body;
+    }
+    
+    public void setDeletedTrue(boolean deletedTrue) {
+        this.deletedTrue = deletedTrue;
+    }
 }
