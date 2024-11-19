@@ -67,9 +67,7 @@ public class PlanServiceImpl implements PlanService {
     }
     
     private PlanPosterImage getPosterImage(Long planId) {
-        return posterImageRepository.findImagesByPlanId(planId).orElseThrow(
-                () -> new PlanCategoryHandler(ErrorStatus.PLAN_POSTER_NOT_FOUND)
-        );
+        return posterImageRepository.findImagesByPlanId(planId).orElse(null);
     }
     
     private Plan findPlanById(Long planId) {
