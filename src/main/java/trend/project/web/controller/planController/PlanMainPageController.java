@@ -53,6 +53,10 @@ public class PlanMainPageController {
     @Operation(summary = "가장 뜨거운 축제 조회 API", description = "해당 API는 게시글을 누적 댓글 갯수 순으로 조회합니다")
     @GetMapping("/hottest")
     public void getHottestPlan(){
+
+
+
+
     }
 
 
