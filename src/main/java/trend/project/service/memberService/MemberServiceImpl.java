@@ -80,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortUpdateDate(Long userId) {
+    public MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(Long userId) {
 
         Member findMember = memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
@@ -99,7 +99,7 @@ public class MemberServiceImpl implements MemberService {
 
 
 
-        return MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
+        return MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO.builder()
                 .name(findMember.getName())
                 .planCount(getPlanCountByMemberId(userId))
                 .followingCount(findMember.getFollowCount())
@@ -112,7 +112,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortLikeCount(Long userId) {
+    public MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(Long userId) {
 
         Member findMember = memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
@@ -137,7 +137,7 @@ public class MemberServiceImpl implements MemberService {
         planResponseDTOListByLikeCount.sort(Comparator.comparing(MemberGetProfileDTO.MemberGetProfilePlanResponseDTO::getLikeCount).reversed());
 
 
-        return MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
+        return MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO.builder()
                 .name(findMember.getName())
                 .planCount(getPlanCountByMemberId(userId))
                 .followingCount(findMember.getFollowCount())
