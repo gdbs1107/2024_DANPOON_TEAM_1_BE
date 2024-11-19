@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.memberService.MemberService;
+import trend.project.web.dto.memberDTO.MemberGetProfileDTO;
 import trend.project.web.dto.memberDTO.MemberJoinDTO;
 import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 import trend.project.web.dto.memberDTO.MemberProfileUpdateDTO;
@@ -34,7 +35,11 @@ public class MemberController {
     //프로필 조회 API
     @Operation(summary = "회원 프로필 조회 API")
     @GetMapping("/profiles")
-    public void getProfiles(@RequestParam Long userId){
+    public ApiResponse<MemberGetProfileDTO.MemberGetProfileResponseDTO> getProfiles(@RequestParam Long userId){
+
+        MemberGetProfileDTO.MemberGetProfileResponseDTO memberProfile = memberService.getMemberProfile(userId);
+
+        return ApiResponse.onSuccess(memberProfile);
 
     }
 
