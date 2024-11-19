@@ -28,7 +28,7 @@ public class PlanBannerController {
     
     @Operation(summary = "배너 등록 API")
     @PostMapping(path = "/{planId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<String> uploadPosterImage(
+    public ApiResponse<String> uploadBannerImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
             @PathVariable Long planId,
             @AuthenticationPrincipal UserDetails userDetails
@@ -47,7 +47,7 @@ public class PlanBannerController {
     
     @Operation(summary = "배너 조회 API")
     @GetMapping(path = "/{planId}")
-    public ResponseEntity<byte[]> getMemberProfileImage(
+    public ResponseEntity<byte[]> getBannerImage(
             @PathVariable Long planId) {
         
         try {
@@ -68,7 +68,7 @@ public class PlanBannerController {
     
     @Operation(summary = "배너 삭제 API")
     @DeleteMapping(path = "/{planId}")
-    public ApiResponse<String> deleteMemberProfileImage(
+    public ApiResponse<String> deleteBannerImage(
             @PathVariable Long planId,
             @AuthenticationPrincipal UserDetails userDetails) {
         
@@ -95,7 +95,7 @@ public class PlanBannerController {
     
     @Operation(summary = "배너 업데이트 API")
     @PutMapping(path = "/{planId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<String> updateMemberProfileImage(
+    public ApiResponse<String> updateBannerImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
             @PathVariable Long planId,
             @AuthenticationPrincipal UserDetails userDetails
