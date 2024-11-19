@@ -33,13 +33,13 @@ public class Comment extends BaseEntity {
     private boolean deletedTrue = false;
     
     @Column(nullable = false)
-    private Long hierarchy;
+    private Long hierarchy = 0L;
     
     @Column(nullable = false)
-    private Long orders;
+    private Long orders = 0L;
     
     @Column(name = "comment_group", nullable = false)
-    private Long groups;
+    private Long groups = 0L;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
