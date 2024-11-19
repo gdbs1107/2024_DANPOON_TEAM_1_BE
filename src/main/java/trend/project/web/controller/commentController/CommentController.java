@@ -30,10 +30,29 @@ public class CommentController {
         return ApiResponse.onSuccess(responseDTO);
     }
     
+    @Operation(summary = "댓글 수정 API", description = "해당 API는 댓글을 수정합니다.")
+    @PutMapping("/{commentId}")
+    public ApiResponse<String> updateComment(
+            @PathVariable Long commentId,
+            @RequestBody CommentDTO.CommentUpdateRequestDTO requestDTO,
+            @AuthenticationPrincipal UserDetails user) {
+        commentService.updateComment(commentId, requestDTO, user.getUsername());
+        return ApiResponse.onSuccess("수정 성공");
+    }
+    
     @Operation(summary = "기획서 댓글 조회 API", description = "해당 API는 기획서에 달린 댓글들의 정보를 조회합니다.")
     @GetMapping("/")
     public ApiResponse<List<CommentDTO.CommentResponseDTO>> getComments(@PathVariable Long planId) {
         List<CommentDTO.CommentResponseDTO> comments = commentService.getComments(planId);
         return ApiResponse.onSuccess(comments);
+    }
+    
+    @Operation(summary = "댓글 삭제 API", description = "해당 API는 댓글을 삭제합니다.")
+    @DeleteMapping("/{commentId}")
+    public ApiResponse<String> deleteComment(
+            @PathVariable Long commentId,
+            @AuthenticationPrincipal UserDetails user) {
+        commentService.deleteComment(commentId, user.getUsername());
+        return ApiResponse.onSuccess("삭제 성공");
     }
 }
