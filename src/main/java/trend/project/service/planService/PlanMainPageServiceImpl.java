@@ -129,5 +129,23 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
     }
 
+
+
+
+    @Override
+    public List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title){
+
+        List<Plan> searchPlans = planRepository.findTop4ByTitleContainingIgnoreCaseOrderByLikesCountDesc(title);
+
+        List<PlanMainPageDTO.PlanSearchResponseDTO> searchResponse = searchPlans.stream()
+                .map(plan -> PlanMainPageDTO.PlanSearchResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .planImageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return searchResponse;
     }
+}
 

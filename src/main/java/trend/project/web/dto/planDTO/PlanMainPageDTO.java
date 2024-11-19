@@ -129,4 +129,22 @@ public class PlanMainPageDTO {
 
     }
 
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class PlanSearchResponseDTO{
+
+        @Schema(description = "게시글 제목 입니다")
+        String title;
+
+        @Schema(description = "게시글 작성자 닉네임 입니다")
+        String name;
+
+        @Schema(description = "포스터 이미지 링크입니다")
+        String planImageLink;
+
+    }
+
+
 }
