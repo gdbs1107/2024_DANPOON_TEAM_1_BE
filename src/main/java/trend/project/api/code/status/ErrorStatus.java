@@ -43,6 +43,9 @@ public enum ErrorStatus implements BaseErrorCode {
     IMAGE_NOT_FOUND(HttpStatus.MULTI_STATUS,"IMAGE4003","이미지를 찾을 수 없습니다"),
     IMAGE_NOT_ALLOWED(HttpStatus.MULTI_STATUS,"IMAGE5004","이미지를 다운받을 수 없습니다"),
 
+    // 이메일 관련 에러
+    EMAIL_NOT_VALID(HttpStatus.FORBIDDEN,"EMAIL4001","인증번호가 일치하지 않습니다"),
+
 
     // 기업 관련 에러
     COMPANY_USERNAME_DUPLICATE(HttpStatus.MULTI_STATUS,"COMPANY4001","중복된 기업 username입니다"),
