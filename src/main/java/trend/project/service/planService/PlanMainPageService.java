@@ -12,4 +12,6 @@ public interface PlanMainPageService {
     List<PlanMainPageDTO.PlanRankingResponseDTO> getRanking();
 
     List<PlanMainPageDTO.PlanMainResponseDTO> getHotties();
+
+    List<PlanMainPageDTO.PlanCategoryResponseDTO> getTopPlanByCategory();
 }

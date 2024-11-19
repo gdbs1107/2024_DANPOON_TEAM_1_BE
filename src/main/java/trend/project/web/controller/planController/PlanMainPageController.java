@@ -66,7 +66,12 @@ public class PlanMainPageController {
     // 각 테마별 누적 좋아요 순으로 1개씩 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수
     @GetMapping("/themes")
     @Operation(summary = "테마별 축제 조회 API", description = "해당 API는 게시글을 각 테마별 누적 좋아요 순으로 1개씩 조회합니다")
-    public void getPlanByThemes(){
+    public ApiResponse<List<PlanMainPageDTO.PlanCategoryResponseDTO>> getPlanByThemes(){
+
+        List<PlanMainPageDTO.PlanCategoryResponseDTO> topPlanByCategory = planMainPageService.getTopPlanByCategory();
+
+        return ApiResponse.onSuccess(topPlanByCategory);
+
     }
 
 
