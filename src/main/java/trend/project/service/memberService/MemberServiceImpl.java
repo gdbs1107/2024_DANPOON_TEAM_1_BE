@@ -105,7 +105,7 @@ public class MemberServiceImpl implements MemberService {
         planResponseDTOListByLikeCount.sort(Comparator.comparing(MemberGetProfileDTO.MemberGetProfilePlanResponseDTO::getLikeCount).reversed());
 
 
-        MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
+        return MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
                 .name(findMember.getName())
                 .planCount(getPlanCountByMemberId(userId))
                 .followingCount(findMember.getFollowCount())
@@ -113,11 +113,6 @@ public class MemberServiceImpl implements MemberService {
                 .planListByLikeCount(planResponseDTOListByLikeCount)
                 .planListByUpdateDate(planResponseDTOList)
                 .build();
-
-
-
-
-
 
 
 
