@@ -15,7 +15,7 @@ public class PlanPosterImage extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false, length = 200)
+    @Column(nullable = false, columnDefinition = "text")
     private String imageLink;
     
     @Column(nullable = false, length = 50)
@@ -25,4 +25,7 @@ public class PlanPosterImage extends BaseEntity {
     @JoinColumn(name = "plan_id")
     private Plan plan;
     
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 }

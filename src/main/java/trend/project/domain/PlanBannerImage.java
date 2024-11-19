@@ -15,13 +15,17 @@ public class PlanBannerImage extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(length = 200)
+    @Column(nullable = false, columnDefinition = "text")
     private String imageLink;
     
-    @Column(length = 50)
+    @Column(nullable = false, length = 50)
     private String imageName;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     private Plan plan;
+    
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 }
