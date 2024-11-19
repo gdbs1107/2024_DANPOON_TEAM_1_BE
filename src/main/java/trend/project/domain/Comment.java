@@ -46,10 +46,6 @@ public class Comment extends BaseEntity {
     @Column(nullable = false)
     private int orderNumber;
     
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CommentType type;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
