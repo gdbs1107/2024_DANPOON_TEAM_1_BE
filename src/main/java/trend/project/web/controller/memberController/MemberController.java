@@ -34,7 +34,7 @@ public class MemberController {
     //프로필 조회 API
     @Operation(summary = "회원 프로필 조회 API")
     @GetMapping("/profiles")
-    public void getProfiles(@AuthenticationPrincipal UserDetails userDetails){
+    public void getProfiles(@RequestParam Long userId){
 
     }
 

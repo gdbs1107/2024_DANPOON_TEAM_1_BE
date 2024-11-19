@@ -20,7 +20,10 @@ import trend.project.web.dto.memberDTO.MemberJoinDTO;
 import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -76,9 +79,46 @@ public class MemberServiceImpl implements MemberService {
 
 
 
-    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfile(String username) {
+    @Override
+    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfile(Long userId) {
 
-        Member memberByUsername = getMemberByUsername(username);
+        Member findMember = memberRepository.findById(userId)
+                .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        // Plan 리스트를 DTO 리스트로 변환
+        List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
+                .map(plan -> MemberGetProfileDTO.MemberGetProfilePlanResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .location(plan.getLocation())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .likeCount(plan.getLikesCount())
+                        .commentCount(plan.getCommentCount())
+                        .build())
+                .collect(Collectors.toList());
+
+
+
+
+        // 좋아요 순 정렬
+        List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOListByLikeCount = new ArrayList<>(planResponseDTOList);
+        planResponseDTOListByLikeCount.sort(Comparator.comparing(MemberGetProfileDTO.MemberGetProfilePlanResponseDTO::getLikeCount).reversed());
+
+
+        MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
+                .name(findMember.getName())
+                .planCount(getPlanCountByMemberId(userId))
+                .followingCount(findMember.getFollowCount())
+                .followerCount(findMember.getFollowerCount())
+                .planListByLikeCount(planResponseDTOListByLikeCount)
+                .planListByUpdateDate(planResponseDTOList)
+                .build();
+
+
+
+
+
+
 
 
     }
@@ -206,4 +246,12 @@ public class MemberServiceImpl implements MemberService {
         return bCryptPasswordEncoder.encode(password);
     }
 
+    public int getPlanCountByMemberId(Long userId) {
+        // 유저 찾기
+        Member findMember = memberRepository.findById(userId)
+                .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        // Plan 개수 반환
+        return findMember.getPlan().size();
+    }
 }
