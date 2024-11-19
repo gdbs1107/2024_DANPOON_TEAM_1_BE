@@ -81,9 +81,11 @@ public class PlanMainPageController {
     // 팔로워 제일 많은 유저 조회하고 그 유저의 최신 게시글 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수, 팔로워 수
     @GetMapping("/popular-users")
     @Operation(summary = "인기유저 조회 API", description = "해당 API는 팔로워가 제일 많은 유저를 조회하고 그 유저의 최신 게시글을 조회합니다")
-    public void getPlanByPopularUsers(){
+    public ApiResponse<List<PlanMainPageDTO.PlanFavoriteMemberDTO>> getPlanByPopularUsers(){
 
+        List<PlanMainPageDTO.PlanFavoriteMemberDTO> planByPopularUsers = planMainPageService.getPlanByPopularUsers();
 
+        return ApiResponse.onSuccess(planByPopularUsers);
     }
 
 

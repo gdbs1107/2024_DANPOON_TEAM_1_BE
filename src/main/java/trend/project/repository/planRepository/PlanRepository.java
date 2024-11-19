@@ -3,6 +3,7 @@ package trend.project.repository.planRepository;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import trend.project.domain.Member;
 import trend.project.domain.Plan;
 import trend.project.domain.enumClass.Category;
 
@@ -24,5 +25,7 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
 
     @EntityGraph(attributePaths = {"member"})
     Plan findTopByCategoryOrderByLikesCountDesc(Category category);
+
+    List<Plan> findTop5ByMember(Member member);
 
 }
