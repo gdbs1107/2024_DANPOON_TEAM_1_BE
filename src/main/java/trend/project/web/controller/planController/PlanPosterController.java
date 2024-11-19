@@ -47,7 +47,7 @@ public class PlanPosterController {
     
     @Operation(summary = "포스터 조회 API")
     @GetMapping(path = "/{planId}")
-    public ResponseEntity<byte[]> getMemberProfileImage(
+    public ResponseEntity<byte[]> getPosterImage(
             @PathVariable Long planId) {
         
         try {
@@ -68,7 +68,7 @@ public class PlanPosterController {
     
     @Operation(summary = "포스터 삭제 API")
     @DeleteMapping(path = "/{planId}")
-    public ApiResponse<String> deleteMemberProfileImage(
+    public ApiResponse<String> deletePosterImage(
             @PathVariable Long planId,
             @AuthenticationPrincipal UserDetails userDetails) {
         
@@ -95,7 +95,7 @@ public class PlanPosterController {
     
     @Operation(summary = "포스터 업데이트 API")
     @PutMapping(path = "/{planId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ApiResponse<String> updateMemberProfileImage(
+    public ApiResponse<String> updatePosterImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
             @PathVariable Long planId,
             @AuthenticationPrincipal UserDetails userDetails
