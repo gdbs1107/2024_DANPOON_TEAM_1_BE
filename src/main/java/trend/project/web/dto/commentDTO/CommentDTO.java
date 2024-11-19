@@ -19,7 +19,6 @@ public class CommentDTO {
         private Long parentCommentId;
         private int depth;
         private int orderNumber;
-        private String  type;
         private String memberName;
         private String companyName;
         private LocalDateTime updatedAt;

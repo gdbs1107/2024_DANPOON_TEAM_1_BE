@@ -13,7 +13,6 @@ public class CommentConverter {
                 .parentCommentId(comment.getParentComment() != null ? comment.getParentComment().getId() : null)
                 .depth(comment.getDepth())
                 .orderNumber(comment.getOrderNumber())
-                .type(String.valueOf(comment.getType()))
                 .memberName(comment.getMember() != null ? comment.getMember().getUsername() : null)
                 .companyName(comment.getCompany() != null ? comment.getCompany().getUsername() : null)
                 .updatedAt(comment.getUpdatedAt())
