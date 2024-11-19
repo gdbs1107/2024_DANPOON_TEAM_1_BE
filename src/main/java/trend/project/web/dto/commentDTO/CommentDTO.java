@@ -15,6 +15,12 @@ public class CommentDTO {
         private Long group;
     }
     
+    @Getter
+    public static class CommentUpdateRequestDTO {
+        
+        private String body;
+    }
+    
     @Builder
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @AllArgsConstructor
