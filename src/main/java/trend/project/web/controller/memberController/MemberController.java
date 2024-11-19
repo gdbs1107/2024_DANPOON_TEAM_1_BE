@@ -45,6 +45,7 @@ public class MemberController {
     }
 
 
+
     //프로필 조회 API
     @Operation(summary = "회원 프로필 조회 - 좋아요 순 API",
             description = "회원의 게시글이 좋아요순으로 조회됩니다")
