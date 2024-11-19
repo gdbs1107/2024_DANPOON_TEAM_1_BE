@@ -12,7 +12,6 @@ public class CommentDTO {
         
         private String body;
         private Long hierarchy;
-        private Long order;
         private Long group;
     }
     
