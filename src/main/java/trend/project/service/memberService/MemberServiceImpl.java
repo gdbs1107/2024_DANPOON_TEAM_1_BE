@@ -54,8 +54,8 @@ public class MemberServiceImpl implements MemberService {
                 .role(Role.ROLE_USER)
                 .phoneNumber(request.getPhoneNumber())
                 .email(request.getEmail())
-                .FollowerCount(0)
-                .FollowCount(0)
+                .followerCount(0)
+                .followCount(0)
                 .status(Status.ACTIVE)
                 .build();
 

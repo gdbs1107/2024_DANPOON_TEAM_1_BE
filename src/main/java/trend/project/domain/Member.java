@@ -52,11 +52,11 @@ public class Member {
 
     // 팔로우 수
     @Column(nullable = false)
-    private Integer FollowCount = 0;
+    private Integer followCount = 0;
 
     // 팔로워 수
     @Column(nullable = false)
-    private Integer FollowerCount = 0;
+    private Integer followerCount = 0;
 
 
 

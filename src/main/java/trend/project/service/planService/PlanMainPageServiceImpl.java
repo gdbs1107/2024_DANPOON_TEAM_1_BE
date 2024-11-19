@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.converter.PlanMainConverter;
+import trend.project.domain.Member;
 import trend.project.domain.Plan;
 import trend.project.domain.Ranking;
 import trend.project.domain.enumClass.Category;
+import trend.project.repository.MemberRepository;
 import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
@@ -22,6 +24,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
     private final PlanRepository planRepository;
     private final RankingRepository rankingRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public List<PlanMainPageDTO.PlanBannerResponseDTO> getPlanBanner() {
@@ -97,6 +100,34 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
         return topPlans;
     }
 
+
+
+
+
+
+    @Override
+    public List<PlanMainPageDTO.PlanFavoriteMemberDTO> getPlanByPopularUsers(){
+
+        Member popularMember = memberRepository.findTopByOrderByFollowerCountDesc();
+        List<Plan> topPlans = planRepository.findTop5ByMember(popularMember);
+
+        List<PlanMainPageDTO.PlanFavoriteMemberDTO> planPopular = topPlans.stream()
+                .map(plan -> PlanMainPageDTO.PlanFavoriteMemberDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .followerCount(plan.getMember().getFollowerCount())
+                        .memberImageLink(plan.getMember().getMemberProfileImages().isEmpty() ? null
+                                : plan.getMember().getMemberProfileImages().get(0).getImageLink())
+                        .town(plan.getLocation().getTown())
+                        .likesCount(plan.getLikesCount())
+                        .planImageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planPopular;
+
+
+    }
 
     }
 
