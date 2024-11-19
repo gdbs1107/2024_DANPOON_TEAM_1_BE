@@ -6,10 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import trend.project.converter.PlanMainConverter;
 import trend.project.domain.Plan;
 import trend.project.domain.Ranking;
+import trend.project.domain.enumClass.Category;
 import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,4 +73,30 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
     }
 
 
-}
+
+    @Override
+    public List<PlanMainPageDTO.PlanCategoryResponseDTO> getTopPlanByCategory() {
+
+        List<PlanMainPageDTO.PlanCategoryResponseDTO> topPlans = new ArrayList<>();
+
+        for (Category category : Category.values()) {
+
+            Plan topPlan = planRepository.findTopByCategoryOrderByLikesCountDesc(category);
+
+            if (topPlan != null) {
+                PlanMainPageDTO.PlanCategoryResponseDTO responseDTO = PlanMainPageDTO.PlanCategoryResponseDTO.builder()
+                        .title(topPlan.getTitle()) // 제목
+                        .category(topPlan.getCategory().name())
+                        .likesCount(topPlan.getLikesCount())
+                        .imageLink(topPlan.getPlanPosterImage() != null ? topPlan.getPlanPosterImage().getImageLink() : null) // 포스터 이미지 링크
+                        .build();
+
+                topPlans.add(responseDTO);
+            }
+        }
+        return topPlans;
+    }
+
+
+    }
+

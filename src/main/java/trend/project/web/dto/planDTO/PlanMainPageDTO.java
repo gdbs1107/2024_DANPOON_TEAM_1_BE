@@ -76,4 +76,25 @@ public class PlanMainPageDTO {
 
     }
 
+
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class PlanCategoryResponseDTO{
+
+        @Schema(description = "게시글 제목 입니다")
+        String title;
+
+        @Schema(description = "게시글 카테고리 입니다")
+        String category;
+
+        @Schema(description = "게시글 좋아요 수 입니다")
+        Integer likesCount;
+
+        @Schema(description = "포스터 이미지 링크입니다")
+        String imageLink;
+
+    }
+
 }
