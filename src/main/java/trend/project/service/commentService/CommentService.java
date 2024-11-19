@@ -14,4 +14,8 @@ public interface CommentService {
     
     List<CommentDTO.CommentResponseDTO> getComments(Long planId);
     
+    void updateComment(Long commentId, CommentDTO.CommentUpdateRequestDTO requestDTO, String username); // 수정
+    
+    void deleteComment(Long commentId, String username); // 삭제
+    
 }

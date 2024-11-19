@@ -5,6 +5,7 @@ import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.api.code.status.ErrorStatus;
+import trend.project.api.exception.handler.CommentCategoryHandler;
 import trend.project.api.exception.handler.CompanyCategoryHandler;
 import trend.project.api.exception.handler.MemberCategoryHandler;
 import trend.project.api.exception.handler.PlanCategoryHandler;
@@ -62,12 +63,6 @@ public class CommentServiceImpl implements CommentService{
         return getBuild(newComment);
     }
     
-    private CommentDTO.CommentCreateResponseDTO getBuild(Comment newComment) {
-        return CommentDTO.CommentCreateResponseDTO.builder()
-                .commentId(commentRepository.save(newComment).getId())
-                .build();
-    }
-    
     @Override
     public List<CommentDTO.CommentResponseDTO> getComments(Long planId) {
         List<Comment> comments = commentRepository.findByPlanId(planId).orElse(null);
@@ -76,10 +71,59 @@ public class CommentServiceImpl implements CommentService{
                 .toList();
     }
     
+    @Override
+    public void updateComment(Long commentId, CommentDTO.CommentUpdateRequestDTO requestDTO, String username) {
+        Comment comment = findCommentById(commentId);
+        
+        // 작성자 검증 (Member 또는 Company)
+        if (isValidEmail(username)) {
+            if (!comment.getCompany().getUsername().equals(username)) {
+                throw new CompanyCategoryHandler(ErrorStatus.MEMBER_UNAUTHORIZED);
+            }
+        } else {
+            if (!comment.getMember().getUsername().equals(username)) {
+                throw new MemberCategoryHandler(ErrorStatus.MEMBER_UNAUTHORIZED);
+            }
+        }
+        
+        // 댓글 내용 수정
+        comment.setBody(requestDTO.getBody());
+    }
+    
+    @Override
+    public void deleteComment(Long commentId, String username) {
+        Comment comment = findCommentById(commentId);
+        
+        // 작성자 검증 (Member 또는 Company)
+        if (isValidEmail(username)) {
+            if (!comment.getCompany().getUsername().equals(username)) {
+                throw new CompanyCategoryHandler(ErrorStatus.COMPANY_UNAUTHORIZED);
+            }
+        } else {
+            if (!comment.getMember().getUsername().equals(username)) {
+                throw new MemberCategoryHandler(ErrorStatus.MEMBER_UNAUTHORIZED);
+            }
+        }
+        
+        // 댓글 삭제 (소프트 삭제로 처리)
+        comment.setDeletedTrue(true);
+    }
+    
+    private CommentDTO.CommentCreateResponseDTO getBuild(Comment newComment) {
+        return CommentDTO.CommentCreateResponseDTO.builder()
+                .commentId(commentRepository.save(newComment).getId())
+                .build();
+    }
+    
     private Plan findPlanById(Long planId) {
         return planRepository.findById(planId).orElseThrow(
                 () -> new PlanCategoryHandler(ErrorStatus.PLAN_NOT_FOUND)
         );
+    }
+    
+    private Comment findCommentById(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new CommentCategoryHandler(ErrorStatus.COMMENT_NOT_FOUND));
     }
     
     // 이메일 유효성 검사 메서드
