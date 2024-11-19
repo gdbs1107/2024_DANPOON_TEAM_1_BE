@@ -38,7 +38,11 @@ public class PlanMainPageController {
     // 한달 누적 좋아요 순으로 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수
     @Operation(summary = "이달의 랭킹 조회 API", description = "해당 API는 게시글을 한달 간의 누적 좋아요의 갯수 순으로 조회합니다" )
     @GetMapping("/Rankings")
-    public void getPlanRanking(){
+    public ApiResponse<List<PlanMainPageDTO.PlanRankingResponseDTO>> getPlanRanking(){
+
+        List<PlanMainPageDTO.PlanRankingResponseDTO> result = planMainPageService.getRanking();
+
+        return ApiResponse.onSuccess(result);
     }
 
 
