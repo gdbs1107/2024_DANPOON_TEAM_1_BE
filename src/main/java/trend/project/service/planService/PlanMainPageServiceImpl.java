@@ -5,11 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.converter.PlanMainConverter;
 import trend.project.domain.Plan;
+import trend.project.domain.Ranking;
 import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,6 +36,19 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
     @Override
     public List<PlanMainPageDTO.PlanRankingResponseDTO> getRanking(){
 
+        List<Ranking> rankings = rankingRepository.findAll();
+
+        List<PlanMainPageDTO.PlanRankingResponseDTO> planRankings = rankings.stream()
+                .map(ranking -> PlanMainPageDTO.PlanRankingResponseDTO.builder()
+                        .title(ranking.getTitle())
+                        .name(ranking.getName())
+                        .likesCount(ranking.getLikesCount())
+                        .commentsCount(ranking.getCommentsCount())
+                        .imageLink(ranking.getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planRankings;
 
     }
 }

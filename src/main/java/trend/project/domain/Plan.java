@@ -72,8 +72,8 @@ public class Plan extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
-    private List<PlanPosterImage> posterImages=new ArrayList<>();
+    @OneToOne(mappedBy = "plan",cascade = CascadeType.ALL)
+    private PlanPosterImage planPosterImage;
 
     @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
     private List<PlanLikes> planLikes=new ArrayList<>();

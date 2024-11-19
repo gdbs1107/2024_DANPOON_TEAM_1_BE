@@ -1,10 +1,7 @@
 package trend.project.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -35,6 +32,7 @@ public class Ranking {
     private Integer commentsCount;
 
     @Schema(description = "게시글 포스터 이미지 링크입니다")
+    @Column(length = 1000)
     private String imageLink;
 
     

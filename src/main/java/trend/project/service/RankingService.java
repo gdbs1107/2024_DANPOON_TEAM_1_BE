@@ -33,12 +33,18 @@ public class RankingService {
 
         // 새로운 랭킹 데이터 저장
         for (Plan plan : topPlans) {
+
+            String imageLink = plan.getPlanPosterImage().getImageLink() != null
+                    ? plan.getPlanPosterImage().getImageLink()
+                    : "default-image-link"; // 기본 이미지 처리
+
             Ranking ranking = Ranking.builder()
                     .planId(plan.getId())
                     .title(plan.getTitle())
                     .name(plan.getMember().getName())
                     .likesCount(plan.getLikesCount())
                     .commentsCount(plan.getCommentCount())
+                    .imageLink(plan.getPlanPosterImage().getImageLink())
                     .build();
 
             rankingRepository.save(ranking);
