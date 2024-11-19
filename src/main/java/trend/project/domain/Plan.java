@@ -71,6 +71,10 @@ public class Plan extends BaseEntity {
 
     @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
     private List<PlanLikes> planLikes=new ArrayList<>();
+
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private Location location;
     
     public void setMember(Member member) {
         this.member = member;
