@@ -55,5 +55,6 @@ public class Comment extends BaseEntity {
     
     public void setDeletedTrue(boolean deletedTrue) {
         this.deletedTrue = deletedTrue;
+        this.deletedAt = LocalDateTime.now();
     }
 }
