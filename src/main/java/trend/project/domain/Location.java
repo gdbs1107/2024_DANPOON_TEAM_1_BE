@@ -34,4 +34,10 @@ public class Location extends BaseEntity {
     public void setPlan(Plan plan) {
         this.plan = plan;
     }
+    
+    public void update(String province, String city, String town) {
+        this.province = province;
+        this.city = city;
+        this.town = town;
+    }
 }
