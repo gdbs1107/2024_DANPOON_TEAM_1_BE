@@ -10,4 +10,6 @@ public interface PlanMainPageService {
     List<PlanMainPageDTO.PlanBannerResponseDTO> getPlanBanner();
 
     List<PlanMainPageDTO.PlanRankingResponseDTO> getRanking();
+
+    List<PlanMainPageDTO.PlanMainResponseDTO> getHotties();
 }

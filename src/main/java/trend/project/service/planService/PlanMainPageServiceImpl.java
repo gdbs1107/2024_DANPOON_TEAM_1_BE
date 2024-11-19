@@ -54,7 +54,21 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
 
     @Override
-    public List<>
+    public List<PlanMainPageDTO.PlanMainResponseDTO> getHotties(){
+
+        List<Plan> topPlans = planRepository.findTop5ByOrderByCommentCountDesc();
+
+        List<PlanMainPageDTO.PlanMainResponseDTO> planHottiest = topPlans.stream()
+                .map(plan -> PlanMainPageDTO.PlanMainResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .town(plan.getLocation().getTown())
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planHottiest;
+    }
 
 
 }

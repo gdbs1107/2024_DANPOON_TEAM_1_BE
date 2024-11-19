@@ -52,11 +52,11 @@ public class PlanMainPageController {
     // 누적 댓글 순 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수
     @Operation(summary = "가장 뜨거운 축제 조회 API", description = "해당 API는 게시글을 누적 댓글 갯수 순으로 조회합니다")
     @GetMapping("/hottest")
-    public void getHottestPlan(){
+    public ApiResponse<List<PlanMainPageDTO.PlanMainResponseDTO>> getHottestPlan(){
 
+        List<PlanMainPageDTO.PlanMainResponseDTO> result = planMainPageService.getHotties();
 
-
-
+        return ApiResponse.onSuccess(result);
     }
 
 

@@ -60,7 +60,7 @@ public class PlanMainPageDTO {
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
     @AllArgsConstructor
     @Getter
-    public static class PlanBannerMainResponseDTO{
+    public static class PlanMainResponseDTO{
 
         @Schema(description = "게시글 제목 입니다")
         String title;

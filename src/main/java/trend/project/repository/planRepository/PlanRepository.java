@@ -2,6 +2,7 @@ package trend.project.repository.planRepository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import trend.project.domain.Plan;
 
 import java.time.LocalDate;
@@ -14,6 +15,9 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
 
     @EntityGraph(attributePaths = {"member"})
     List<Plan> findTop4ByOrderByLikesCountDesc();
+
+    @EntityGraph(attributePaths = {"member"})
+    List<Plan> findTop5ByOrderByCommentCountDesc();
 
     List<Plan> findTop5ByStartDateAfterOrderByLikesCountDesc(LocalDate startDate);
 
