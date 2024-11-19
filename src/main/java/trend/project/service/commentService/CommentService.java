@@ -10,6 +10,8 @@ import java.util.List;
 @Transactional
 public interface CommentService {
     
+    CommentDTO.CommentCreateResponseDTO createComment(CommentDTO.CommentCreateRequestDTO requestDTO, Long planId, String username);
+    
     List<CommentDTO.CommentResponseDTO> getComments(Long planId);
     
 }
