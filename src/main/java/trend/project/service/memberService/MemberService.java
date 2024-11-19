@@ -1,11 +1,14 @@
 package trend.project.service.memberService;
 
 import org.springframework.scheduling.annotation.Scheduled;
+import trend.project.web.dto.memberDTO.MemberGetProfileDTO;
 import trend.project.web.dto.memberDTO.MemberJoinDTO;
 import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 
 public interface MemberService {
     MemberJoinDTO.MemberJoinResponseDTO joinMember(MemberJoinDTO.MemberJoinRequestDTO request);
+
+    MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfile(Long userId);
 
     void deleteMember(String username);
 
