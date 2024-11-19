@@ -45,6 +45,39 @@ public class PlanServiceImpl implements PlanService {
     }
     
     @Override
+    public PlanDTO.PlanUpdateResponseDTO planUpdate(PlanDTO.PlanUpdateRequestDTO req, Long planId, String username) {
+        
+        Plan findPlan = findPlanById(planId);
+        Location findLocation = getLocation(planId);
+        
+        if (!findPlan.getMember().getUsername().equals(username)) {
+            throw new PlanCategoryHandler(ErrorStatus.UNAUTHORIZED_ACTION);
+        }
+        
+        findPlan.update(req);
+        findLocation.update(req.getProvince(), req.getCity(), req.getTown());
+        
+        Plan savedPlan = planRepository.save(findPlan);
+        locationRepository.save(findLocation);
+        
+        return PlanDTO.PlanUpdateResponseDTO.builder().planId(savedPlan.getId()).build();
+    }
+    
+    @Override
+    public void deletePlan(Long planId, String username) {
+        
+        Plan findPlan = findPlanById(planId);
+        Location findLocation = getLocation(planId);
+        
+        if (!findPlan.getMember().getUsername().equals(username)) {
+            throw new PlanCategoryHandler(ErrorStatus.UNAUTHORIZED_ACTION);
+        }
+        
+        locationRepository.delete(findLocation);
+        planRepository.delete(findPlan);
+    }
+    
+    @Override
     public PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId) {
         
         Plan findPlan = findPlanById(planId);

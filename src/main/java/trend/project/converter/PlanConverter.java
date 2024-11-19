@@ -16,11 +16,18 @@ public class PlanConverter {
             throw new PlanCategoryHandler(ErrorStatus.PlAN_END_DATE_INVALID);
         }
         
-        Category category;
-        try{
-            category = Category.valueOf(planCreateRequestDTO.getCategory().toUpperCase());
-        } catch (IllegalArgumentException | NullPointerException e) {
-            throw new PlanCategoryHandler(ErrorStatus.CATEGORY_INVALID);}
+        Category category = switch (planCreateRequestDTO.getCategory()) {
+            case 1 -> Category.MUSIC_PERFORMANCE;
+            case 2 -> Category.ART_CRAFT;
+            case 3 -> Category.LOCAL_CULTURE;
+            case 4 -> Category.FOOD_MARKET;
+            case 5 -> Category.TRADITION_HISTORY;
+            case 6 -> Category.NATURE_AGRICULTURE;
+            case 7 -> Category.SPORTS;
+            case 8 -> Category.SEASONAL_EVENT;
+            case 9 -> Category.COMMUNITY_FAMILY;
+            default -> throw new PlanCategoryHandler(ErrorStatus.CATEGORY_INVALID);
+        };
         
         return Plan.builder()
                 .title(planCreateRequestDTO.getTitle())
