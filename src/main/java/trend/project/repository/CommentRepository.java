@@ -19,4 +19,8 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @EntityGraph(attributePaths = {"plan","member","company"})
     @Query("select max(c.orders) from Comment c where c.plan.id = :id and c.groups = :groups")
     Long findMaxCommentOrder(@Param("id") Long postId, @Param("groups") Long groups);
+    
+    @EntityGraph(attributePaths = {"plan","member","company"})
+    @Query("SELECT COALESCE(MAX(c.groups), 0) FROM Comment c WHERE c.plan.id = :planId")
+    Long findMaxCommentGroup(@Param("planId") Long postId);
 }
