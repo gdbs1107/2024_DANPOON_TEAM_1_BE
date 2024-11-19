@@ -80,7 +80,39 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfile(Long userId) {
+    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortUpdateDate(Long userId) {
+
+        Member findMember = memberRepository.findById(userId)
+                .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+
+        // Plan 리스트를 DTO 리스트로 변환
+        List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
+                .map(plan -> MemberGetProfileDTO.MemberGetProfilePlanResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .location(plan.getLocation())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .likeCount(plan.getLikesCount())
+                        .commentCount(plan.getCommentCount())
+                        .build())
+                .collect(Collectors.toList());
+
+
+
+        return MemberGetProfileDTO.MemberGetProfileResponseDTO.builder()
+                .name(findMember.getName())
+                .planCount(getPlanCountByMemberId(userId))
+                .followingCount(findMember.getFollowCount())
+                .followerCount(findMember.getFollowerCount())
+                .planListByUpdateDate(planResponseDTOList)
+                .build();
+
+
+
+    }
+
+    @Override
+    public MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortLikeCount(Long userId) {
 
         Member findMember = memberRepository.findById(userId)
                 .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
@@ -111,7 +143,6 @@ public class MemberServiceImpl implements MemberService {
                 .followingCount(findMember.getFollowCount())
                 .followerCount(findMember.getFollowerCount())
                 .planListByLikeCount(planResponseDTOListByLikeCount)
-                .planListByUpdateDate(planResponseDTOList)
                 .build();
 
 
