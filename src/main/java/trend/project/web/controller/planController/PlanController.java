@@ -35,14 +35,21 @@ public class PlanController {
     }
     
     @Operation(summary = "기획서 수정 API", description = "해당 API는 특정 게시글의 정보를 수정합니다. 권한는 작성자에게 있습니다.")
-    @PutMapping("/{id}")
-    public void updatePlan() {
+    @PutMapping("/{planId}")
+    public ApiResponse<PlanDTO.PlanUpdateResponseDTO> updatePlan(@RequestBody PlanDTO.PlanUpdateRequestDTO req,
+                                                                 @PathVariable Long planId,
+                                                                 @AuthenticationPrincipal UserDetails user) {
+        PlanDTO.PlanUpdateResponseDTO res = planService.planUpdate(req, planId, user.getUsername());
+        return ApiResponse.onSuccess(res);
     }
     
     @Operation(summary = "기획서 삭제 API", description = "해당 API는 특정 게시글을 삭제합니다. 권한는 작성자에게 있습니다.")
-    @DeleteMapping("/{id}")
-    public void deletePlan() {
-    
+    @DeleteMapping("/{planId}")
+    public ApiResponse<String> deletePlan(@PathVariable Long planId,
+                                          @AuthenticationPrincipal UserDetails user) {
+        planService.deletePlan(planId, user.getUsername());
+        
+        return ApiResponse.onSuccess("기획서가 삭제되었습니다.");
     }
 
 }
