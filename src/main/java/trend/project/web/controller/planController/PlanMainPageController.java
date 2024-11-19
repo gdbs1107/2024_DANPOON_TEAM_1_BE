@@ -2,21 +2,34 @@ package trend.project.web.controller.planController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import trend.project.api.ApiResponse;
+import trend.project.service.planService.PlanMainPageService;
+import trend.project.web.dto.planDTO.PlanBannerDTO;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/plans/main")
+@RequiredArgsConstructor
 @Tag(name = "메인페이지 조회 API")
 public class PlanMainPageController {
+
+    private final PlanMainPageService planMainPageService;
 
     // 상단 배너 조회
     // 누적 좋아요수 순으로 4개 조회 - 메인 이미지, title, 기획자 이름, 좋아요 수, 댓글 수, startDate,endDate
     @Operation(summary = "상단 배너 조회 API", description = "해당 API는 게시글을 총 누적 좋아요의 갯수 순으로 조회합니다")
     @GetMapping("/banners")
-    public void getPlanBanners(){
+    public ApiResponse<List<PlanBannerDTO.PlanBannerResponseDTO>> getPlanBanners(){
+
+        List<PlanBannerDTO.PlanBannerResponseDTO> planBanner = planMainPageService.getPlanBanner();
+
+        return ApiResponse.onSuccess(planBanner);
     }
 
 
