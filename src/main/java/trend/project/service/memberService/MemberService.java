@@ -8,9 +8,9 @@ import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
 public interface MemberService {
     MemberJoinDTO.MemberJoinResponseDTO joinMember(MemberJoinDTO.MemberJoinRequestDTO request);
 
-    MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortUpdateDate(Long userId);
+    MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(Long userId);
 
-    MemberGetProfileDTO.MemberGetProfileResponseDTO getMemberProfileSortLikeCount(Long userId);
+    MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(Long userId);
 
     void deleteMember(String username);
 

@@ -36,9 +36,9 @@ public class MemberController {
     @Operation(summary = "회원 프로필 조회 - 최신순 API",
     description = "회원의 게시글이 최신순으로 조회됩니다")
     @GetMapping("/profiles/{userId}/recent")
-    public ApiResponse<MemberGetProfileDTO.MemberGetProfileResponseDTO> getProfilesByRecent(@PathVariable Long userId){
+    public ApiResponse<MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO> getProfilesByRecent(@PathVariable Long userId){
 
-        MemberGetProfileDTO.MemberGetProfileResponseDTO memberProfile = memberService.getMemberProfileSortUpdateDate(userId);
+        MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO memberProfile = memberService.getMemberProfileSortUpdateDate(userId);
 
         return ApiResponse.onSuccess(memberProfile);
 
@@ -49,9 +49,9 @@ public class MemberController {
     @Operation(summary = "회원 프로필 조회 - 좋아요 순 API",
             description = "회원의 게시글이 좋아요순으로 조회됩니다")
     @GetMapping("/profiles/{userId}/likeCount")
-    public ApiResponse<MemberGetProfileDTO.MemberGetProfileResponseDTO> getProfilesByLikeCount(@PathVariable Long userId){
+    public ApiResponse<MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO> getProfilesByLikeCount(@PathVariable Long userId){
 
-        MemberGetProfileDTO.MemberGetProfileResponseDTO memberProfile = memberService.getMemberProfileSortLikeCount(userId);
+        MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO memberProfile = memberService.getMemberProfileSortLikeCount(userId);
 
         return ApiResponse.onSuccess(memberProfile);
 
