@@ -30,6 +30,7 @@ public enum ErrorStatus implements BaseErrorCode {
     PLAN_LOCATION_NOT_FOUND(HttpStatus.NOT_FOUND, "PLAN4004", "주소를 찾을 수 없습니다."),
     CATEGORY_INVALID(HttpStatus.BAD_REQUEST, "PLAN4004", "일치하는 카테고리를 찾을 수 없습니다."),
     PlAN_END_DATE_INVALID(HttpStatus.BAD_REQUEST, "PLAN4005", "종료일은 시작일 이후로 설정해 주세요."),
+    UNAUTHORIZED_ACTION(HttpStatus.UNAUTHORIZED, "PLAN4006", "권한이 없습니다."),
 
 
     // 이미지 관련
