@@ -43,14 +43,18 @@ public class CommentServiceImpl implements CommentService{
         
         Long order = requestDTO.getHierarchy() == 1
                 ? commentRepository.findMaxCommentOrder(findPlan.getId(), requestDTO.getGroup()) + 1
-                : requestDTO.getOrder();
+                : 0;
+        
+        Long group = requestDTO.getHierarchy() == 1
+                ? requestDTO.getGroup()
+                : commentRepository.findMaxCommentGroup(findPlan.getId()) + 1;
         
         Comment newComment = Comment.builder()
                 .body(requestDTO.getBody())
                 .plan(findPlan)
                 .member(!isCompany ? (Member) entity : null)
                 .company(isCompany ? (Company) entity : null)
-                .groups(requestDTO.getGroup())
+                .groups(group)
                 .orders(order)
                 .hierarchy(requestDTO.getHierarchy())
                 .build();
