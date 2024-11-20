@@ -8,4 +8,6 @@ import java.util.List;
 @Service
 public interface PlanByCategoryService {
     List<PlanCategoryPageDTO.PlanCategoryBannerResponseDTO> getPlanByCategoryBanner(String categoryName);
+
+    List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> getRanking(String categoryName);
 }

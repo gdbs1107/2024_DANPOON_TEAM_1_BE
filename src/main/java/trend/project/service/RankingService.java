@@ -10,7 +10,6 @@ import trend.project.domain.enumClass.Category;
 import trend.project.domain.enumClass.RankingCategory;
 import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
-import trend.project.repository.rankingRepository.*;
 
 import java.time.LocalDate;
 import java.util.List;
