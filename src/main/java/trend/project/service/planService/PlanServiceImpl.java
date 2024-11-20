@@ -38,7 +38,7 @@ public class PlanServiceImpl implements PlanService {
         Plan savedPlan = planRepository.save(newPlan);
         
         Location newLocation = LocationConverter.toPlanLocation(req);
-        newLocation.setPlan(savedPlan);
+        newPlan.setLocation(newLocation);
         locationRepository.save(newLocation);
         
         return PlanDTO.PlanCreateResponseDTO.builder().planId(savedPlan.getId()).build();
