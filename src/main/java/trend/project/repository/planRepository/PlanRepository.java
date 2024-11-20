@@ -30,4 +30,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
 
     List<Plan> findTop4ByTitleContainingIgnoreCaseOrderByLikesCountDesc(String title);
 
+    List<Plan> findTop4ByCategoryOrderByLikesCountDesc(Category category);
+
 }
