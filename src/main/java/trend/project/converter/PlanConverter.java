@@ -63,7 +63,7 @@ public class PlanConverter {
                 .status(plan.getStatus().name())
                 .posterUrl(posterImage != null ? posterImage.getImageLink() : null)
                 .bannerUrl(bannerImage != null ? bannerImage.getImageLink() : null)
-                .username(member.getNickname())
+                .username(member.getName())
                 .followerCount(member.getFollowerCount())
                 .province(location.getProvince())
                 .city(location.getCity())
