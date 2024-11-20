@@ -28,10 +28,13 @@ public class CategoryNameValidator implements ConstraintValidator<CategoryNameVa
             return false;
         }
 
-        // Category 열거형의 description 값 중 하나와 일치하는지 확인
-        return Arrays.stream(Category.values())
-                .map(Category::getDescription) // 각 enum의 description 가져오기
-                .anyMatch(description -> description.equals(categoryName)); // 입력된 categoryName과 비교
+        // Category 열거형 이름과 일치하는지 확인
+        try {
+            Category.valueOf(categoryName); // Enum 이름과 일치하는지 체크
+            return true; // 일치하면 유효
+        } catch (IllegalArgumentException e) {
+            return false; // 일치하지 않으면 유효하지 않음
+        }
     }
 
 }
