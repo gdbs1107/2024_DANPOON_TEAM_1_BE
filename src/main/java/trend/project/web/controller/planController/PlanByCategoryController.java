@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import trend.project.service.planService.PlanByCategoryService;
+import trend.project.validation.annotation.CategoryNameValid;
 
 @RestController
 @RequestMapping("/plans/themes")
@@ -18,7 +19,7 @@ public class PlanByCategoryController {
     // 메인 배너 조회 API
     @Operation(summary = "메인 배너 조회 API")
     @GetMapping("/banner/{categoryName}")
-    public void getBanner(@PathVariable String categoryName){
+    public void getBanner(@PathVariable @CategoryNameValid String categoryName){
 
     }
 
@@ -27,7 +28,7 @@ public class PlanByCategoryController {
     // 최고 좋아요 조회 API
     @Operation(summary = "최고 좋아요 조회 API")
     @GetMapping("/Ranking/{categoryName}")
-    public void getRanking(@PathVariable String categoryName){
+    public void getRanking(@PathVariable @CategoryNameValid String categoryName){
 
     }
 
@@ -36,7 +37,7 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 최신별로 조회
     @Operation(summary = "전체 게시글 조회 API - 최신별로 조회")
     @GetMapping("/update-date/{categoryName}")
-    public void getPlansByUpdateDate(@PathVariable String categoryName){
+    public void getPlansByUpdateDate(@PathVariable @CategoryNameValid String categoryName){
 
     }
 
@@ -45,7 +46,7 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 좋아요 갯수 순으로 조회
     @Operation(summary = "전체 게시글 조회 API - 좋아요 갯수 순으로 조회")
     @GetMapping("/like-count/{categoryName}")
-    public void getPlansByLikeCount(@PathVariable String categoryName){
+    public void getPlansByLikeCount(@PathVariable @CategoryNameValid String categoryName){
 
     }
 
@@ -54,7 +55,7 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 지역별로 조회
     @Operation(summary = "전체 게시글 조회 API - 지역별로 조회")
     @GetMapping("/region/{categoryName}")
-    public void getPlansByRegion(@PathVariable String categoryName,
+    public void getPlansByRegion(@PathVariable @CategoryNameValid String categoryName,
                                  @RequestParam String region){
 
     }
