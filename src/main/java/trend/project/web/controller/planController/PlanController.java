@@ -27,13 +27,6 @@ public class PlanController {
         return ApiResponse.onSuccess(res);
     }
     
-    @Operation(summary = "기획서 상세 조회 API", description = "해당 API는 게시글 상세 정보를 조회합니다.")
-    @GetMapping("/{planId}")
-    public ApiResponse<PlanDetailDTO.PlanDetailResponseDTO> getDetailPlan(@PathVariable Long planId) {
-        PlanDetailDTO.PlanDetailResponseDTO planDetail = planService.getPlanDetail(planId);
-        return ApiResponse.onSuccess(planDetail);
-    }
-    
     @Operation(summary = "기획서 수정 API", description = "해당 API는 특정 게시글의 정보를 수정합니다. 권한는 작성자에게 있습니다.")
     @PutMapping("/{planId}")
     public ApiResponse<PlanDTO.PlanUpdateResponseDTO> updatePlan(@RequestBody PlanDTO.PlanUpdateRequestDTO req,
@@ -51,5 +44,4 @@ public class PlanController {
         
         return ApiResponse.onSuccess("기획서가 삭제되었습니다.");
     }
-
 }
