@@ -96,7 +96,7 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()// Swagger 관련 경로를 허용
                 .requestMatchers(HttpMethod.GET, "/plans/detail/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/detail/{planId}/similar").permitAll()
-                .requestMatchers(HttpMethod.GET, "/comments/{id}").permitAll()
+                .requestMatchers(HttpMethod.GET, "/plans/{planId}/comments/").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/poster/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/banner/{planId}").permitAll()
                 .requestMatchers("/plans/main/**","/plans/ranking","/plans/themes/**").permitAll()
