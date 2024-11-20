@@ -108,8 +108,8 @@ public class PlanPosterServiceImpl implements PlanPosterService {
         PlanPosterImage image = PlanPosterImage.builder()
                 .imageLink(uniqueFileName)
                 .imageName(originalFileName)
-                .plan(findplan)
                 .build();
+        findplan.setPlanPosterImage(image);
         
         posterImageRepository.save(image);
     }
