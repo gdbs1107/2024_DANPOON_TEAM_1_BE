@@ -82,6 +82,11 @@ public class Plan extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Location location;
     
+    public void setLocation(Location location) {
+        this.location = location;
+        location.setPlan(this);
+    }
+    
     public void setMember(Member member) {
         this.member = member;
     }
