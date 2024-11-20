@@ -58,3 +58,10 @@ cloud:
       auto: false
     stack:
       auto: false
+
+sentry:
+  dsn: ${DSN}
+  send-default-pii: true
+  stacktrace:
+    app-packages:
+      - trend.project
