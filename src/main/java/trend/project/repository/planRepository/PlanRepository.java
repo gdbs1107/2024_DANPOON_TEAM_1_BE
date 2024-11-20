@@ -40,4 +40,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
             @Param("province") String province,
             @Param("planId") Long planId);
 
+    List<Plan> findTop4ByCategoryOrderByLikesCountDesc(Category category);
+
 }
