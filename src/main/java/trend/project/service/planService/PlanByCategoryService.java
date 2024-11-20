@@ -12,4 +12,6 @@ public interface PlanByCategoryService {
     List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> getRanking(String categoryName);
 
     List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlan(String categoryName);
+
+    List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByLikeCount(String categoryName);
 }

@@ -61,7 +61,11 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 좋아요 갯수 순으로 조회
     @Operation(summary = "전체 게시글 조회 API - 좋아요 갯수 순으로 조회")
     @GetMapping("/like-count/{categoryName}")
-    public void getPlansByLikeCount(@PathVariable @CategoryNameValid String categoryName){
+    public ApiResponse<List<PlanCategoryPageDTO.PlanCategoryResponseDTO>> getPlansByLikeCount(@PathVariable @CategoryNameValid String categoryName){
+
+        List<PlanCategoryPageDTO.PlanCategoryResponseDTO> result = planByCategoryService.getPlanByLikeCount(categoryName);
+
+        return ApiResponse.onSuccess(result);
 
     }
 

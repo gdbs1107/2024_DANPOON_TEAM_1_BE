@@ -45,4 +45,7 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findTop5ByCategoryAndStartDateAfterOrderByLikesCountDesc(Category category, LocalDate startDate);
 
     List<Plan> findByCategory(Category category);
+
+    // N+1 발생
+    List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
 }
