@@ -15,7 +15,6 @@ import trend.project.repository.planRepository.LocationRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.repository.planRepository.PosterImageRepository;
 import trend.project.web.dto.planDTO.PlanDTO;
-import trend.project.web.dto.planDTO.PlanDetailDTO;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +23,6 @@ public class PlanServiceImpl implements PlanService {
     
     private final PlanRepository planRepository;
     private final LocationRepository locationRepository;
-    private final PosterImageRepository posterImageRepository;
-    private final BannerImageRepository bannerImageRepository;
     private final MemberRepository memberRepository;
     
     @Override
@@ -77,30 +74,10 @@ public class PlanServiceImpl implements PlanService {
         planRepository.delete(findPlan);
     }
     
-    @Override
-    public PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId) {
-        
-        Plan findPlan = findPlanById(planId);
-        Member findMember = findPlan.getMember();
-        Location planLocation = getLocation(planId);
-        PlanPosterImage posterImage = getPosterImage(planId);
-        PlanBannerImage bannerImage = getBannerImage(planId);
-        
-        return PlanConverter.toPlanDetailResponseDTO(findPlan, findMember, planLocation, posterImage, bannerImage);
-    }
-    
     private Location getLocation(Long planId) {
         return locationRepository.findByPlanId(planId).orElseThrow(
                 () -> new PlanCategoryHandler(ErrorStatus.PLAN_LOCATION_NOT_FOUND)
         );
-    }
-    
-    private PlanBannerImage getBannerImage(Long planId) {
-        return bannerImageRepository.findImagesByPlanId(planId).orElse(null);
-    }
-    
-    private PlanPosterImage getPosterImage(Long planId) {
-        return posterImageRepository.findImagesByPlanId(planId).orElse(null);
     }
     
     private Plan findPlanById(Long planId) {

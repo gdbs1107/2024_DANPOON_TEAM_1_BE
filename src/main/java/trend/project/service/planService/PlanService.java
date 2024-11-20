@@ -9,8 +9,6 @@ import java.util.List;
 @Service
 public interface PlanService {
     
-    PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId);
-    
     PlanDTO.PlanCreateResponseDTO planCreate(PlanDTO.PlanCreateRequestDTO req, String username);
     
     PlanDTO.PlanUpdateResponseDTO planUpdate(PlanDTO.PlanUpdateRequestDTO req, Long planId, String username);
