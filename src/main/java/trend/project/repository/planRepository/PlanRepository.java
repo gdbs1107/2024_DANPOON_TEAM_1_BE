@@ -40,4 +40,14 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
             @Param("province") String province,
             @Param("planId") Long planId);
 
+    List<Plan> findTop4ByCategoryOrderByLikesCountDesc(Category category);
+
+    List<Plan> findTop5ByCategoryAndStartDateAfterOrderByLikesCountDesc(Category category, LocalDate startDate);
+
+    List<Plan> findByCategory(Category category);
+
+    // N+1 발생
+    List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
+
+    List<Plan> findByCategoryAndLocationTownOrderByLikesCountDesc(Category category, String town);
 }

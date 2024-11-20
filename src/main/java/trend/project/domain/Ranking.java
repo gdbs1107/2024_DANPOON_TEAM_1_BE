@@ -3,6 +3,7 @@ package trend.project.domain;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
+import trend.project.domain.enumClass.RankingCategory;
 
 @Entity
 @Builder
@@ -30,6 +31,9 @@ public class Ranking {
 
     @Schema(description = "게시글 댓글 수 입니다")
     private Integer commentsCount;
+
+    @Enumerated(EnumType.STRING)
+    private RankingCategory rankingCategory;
 
     @Schema(description = "게시글 포스터 이미지 링크입니다")
     @Column(length = 1000)
