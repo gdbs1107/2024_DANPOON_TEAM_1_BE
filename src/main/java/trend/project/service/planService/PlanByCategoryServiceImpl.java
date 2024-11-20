@@ -78,6 +78,25 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
 
 
+    @Override
+    public List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlan(String categoryName){
+
+        List<Plan> byCategory = planRepository.findByCategory(Category.valueOf(categoryName));
+
+        List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
+                .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .town(plan.getLocation().getTown())
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planByCategory;
+
+    }
+
+
 
 
 }

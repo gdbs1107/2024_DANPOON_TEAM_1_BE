@@ -48,7 +48,11 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 최신별로 조회
     @Operation(summary = "전체 게시글 조회 API - 최신별로 조회")
     @GetMapping("/update-date/{categoryName}")
-    public void getPlansByUpdateDate(@PathVariable @CategoryNameValid String categoryName){
+    public ApiResponse<List<PlanCategoryPageDTO.PlanCategoryResponseDTO>> getPlansByUpdateDate(@PathVariable @CategoryNameValid String categoryName){
+
+        List<PlanCategoryPageDTO.PlanCategoryResponseDTO> result = planByCategoryService.getPlan(categoryName);
+
+        return ApiResponse.onSuccess(result);
 
     }
 
