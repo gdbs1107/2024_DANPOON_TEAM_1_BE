@@ -91,6 +91,11 @@ public class Plan extends BaseEntity {
         this.member = member;
     }
     
+    public void setPlanPosterImage(PlanPosterImage planPosterImage) {
+        this.planPosterImage = planPosterImage;
+        planPosterImage.setPlan(this);
+    }
+    
     public void update(PlanDTO.PlanUpdateRequestDTO dto) {
         Category category = switch (dto.getCategory()) {
             case 1 -> Category.MUSIC_PERFORMANCE;
