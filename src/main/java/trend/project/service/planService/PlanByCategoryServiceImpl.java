@@ -97,6 +97,8 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
     }
 
 
+
+
     @Override
     public List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByLikeCount(String categoryName){
 
@@ -115,6 +117,27 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
     }
 
+
+
+    @Override
+    public List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByTown(String categoryName,String town){
+
+        List<Plan> byCategory = planRepository.
+                findByCategoryAndLocationTownOrderByLikesCountDesc(Category.valueOf(categoryName), town);
+
+        List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
+                .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .town(plan.getLocation().getTown())
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planByCategory;
+
+
+    }
 
 
 

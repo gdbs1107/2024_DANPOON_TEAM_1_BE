@@ -14,4 +14,6 @@ public interface PlanByCategoryService {
     List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlan(String categoryName);
 
     List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByLikeCount(String categoryName);
+
+    List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByTown(String categoryName, String town);
 }

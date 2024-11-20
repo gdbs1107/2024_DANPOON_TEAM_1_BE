@@ -74,9 +74,12 @@ public class PlanByCategoryController {
     // 전체 게시글 조회 API - 지역별로 조회
     @Operation(summary = "전체 게시글 조회 API - 지역별로 조회")
     @GetMapping("/region/{categoryName}")
-    public void getPlansByRegion(@PathVariable @CategoryNameValid String categoryName,
-                                 @RequestParam String region){
+    public ApiResponse<List<PlanCategoryPageDTO.PlanCategoryResponseDTO>> getPlansByRegion(@PathVariable @CategoryNameValid String categoryName,
+                                 @RequestParam String town){
 
+        List<PlanCategoryPageDTO.PlanCategoryResponseDTO> result = planByCategoryService.getPlanByTown(categoryName, town);
+
+        return ApiResponse.onSuccess(result);
     }
 
 }

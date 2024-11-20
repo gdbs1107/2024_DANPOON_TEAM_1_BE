@@ -48,4 +48,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
 
     // N+1 발생
     List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
+
+    List<Plan> findByCategoryAndLocationTownOrderByLikesCountDesc(Category category, String town);
 }
