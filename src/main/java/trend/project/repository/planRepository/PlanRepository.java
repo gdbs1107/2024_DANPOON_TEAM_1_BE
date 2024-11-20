@@ -3,6 +3,7 @@ package trend.project.repository.planRepository;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import trend.project.domain.Member;
 import trend.project.domain.Plan;
 import trend.project.domain.enumClass.Category;
@@ -29,5 +30,14 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findTop5ByMember(Member member);
 
     List<Plan> findTop4ByTitleContainingIgnoreCaseOrderByLikesCountDesc(String title);
+    
+    @Query("SELECT p FROM Plan p " +
+            "JOIN p.location l " +
+            "WHERE l.province = :province " +
+            "AND p.id <> :planId " +
+            "ORDER BY p.likesCount DESC")
+    List<Plan> findTop5ByProvinceAndNotCurrentPlanOrderByLikesCountDesc(
+            @Param("province") String province,
+            @Param("planId") Long planId);
 
 }
