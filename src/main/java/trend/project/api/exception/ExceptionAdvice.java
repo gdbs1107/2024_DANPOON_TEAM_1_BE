@@ -1,5 +1,6 @@
 package trend.project.api.exception;
 
+import io.sentry.Sentry;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 .orElse("Invalid input");
 
         ErrorStatus errorStatus = resolveErrorStatus(errorMessage, ErrorStatus._BAD_REQUEST);
+        Sentry.captureException(e);
 
         return handleExceptionInternalConstraint(e, errorStatus, HttpHeaders.EMPTY, request);
     }
@@ -62,6 +64,8 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
         log.error("Unhandled exception: {}", e.getMessage(), e);
+
+        Sentry.captureException(e);
 
         return handleExceptionInternalFalse(
                 e,

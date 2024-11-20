@@ -49,8 +49,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 	// Sentry Dependencies
-	implementation 'io.sentry:sentry-logback:1.7.30'
-	implementation 'io.sentry:sentry-spring-boot-starter:1.7.30'
+	implementation 'io.sentry:sentry-logback:6.26.0'
+	implementation 'io.sentry:sentry-spring-boot-starter:6.26.0'
 
 }
 
