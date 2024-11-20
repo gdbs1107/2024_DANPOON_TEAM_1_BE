@@ -35,7 +35,7 @@ public class PlanByCategoryController {
 
     // 전체 게시글 조회 API - 최신별로 조회
     @Operation(summary = "전체 게시글 조회 API - 최신별로 조회")
-    @GetMapping("/banner/{categoryName}")
+    @GetMapping("/update-date/{categoryName}")
     public void getPlansByUpdateDate(@PathVariable String categoryName){
 
     }
@@ -44,7 +44,7 @@ public class PlanByCategoryController {
 
     // 전체 게시글 조회 API - 좋아요 갯수 순으로 조회
     @Operation(summary = "전체 게시글 조회 API - 좋아요 갯수 순으로 조회")
-    @GetMapping("/banner/{categoryName}")
+    @GetMapping("/like-count/{categoryName}")
     public void getPlansByLikeCount(@PathVariable String categoryName){
 
     }
@@ -53,7 +53,7 @@ public class PlanByCategoryController {
 
     // 전체 게시글 조회 API - 지역별로 조회
     @Operation(summary = "전체 게시글 조회 API - 지역별로 조회")
-    @GetMapping("/banner/{categoryName}")
+    @GetMapping("/region/{categoryName}")
     public void getPlansByRegion(@PathVariable String categoryName,
                                  @RequestParam String region){
 
