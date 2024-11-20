@@ -37,6 +37,7 @@ public class PlanDetailServiceImpl implements PlanDetailService {
         Location planLocation = getLocation(planId);
         PlanPosterImage posterImage = getPosterImage(planId);
         PlanBannerImage bannerImage = getBannerImage(planId);
+        findPlan.updateCommentCount();
         
         return PlanDetailConverter.toPlanDetailResponseDTO(findPlan, findMember, planLocation, posterImage, bannerImage);
     }

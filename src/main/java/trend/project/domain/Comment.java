@@ -5,6 +5,7 @@ import lombok.*;
 import trend.project.domain.common.BaseEntity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Builder

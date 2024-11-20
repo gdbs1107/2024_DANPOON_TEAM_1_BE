@@ -59,6 +59,8 @@ public class CommentServiceImpl implements CommentService{
                 .orders(order)
                 .hierarchy(requestDTO.getHierarchy())
                 .build();
+        findPlan.getComments().add(newComment);
+        findPlan.updateCommentCount();
         
         return getBuild(newComment);
     }

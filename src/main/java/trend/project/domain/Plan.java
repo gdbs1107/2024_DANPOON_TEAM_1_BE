@@ -52,6 +52,9 @@ public class Plan extends BaseEntity {
     
     @Column(nullable = false)
     private int commentCount;
+    
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(nullable = false, columnDefinition = "int default 0")
     private int bookmarkCount = 0;
@@ -118,5 +121,9 @@ public class Plan extends BaseEntity {
         this.bookingMethod = dto.getBookingMethod();
         this.content = dto.getContent();
         this.budget = dto.getBudget();
+    }
+    
+    public void updateCommentCount() {
+        this.commentCount = this.comments.size();
     }
 }
