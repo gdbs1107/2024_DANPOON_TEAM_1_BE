@@ -71,4 +71,20 @@ public class PlanDetailDTO {
         @Schema(description = "읍/면/동")
         private String town;
     }
+    
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class SameProvinceOtherPlanResponseDTO {
+        
+        @Schema(description = "기획자 이름입니다.")
+        private String name;
+        
+        @Schema(description = "기획서 제목입니다.")
+        private String title;
+        
+        @Schema(description = "포스터 이미지 링크입니다.")
+        private String imageLink;
+    }
 }
