@@ -14,4 +14,6 @@ public interface RankingRepository extends JpaRepository<Ranking, Long> {
 
     void deleteByRankingCategory(RankingCategory rankingCategory);
 
+    List<Ranking> findByRankingCategory(RankingCategory rankingCategory);
+
 }

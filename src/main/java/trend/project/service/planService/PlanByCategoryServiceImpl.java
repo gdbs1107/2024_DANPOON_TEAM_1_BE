@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.domain.Plan;
+import trend.project.domain.Ranking;
 import trend.project.domain.enumClass.Category;
+import trend.project.domain.enumClass.RankingCategory;
+import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanCategoryPageDTO;
 
@@ -19,6 +22,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
 
     private final PlanRepository planRepository;
+    private final RankingRepository rankingRepository;
 
 
 
@@ -53,7 +57,24 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
     2. 랭킹 타입에 맞게 저장
  */
 
+    @Override
+    public List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> getRanking(String categoryName){
 
+        List<Ranking> rankings = rankingRepository.findByRankingCategory(RankingCategory.valueOf(categoryName));
+
+        List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> planRankings = rankings.stream()
+                .map(ranking -> PlanCategoryPageDTO.PlanCategoryRankingResponseDTO.builder()
+                        .title(ranking.getTitle())
+                        .name(ranking.getName())
+                        .likesCount(ranking.getLikesCount())
+                        .commentsCount(ranking.getCommentsCount())
+                        .imageLink(ranking.getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return planRankings;
+
+    }
 
 
 

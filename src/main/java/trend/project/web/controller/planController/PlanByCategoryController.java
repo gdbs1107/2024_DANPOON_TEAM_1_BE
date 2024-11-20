@@ -36,8 +36,11 @@ public class PlanByCategoryController {
     // 최고 좋아요 조회 API
     @Operation(summary = "최고 좋아요 조회 API")
     @GetMapping("/Ranking/{categoryName}")
-    public void getRanking(@PathVariable @CategoryNameValid String categoryName){
+    public ApiResponse<List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO>> getRanking(@PathVariable @CategoryNameValid String categoryName){
 
+        List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> ranking = planByCategoryService.getRanking(categoryName);
+
+        return ApiResponse.onSuccess(ranking);
     }
 
 

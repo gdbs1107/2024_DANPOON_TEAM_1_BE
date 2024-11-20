@@ -8,6 +8,7 @@ import trend.project.domain.Member;
 import trend.project.domain.Plan;
 import trend.project.domain.Ranking;
 import trend.project.domain.enumClass.Category;
+import trend.project.domain.enumClass.RankingCategory;
 import trend.project.repository.MemberRepository;
 import trend.project.repository.RankingRepository;
 import trend.project.repository.planRepository.PlanRepository;
@@ -41,7 +42,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
     @Override
     public List<PlanMainPageDTO.PlanRankingResponseDTO> getRanking(){
 
-        List<Ranking> rankings = rankingRepository.findAll();
+        List<Ranking> rankings = rankingRepository.findByRankingCategory(RankingCategory.MAIN);
 
         List<PlanMainPageDTO.PlanRankingResponseDTO> planRankings = rankings.stream()
                 .map(ranking -> PlanMainPageDTO.PlanRankingResponseDTO.builder()
