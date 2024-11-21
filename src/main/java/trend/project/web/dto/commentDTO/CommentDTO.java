@@ -46,8 +46,6 @@ public class CommentDTO {
         private String memberName;
         private String companyName;
         private LocalDateTime updatedAt;
-        private LocalDateTime deletedAt;
-        private boolean deletedTrue;
     }
     
     @Builder
