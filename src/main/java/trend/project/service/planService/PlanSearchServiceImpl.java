@@ -34,4 +34,6 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         return searchResponse;
     }
+
+
 }
