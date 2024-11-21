@@ -1,5 +1,6 @@
 package trend.project.api.exception;
 
+import io.sentry.Sentry;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
                 .orElse("Invalid input");
 
         ErrorStatus errorStatus = resolveErrorStatus(errorMessage, ErrorStatus._BAD_REQUEST);
+        Sentry.captureException(e);
 
         return handleExceptionInternalConstraint(e, errorStatus, HttpHeaders.EMPTY, request);
     }
@@ -45,6 +47,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
         Map<String, String> errors = new LinkedHashMap<>();
+        Sentry.captureException(ex);
         ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
             String fieldName = fieldError.getField();
             String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
@@ -63,6 +66,8 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
         log.error("Unhandled exception: {}", e.getMessage(), e);
 
+        Sentry.captureException(e);
+
         return handleExceptionInternalFalse(
                 e,
                 ErrorStatus._INTERNAL_SERVER_ERROR,
@@ -78,6 +83,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         log.error("General exception: {}", generalException.getMessage(), generalException);
 
         ErrorReasonDTO errorReason = generalException.getErrorReasonHttpStatus();
+        Sentry.captureException(generalException);
         return handleExceptionInternal(generalException, errorReason, null, request);
     }
 
