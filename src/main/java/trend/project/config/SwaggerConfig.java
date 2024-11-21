@@ -16,7 +16,7 @@ public class SwaggerConfig {
     public OpenAPI TRENDS_API(){
         Info info=new Info()
                 .title("유행: 내가 만드는 지역 행사")
-                .description("TEAM 유행 API입니다 <br>" +
+                .description("TEAM 유행 API입니다 <br><br>" +
                         "인증이 필요한 API 호출 시, Authorization 헤더에 Bearer Accesstoken을 넣고 요청해주세요")
                 .version("1.0");
 
