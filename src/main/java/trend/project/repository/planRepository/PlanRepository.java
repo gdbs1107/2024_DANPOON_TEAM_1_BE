@@ -58,4 +58,13 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findByTitleContainingIgnoreCaseAndBudget(String title,int budget);
 
     List<Plan> findByTitleContainingIgnoreCaseAndBudgetGreaterThan(String title, int budget);
+
+
+    @Query("SELECT p FROM Plan p WHERE " +
+            "LOWER(p.title) LIKE LOWER(CONCAT('%', :title, '%')) AND " +
+            "p.startDate <= :endDate AND p.endDate >= :startDate")
+    List<Plan> findPlansByTitleAndPeriod(
+            @Param("title") String title,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
 }

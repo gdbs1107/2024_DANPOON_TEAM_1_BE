@@ -9,6 +9,7 @@ import trend.project.service.planService.PlanSearchService;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 import trend.project.web.dto.planDTO.PlanSearchDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -57,11 +58,14 @@ public class PlanSearchController {
     }
 
 
-    // 기간별 조회
-    @GetMapping("/{searchContent}/regions")
+    @GetMapping("/{searchContent}/periods")
     @Operation(summary = "게시글 검색 기간별 조회 API")
-    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByPeriod(){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByPeriod(@PathVariable String searchContent,
+                                                                                          @RequestParam LocalDate startDate,
+                                                                                          @RequestParam LocalDate endDate) {
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByPeriod(searchContent, startDate, endDate);
 
+        return ApiResponse.onSuccess(result);
     }
 
 

@@ -9,6 +9,7 @@ import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 import trend.project.web.dto.planDTO.PlanSearchDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,6 +105,28 @@ public class PlanSearchServiceImpl implements PlanSearchService {
     public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByNonFree(String title){
 
         List<Plan> plans = planRepository.findByTitleContainingIgnoreCaseAndBudgetGreaterThan(title,0);
+
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
+                .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .category(plan.getCategory())
+                        .title(plan.getTitle())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .name(plan.getMember().getName())
+                        .build())
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+
+    @Override
+    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByPeriod(String title,
+                                                                            LocalDate startDate,
+                                                                            LocalDate endDate){
+
+        List<Plan> plans = planRepository.findPlansByTitleAndPeriod(title,startDate,endDate);
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
