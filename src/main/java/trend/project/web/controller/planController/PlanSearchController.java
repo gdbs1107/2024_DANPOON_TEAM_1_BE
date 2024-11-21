@@ -3,6 +3,7 @@ package trend.project.web.controller.planController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanSearchService;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/plans/search")
 @RequiredArgsConstructor
 @Tag(name = "기획서 검색 API")
+@Slf4j
 public class PlanSearchController {
 
     private final PlanSearchService planSearchService;
@@ -48,10 +50,9 @@ public class PlanSearchController {
     // 테마별 조회
     @GetMapping("/{searchContent}/themes")
     @Operation(summary = "게시글 검색 테마별 조회 API")
-    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByThemes(@RequestParam String category,
-                                                                                          @PathVariable String searchContent){
-
-        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByTheme(category, searchContent);
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByThemes(@PathVariable String searchContent,
+                                                                                          @RequestParam String category){
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByTheme(searchContent, category);
 
         return ApiResponse.onSuccess(result);
 

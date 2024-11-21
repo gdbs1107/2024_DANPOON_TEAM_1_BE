@@ -1,6 +1,7 @@
 package trend.project.service.planService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.domain.Plan;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class PlanSearchServiceImpl implements PlanSearchService {
 
 
