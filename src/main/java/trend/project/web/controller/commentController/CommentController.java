@@ -20,7 +20,8 @@ public class CommentController {
     
     private final CommentService commentService;
     
-    @Operation(summary = "댓글 작성 API", description = "해당 API는 새로운 댓글을 작성합니다.")
+    @Operation(summary = "댓글 작성 API", description = "해당 API는 새로운 댓글을 작성합니다.<br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @PostMapping("/")
     public ApiResponse<CommentDTO.CommentCreateResponseDTO> createComment(
             @PathVariable Long planId,
@@ -30,7 +31,8 @@ public class CommentController {
         return ApiResponse.onSuccess(responseDTO);
     }
     
-    @Operation(summary = "댓글 수정 API", description = "해당 API는 댓글을 수정합니다.")
+    @Operation(summary = "댓글 수정 API", description = "해당 API는 댓글을 수정합니다.<br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @PutMapping("/{commentId}")
     public ApiResponse<String> updateComment(
             @PathVariable Long commentId,
@@ -47,7 +49,8 @@ public class CommentController {
         return ApiResponse.onSuccess(comments);
     }
     
-    @Operation(summary = "댓글 삭제 API", description = "해당 API는 댓글을 삭제합니다.")
+    @Operation(summary = "댓글 삭제 API", description = "해당 API는 댓글을 삭제합니다.<br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @DeleteMapping("/{commentId}")
     public ApiResponse<String> deleteComment(
             @PathVariable Long commentId,
