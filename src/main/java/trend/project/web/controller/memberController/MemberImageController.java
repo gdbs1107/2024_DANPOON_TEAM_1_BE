@@ -31,7 +31,7 @@ public class MemberImageController {
 
 
 
-    @Operation(summary = "프로필 사진 등록 API")
+    @Operation(summary = "프로필 사진 등록 API" , description = "Authorization 헤더에 토큰을 넣어주세요")
     @PostMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> uploadMemberProfileImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
@@ -51,7 +51,7 @@ public class MemberImageController {
 
 
 
-    @Operation(summary = "본인 프로필 사진 조회 API")
+    @Operation(summary = "본인 프로필 사진 조회 API" , description = "Authorization 헤더에 토큰을 넣어주세요")
     @GetMapping(path = "")
     public ResponseEntity<byte[]> getMemberProfileImage(
             @AuthenticationPrincipal UserDetails userDetails) {
@@ -77,7 +77,7 @@ public class MemberImageController {
 
 
 
-    @Operation(summary = "프로필 사진 조회 API")
+    @Operation(summary = "프로필 사진 조회 API" , description = "Authorization 헤더에 토큰을 넣어주세요")
     @GetMapping(path = "/{memberId}")
     public ResponseEntity<byte[]> getProfileImage(
             @PathVariable Long memberId) {
@@ -104,7 +104,7 @@ public class MemberImageController {
 
 
 
-    @Operation(summary = "프로필 사진 삭제 API")
+    @Operation(summary = "프로필 사진 삭제 API" , description = "Authorization 헤더에 토큰을 넣어주세요")
     @DeleteMapping(path = "")
     public ApiResponse<String> deleteMemberProfileImage(
             @AuthenticationPrincipal UserDetails userDetails) {
@@ -130,7 +130,7 @@ public class MemberImageController {
 
 
 
-    @Operation(summary = "프로필 사진 업데이트 API")
+    @Operation(summary = "프로필 사진 업데이트 API" , description = "Authorization 헤더에 토큰을 넣어주세요")
     @PutMapping(path = "", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> updateMemberProfileImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
