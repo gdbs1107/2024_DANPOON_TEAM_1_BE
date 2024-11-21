@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanSearchService;
+import trend.project.validation.annotation.CategoryNameValid;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 import trend.project.web.dto.planDTO.PlanSearchDTO;
 
@@ -51,7 +52,7 @@ public class PlanSearchController {
     @GetMapping("/{searchContent}/themes")
     @Operation(summary = "게시글 검색 테마별 조회 API")
     public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByThemes(@PathVariable String searchContent,
-                                                                                          @RequestParam String category){
+                                                                                          @RequestParam @CategoryNameValid String category){
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByTheme(searchContent, category);
 
         return ApiResponse.onSuccess(result);
