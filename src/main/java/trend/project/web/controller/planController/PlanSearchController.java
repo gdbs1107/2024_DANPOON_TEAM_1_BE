@@ -38,10 +38,10 @@ public class PlanSearchController {
     // 지역별 조회
     @GetMapping("/{searchContent}/regions")
     @Operation(summary = "게시글 검색 지역별 조회 API")
-    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByRegion(@RequestParam String region,
-                                                                                          @PathVariable String searchContent){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByRegion(@PathVariable String searchContent,
+                                                                                          @RequestParam String region){
 
-        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByRegion(region, searchContent);
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByRegion(searchContent,region);
 
         return ApiResponse.onSuccess(result);
     }
