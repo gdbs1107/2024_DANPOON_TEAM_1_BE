@@ -86,9 +86,8 @@ public class CommentServiceImpl implements CommentService{
                 throw new MemberCategoryHandler(ErrorStatus.MEMBER_UNAUTHORIZED);
             }
         }
-        
-        // 댓글 내용 수정
         comment.setBody(requestDTO.getBody());
+        commentRepository.save(comment);
     }
     
     @Override
@@ -106,8 +105,7 @@ public class CommentServiceImpl implements CommentService{
             }
         }
         
-        // 댓글 삭제 (소프트 삭제로 처리)
-        comment.setDeletedTrue(true);
+        commentRepository.delete(comment);
     }
     
     private CommentDTO.CommentCreateResponseDTO getBuild(Comment newComment) {

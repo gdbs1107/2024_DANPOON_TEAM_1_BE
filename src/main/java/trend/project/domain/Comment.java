@@ -29,11 +29,6 @@ public class Comment extends BaseEntity {
     @Column(nullable = false)
     private int likesCount = 0;
     
-    private LocalDateTime deletedAt;
-    
-    @Column(nullable = false)
-    private boolean deletedTrue = false;
-    
     @Column(nullable = false)
     private Long hierarchy = 0L;
     
@@ -56,11 +51,6 @@ public class Comment extends BaseEntity {
     
     public void setBody(String body) {
         this.body = body;
-    }
-    
-    public void setDeletedTrue(boolean deletedTrue) {
-        this.deletedTrue = deletedTrue;
-        this.deletedAt = LocalDateTime.now();
     }
     
     public void updateLikesCount() {

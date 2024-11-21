@@ -15,8 +15,6 @@ public class CommentConverter {
                 .orders(comment.getOrders())
                 .hierarchy(comment.getHierarchy())
                 .updatedAt(comment.getUpdatedAt())
-                .deletedAt(comment.getDeletedAt())
-                .deletedTrue(comment.isDeletedTrue())
                 .build();
     }
 }
