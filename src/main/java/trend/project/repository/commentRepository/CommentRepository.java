@@ -1,4 +1,4 @@
-package trend.project.repository;
+package trend.project.repository.commentRepository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,6 @@
 package trend.project.service.commentService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.api.code.status.ErrorStatus;
@@ -14,7 +13,7 @@ import trend.project.domain.Comment;
 import trend.project.domain.Company;
 import trend.project.domain.Member;
 import trend.project.domain.Plan;
-import trend.project.repository.CommentRepository;
+import trend.project.repository.commentRepository.CommentRepository;
 import trend.project.repository.CompanyRepository;
 import trend.project.repository.MemberRepository;
 import trend.project.repository.planRepository.PlanRepository;

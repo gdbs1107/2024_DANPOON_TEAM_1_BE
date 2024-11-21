@@ -80,8 +80,7 @@ public class Plan extends BaseEntity {
 
     @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
     private List<PlanLikes> planLikes=new ArrayList<>();
-
-
+    
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Location location;
     
@@ -125,5 +124,9 @@ public class Plan extends BaseEntity {
     
     public void updateCommentCount() {
         this.commentCount = this.comments.size();
+    }
+    
+    public void updateLikesCount() {
+        this.likesCount = this.planLikes.size();
     }
 }

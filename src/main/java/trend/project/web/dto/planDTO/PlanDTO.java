@@ -112,4 +112,12 @@ public class PlanDTO {
         
         Long planId;
     }
+    
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class PlanLikesCountResponseDTO {
+        Integer likesCount;
+    }
 }

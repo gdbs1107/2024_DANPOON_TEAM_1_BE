@@ -5,6 +5,7 @@ import lombok.*;
 import trend.project.domain.common.BaseEntity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,6 +51,9 @@ public class Comment extends BaseEntity {
     @JoinColumn(name = "company_id")
     private Company company;
     
+    @OneToMany(mappedBy = "comment", cascade = CascadeType.ALL)
+    private List<CommentLikes> commentLikes = new ArrayList<>();
+    
     public void setBody(String body) {
         this.body = body;
     }
@@ -57,5 +61,9 @@ public class Comment extends BaseEntity {
     public void setDeletedTrue(boolean deletedTrue) {
         this.deletedTrue = deletedTrue;
         this.deletedAt = LocalDateTime.now();
+    }
+    
+    public void updateLikesCount() {
+        this.likesCount = commentLikes.size();
     }
 }
