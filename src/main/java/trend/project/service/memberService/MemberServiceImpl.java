@@ -89,7 +89,7 @@ public class MemberServiceImpl implements MemberService {
         List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
                 .map(plan -> MemberGetProfileDTO.MemberGetProfilePlanResponseDTO.builder()
                         .title(plan.getTitle())
-                        .location(plan.getLocation())
+                        .town(plan.getLocation().getTown())
                         .startDate(plan.getStartDate())
                         .endDate(plan.getEndDate())
                         .likeCount(plan.getLikesCount())
@@ -111,6 +111,8 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+
+    // N+1 발생
     @Override
     public MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(Long userId) {
 
@@ -121,7 +123,7 @@ public class MemberServiceImpl implements MemberService {
         List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
                 .map(plan -> MemberGetProfileDTO.MemberGetProfilePlanResponseDTO.builder()
                         .title(plan.getTitle())
-                        .location(plan.getLocation())
+                        .town(plan.getLocation().getTown())
                         .startDate(plan.getStartDate())
                         .endDate(plan.getEndDate())
                         .likeCount(plan.getLikesCount())

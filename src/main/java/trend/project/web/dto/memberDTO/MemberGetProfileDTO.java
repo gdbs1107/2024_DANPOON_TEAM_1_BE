@@ -66,7 +66,7 @@ public class MemberGetProfileDTO {
 
         String title;
 
-        Location location;
+        String town;
 
         LocalDate startDate;
 
