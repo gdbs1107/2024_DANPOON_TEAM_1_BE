@@ -100,7 +100,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/plans/{planId}/comments/").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/poster/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/banner/{planId}").permitAll()
-                .requestMatchers("/plans/main/**","/plans/ranking","/plans/themes/**","/test").permitAll()
+                .requestMatchers("/plans/main/**","/plans/ranking","/plans/themes/**","plans/search/**","/test").permitAll()
                 
                 
                 .anyRequest().authenticated());

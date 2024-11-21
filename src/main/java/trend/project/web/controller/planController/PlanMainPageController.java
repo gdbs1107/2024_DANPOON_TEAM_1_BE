@@ -89,15 +89,4 @@ public class PlanMainPageController {
     }
 
 
-    // 검색 API
-    @GetMapping("/search")
-    @Operation(summary = "게시글 검색 API", description = "제목을 기반으로 검색합니다")
-    public ApiResponse<List<PlanMainPageDTO.PlanSearchResponseDTO>> searchPlans(@RequestParam String searchContent){
-
-        List<PlanMainPageDTO.PlanSearchResponseDTO> result = planMainPageService.searchPlan(searchContent);
-
-        return ApiResponse.onSuccess(result);
-
-    }
-
 }

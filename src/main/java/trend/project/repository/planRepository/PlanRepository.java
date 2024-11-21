@@ -50,4 +50,21 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
 
     List<Plan> findByCategoryAndLocationTownOrderByLikesCountDesc(Category category, String town);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndLocationProvince(String title,String province);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndCategory(String title,Category category);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndBudget(String title,int budget);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndBudgetGreaterThan(String title, int budget);
+
+
+    @Query("SELECT p FROM Plan p WHERE " +
+            "LOWER(p.title) LIKE LOWER(CONCAT('%', :title, '%')) AND " +
+            "p.startDate <= :endDate AND p.endDate >= :startDate")
+    List<Plan> findPlansByTitleAndPeriod(
+            @Param("title") String title,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
 }
