@@ -47,6 +47,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
         Map<String, String> errors = new LinkedHashMap<>();
+        Sentry.captureException(ex);
         ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
             String fieldName = fieldError.getField();
             String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
@@ -82,6 +83,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         log.error("General exception: {}", generalException.getMessage(), generalException);
 
         ErrorReasonDTO errorReason = generalException.getErrorReasonHttpStatus();
+        Sentry.captureException(generalException);
         return handleExceptionInternal(generalException, errorReason, null, request);
     }
 

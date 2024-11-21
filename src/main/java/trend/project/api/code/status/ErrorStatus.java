@@ -21,7 +21,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 멤버 관련 에러
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER4001", "사용자가 없습니다."),
-    MEMBER_USERNAME_DUPLICATE(HttpStatus.MULTI_STATUS,"MEMBER4002","중복된 사용자 username입니다"),
+    MEMBER_USERNAME_DUPLICATE(HttpStatus.BAD_REQUEST,"MEMBER4002","중복된 사용자 username입니다"),
     MEMBER_VALID_USERNAME(HttpStatus.MULTI_STATUS,"MEMBER4003","username이 유효하지 않습니다."),
     MEMBER_VALID_EMAIL(HttpStatus.MULTI_STATUS,"MEMBER4004","email이 유효하지 않습니다."),
     MEMBER_VALID_PASSWORD(HttpStatus.MULTI_STATUS,"MEMBER4005","비밀번호가 변경되지 않았습니다"),
@@ -45,11 +45,11 @@ public enum ErrorStatus implements BaseErrorCode {
     IMAGE_NOT_ALLOWED(HttpStatus.MULTI_STATUS,"IMAGE5004","이미지를 다운받을 수 없습니다"),
 
     // 이메일 관련 에러
-    EMAIL_NOT_VALID(HttpStatus.FORBIDDEN,"EMAIL4001","인증번호가 일치하지 않습니다"),
+    EMAIL_NOT_VALID(HttpStatus.BAD_REQUEST,"EMAIL4001","인증번호가 일치하지 않습니다"),
 
 
     // 기업 관련 에러
-    COMPANY_USERNAME_DUPLICATE(HttpStatus.MULTI_STATUS,"COMPANY4001","중복된 기업 username입니다"),
+    COMPANY_USERNAME_DUPLICATE(HttpStatus.BAD_REQUEST,"COMPANY4001","중복된 기업 username입니다"),
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "COMPANY4002", "사용자가 없습니다."),
     COMPANY_VALID_PASSWORD(HttpStatus.MULTI_STATUS,"COMPANY4003","비밀번호가 변경되지 않았습니다"),
     COMPANY_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "COMPANY4004", "권한이 없습니다."),
