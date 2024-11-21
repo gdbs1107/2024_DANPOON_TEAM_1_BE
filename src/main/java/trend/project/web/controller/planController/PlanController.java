@@ -19,7 +19,8 @@ public class PlanController {
     
     private final PlanService planService;
     
-    @Operation(summary = "기획서 생성 API", description = "해당 API는 게시글의 정보를 입력받아 생성합니다.")
+    @Operation(summary = "기획서 생성 API", description = "해당 API는 게시글의 정보를 입력받아 생성합니다. <br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @PostMapping
     public ApiResponse<PlanDTO.PlanCreateResponseDTO> createPlan(@RequestBody PlanDTO.PlanCreateRequestDTO req,
                                                                  @AuthenticationPrincipal UserDetails user) {
@@ -27,7 +28,8 @@ public class PlanController {
         return ApiResponse.onSuccess(res);
     }
     
-    @Operation(summary = "기획서 수정 API", description = "해당 API는 특정 게시글의 정보를 수정합니다. 권한는 작성자에게 있습니다.")
+    @Operation(summary = "기획서 수정 API", description = "해당 API는 특정 게시글의 정보를 수정합니다. 권한는 작성자에게 있습니다. <br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @PutMapping("/{planId}")
     public ApiResponse<PlanDTO.PlanUpdateResponseDTO> updatePlan(@RequestBody PlanDTO.PlanUpdateRequestDTO req,
                                                                  @PathVariable Long planId,
@@ -36,7 +38,8 @@ public class PlanController {
         return ApiResponse.onSuccess(res);
     }
     
-    @Operation(summary = "기획서 삭제 API", description = "해당 API는 특정 게시글을 삭제합니다. 권한는 작성자에게 있습니다.")
+    @Operation(summary = "기획서 삭제 API", description = "해당 API는 특정 게시글을 삭제합니다. 권한는 작성자에게 있습니다. <br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @DeleteMapping("/{planId}")
     public ApiResponse<String> deletePlan(@PathVariable Long planId,
                                           @AuthenticationPrincipal UserDetails user) {
