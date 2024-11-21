@@ -21,7 +21,8 @@ public class PlanLikesController {
     
     private final PlanLikesService planLikesService;
     
-    @Operation(summary = "기획서 좋아요 API", description = "해당 API는 기획서를 토글 형식으로 좋아요를 합니다.")
+    @Operation(summary = "기획서 좋아요 API", description = "해당 API는 기획서를 토글 형식으로 좋아요를 합니다. <br><br>" +
+            "Authorization 헤더에 토큰을 넣어주세요")
     @PostMapping("/")
     public ApiResponse<PlanDTO.PlanLikesCountResponseDTO> toggleLike(@PathVariable Long planId,
                                                                            @AuthenticationPrincipal UserDetails user) {

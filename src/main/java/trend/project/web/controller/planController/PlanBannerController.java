@@ -26,7 +26,7 @@ public class PlanBannerController {
     
     private final PlanBannerService planBannerService;
     
-    @Operation(summary = "배너 등록 API")
+    @Operation(summary = "배너 등록 API", description = "Authorization 헤더에 토큰을 넣어주세요")
     @PostMapping(path = "/{planId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> uploadBannerImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
@@ -66,7 +66,7 @@ public class PlanBannerController {
         }
     }
     
-    @Operation(summary = "배너 삭제 API")
+    @Operation(summary = "배너 삭제 API", description = "Authorization 헤더에 토큰을 넣어주세요")
     @DeleteMapping(path = "/{planId}")
     public ApiResponse<String> deleteBannerImage(
             @PathVariable Long planId,
@@ -93,7 +93,7 @@ public class PlanBannerController {
     
     
     
-    @Operation(summary = "배너 업데이트 API")
+    @Operation(summary = "배너 업데이트 API", description = "Authorization 헤더에 토큰을 넣어주세요")
     @PutMapping(path = "/{planId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<String> updateBannerImage(
             @RequestPart(value = "file") MultipartFile multipartFile,
