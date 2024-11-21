@@ -98,4 +98,25 @@ public class PlanSearchServiceImpl implements PlanSearchService {
         return result;
     }
 
+
+
+    @Override
+    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByNonFree(String title){
+
+        List<Plan> plans = planRepository.findByTitleContainingIgnoreCaseAndBudgetGreaterThan(title,0);
+
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
+                .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .category(plan.getCategory())
+                        .title(plan.getTitle())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .name(plan.getMember().getName())
+                        .build())
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
 }

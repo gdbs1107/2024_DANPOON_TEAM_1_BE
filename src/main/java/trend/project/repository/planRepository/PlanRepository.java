@@ -56,4 +56,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findByTitleContainingIgnoreCaseAndCategory(String title,Category category);
 
     List<Plan> findByTitleContainingIgnoreCaseAndBudget(String title,int budget);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndBudgetGreaterThan(String title, int budget);
 }

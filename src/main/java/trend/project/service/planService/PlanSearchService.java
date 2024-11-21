@@ -15,4 +15,6 @@ public interface PlanSearchService {
     List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByTheme(String title, String category);
 
     List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByFree(String title);
+
+    List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByNonFree(String title);
 }
