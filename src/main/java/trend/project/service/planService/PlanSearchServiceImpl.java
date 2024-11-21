@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.domain.Plan;
+import trend.project.domain.enumClass.Category;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 import trend.project.web.dto.planDTO.PlanSearchDTO;
@@ -38,9 +39,30 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
 
     @Override
-    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title,String province){
+    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title, String province){
 
         List<Plan> plans = planRepository.findByTitleContainingIgnoreCaseAndLocationProvince(title, province);
+
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
+                .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .category(plan.getCategory())
+                        .title(plan.getTitle())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .name(plan.getMember().getName())
+                        .build())
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+
+
+    @Override
+    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByTheme(String title,String category){
+
+        List<Plan> plans = planRepository.findByTitleContainingIgnoreCaseAndCategory(title, Category.valueOf(category));
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()

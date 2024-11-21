@@ -11,4 +11,6 @@ public interface PlanSearchService {
     List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title);
 
     List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title, String province);
+
+    List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByTheme(String title, String category);
 }

@@ -45,27 +45,30 @@ public class PlanSearchController {
 
 
     // 테마별 조회
-    @GetMapping("/themes")
+    @GetMapping("/{searchContent}/themes")
     @Operation(summary = "게시글 검색 테마별 조회 API")
-    public void searchPlansByThemes(){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByThemes(@RequestParam String category,
+                                                                                          @PathVariable String searchContent){
 
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByTheme(category, searchContent);
 
+        return ApiResponse.onSuccess(result);
 
     }
 
 
     // 기간별 조회
-    @GetMapping("/regions")
+    @GetMapping("/{searchContent}/regions")
     @Operation(summary = "게시글 검색 기간별 조회 API")
-    public void searchPlansByPeriod(){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByPeriod(){
 
     }
 
 
     // 가격별 조회 - 유료/무료
-    @GetMapping("/prices")
+    @GetMapping("/{searchContent}/prices")
     @Operation(summary = "게시글 검색 가격별 조회 API")
-    public void searchPlansByPrice(){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByPrice(){
 
     }
 
