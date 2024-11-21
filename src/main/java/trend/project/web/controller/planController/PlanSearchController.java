@@ -3,13 +3,11 @@ package trend.project.web.controller.planController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanSearchService;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
+import trend.project.web.dto.planDTO.PlanSearchDTO;
 
 import java.util.List;
 
@@ -23,9 +21,9 @@ public class PlanSearchController {
 
 
     // 검색 API
-    @GetMapping("")
+    @GetMapping("{searchContent}")
     @Operation(summary = "게시글 검색창 API", description = "제목을 기반으로 검색합니다")
-    public ApiResponse<List<PlanMainPageDTO.PlanSearchResponseDTO>> searchPlans(@RequestParam String searchContent){
+    public ApiResponse<List<PlanMainPageDTO.PlanSearchResponseDTO>> searchPlans(@PathVariable String searchContent){
 
         List<PlanMainPageDTO.PlanSearchResponseDTO> result = planSearchService.searchPlan(searchContent);
 
@@ -35,10 +33,14 @@ public class PlanSearchController {
 
 
     // 지역별 조회
-    @GetMapping("/regions")
+    @GetMapping("/{searchContent}/regions")
     @Operation(summary = "게시글 검색 지역별 조회 API")
-    public void searchPlansByRegion(){
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByRegion(@RequestParam String region,
+                                                                                          @PathVariable String searchContent){
 
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByRegion(region, searchContent);
+
+        return ApiResponse.onSuccess(result);
     }
 
 
@@ -46,6 +48,8 @@ public class PlanSearchController {
     @GetMapping("/themes")
     @Operation(summary = "게시글 검색 테마별 조회 API")
     public void searchPlansByThemes(){
+
+
 
     }
 

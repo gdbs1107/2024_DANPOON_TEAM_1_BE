@@ -50,4 +50,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
 
     List<Plan> findByCategoryAndLocationTownOrderByLikesCountDesc(Category category, String town);
+
+    List<Plan> findByTitleContainingIgnoreCaseAndLocationProvince(String title,String province);
 }

@@ -2,6 +2,7 @@ package trend.project.web.dto.planDTO;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import trend.project.domain.enumClass.Category;
 
 import java.time.LocalDate;
 
@@ -18,7 +19,7 @@ public class PlanSearchDTO {
         String imageLink;
 
         @Schema(description = "카테고리 이름 입니다")
-        String category;
+        Category category;
 
         @Schema(description = "기획서 제목 입니다")
         String title;

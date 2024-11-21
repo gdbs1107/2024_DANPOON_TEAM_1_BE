@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import trend.project.domain.Plan;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
+import trend.project.web.dto.planDTO.PlanSearchDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,4 +37,22 @@ public class PlanSearchServiceImpl implements PlanSearchService {
     }
 
 
+    @Override
+    public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title,String province){
+
+        List<Plan> plans = planRepository.findByTitleContainingIgnoreCaseAndLocationProvince(title, province);
+
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
+                .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .category(plan.getCategory())
+                        .title(plan.getTitle())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .name(plan.getMember().getName())
+                        .build())
+                .collect(Collectors.toList());
+
+        return result;
+    }
 }
