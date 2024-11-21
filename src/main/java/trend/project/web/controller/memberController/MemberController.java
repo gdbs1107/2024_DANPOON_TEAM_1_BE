@@ -61,7 +61,7 @@ public class MemberController {
 
 
     // 회원 프로필 수정 API
-    @Operation(summary = "회원프로필 수정 API")
+    @Operation(summary = "회원프로필 수정 API", description = "Authorization 헤더에 토큰을 넣어주세요")
     @PatchMapping("/profiles")
     public void updateProfile(@AuthenticationPrincipal UserDetails userDetails,
                               @RequestBody MemberProfileUpdateDTO.MemberProfileUpdateRequestDTO request){
@@ -72,7 +72,8 @@ public class MemberController {
 
 
     // 회원 탈퇴 API
-    @Operation(summary = "회원 탈퇴 API")
+    @Operation(summary = "회원 탈퇴 API", description = "Authorization 헤더에 토큰을 넣어주세요 <br><br>" +
+            "삭제 요청 후 30일 후에 최종 삭제됩니다")
     @PatchMapping("")
     public ApiResponse<String> deleteMember(@AuthenticationPrincipal UserDetails userDetails){
 

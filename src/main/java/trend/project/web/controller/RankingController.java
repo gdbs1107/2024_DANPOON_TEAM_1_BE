@@ -28,7 +28,7 @@ public class RankingController {
     }
 
 
-    @Operation(summary = "이달의 인기 랭킹 집계 api")
+    @Operation(summary = "카테고리 별, 이달의 인기 랭킹 집계 api")
     @PostMapping("/ranking/{categoryName}")
     public ApiResponse<String> calculateMonthlyRanking(@PathVariable @CategoryNameValid String categoryName) {
         rankingService.calculateAndSaveMonthlyRankingByCategory(categoryName);
