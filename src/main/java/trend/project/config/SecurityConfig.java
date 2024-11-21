@@ -65,7 +65,8 @@ public class SecurityConfig {
 
                         configuration.setAllowedOrigins(Arrays.asList(
                                 "http://localhost:3000",
-                                "https://www.yuhang.store:8080/"
+                                "https://www.yuhang.store:8080/",
+                                "https://goormyuhang.shop"
                         ));
                         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                         configuration.setAllowCredentials(true);
