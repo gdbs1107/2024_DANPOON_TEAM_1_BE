@@ -66,9 +66,20 @@ public class PlanSearchController {
 
 
     // 가격별 조회 - 유료/무료
-    @GetMapping("/{searchContent}/prices")
-    @Operation(summary = "게시글 검색 가격별 조회 API")
-    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByPrice(){
+    @GetMapping("/{searchContent}/free")
+    @Operation(summary = "게시글 검색 무료 게시글 조회 API")
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByFree(@PathVariable String searchContent){
+
+        List<PlanSearchDTO.PlanMainSearchResponseDTO> result = planSearchService.searchPlanByFree(searchContent);
+
+        return ApiResponse.onSuccess(result);
+
+    }
+
+    // 가격별 조회 - 유료/무료
+    @GetMapping("/{searchContent}/non-free")
+    @Operation(summary = "게시글 검색 유료 게시글 조회 API")
+    public ApiResponse<List<PlanSearchDTO.PlanMainSearchResponseDTO>> searchPlansByNonFree(){
 
     }
 
