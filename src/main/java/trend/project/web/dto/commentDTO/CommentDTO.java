@@ -49,4 +49,12 @@ public class CommentDTO {
         private LocalDateTime deletedAt;
         private boolean deletedTrue;
     }
+    
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class CommentLikesCountResponseDTO {
+        Integer likesCount;
+    }
 }
