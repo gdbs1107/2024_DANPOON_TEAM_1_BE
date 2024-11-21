@@ -35,7 +35,35 @@ public class PlanSearchController {
 
 
     // 지역별 조회
+    @GetMapping("/regions")
+    @Operation(summary = "게시글 검색 지역별 조회 API")
+    public void searchPlansByRegion(){
+
+    }
+
+
     // 테마별 조회
+    @GetMapping("/themes")
+    @Operation(summary = "게시글 검색 테마별 조회 API")
+    public void searchPlansByThemes(){
+
+    }
+
+
     // 기간별 조회
+    @GetMapping("/regions")
+    @Operation(summary = "게시글 검색 기간별 조회 API")
+    public void searchPlansByPeriod(){
+
+    }
+
+
     // 가격별 조회 - 유료/무료
+    @GetMapping("/prices")
+    @Operation(summary = "게시글 검색 가격별 조회 API")
+    public void searchPlansByPrice(){
+
+    }
+
+
 }
