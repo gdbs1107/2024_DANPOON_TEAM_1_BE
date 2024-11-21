@@ -1,0 +1,37 @@
+package trend.project.service.planService;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import trend.project.domain.Plan;
+import trend.project.repository.planRepository.PlanRepository;
+import trend.project.web.dto.planDTO.PlanMainPageDTO;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class PlanSearchServiceImpl implements PlanSearchService {
+
+
+    private final PlanRepository planRepository;
+
+
+    @Override
+    public List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title){
+
+        List<Plan> searchPlans = planRepository.findTop4ByTitleContainingIgnoreCaseOrderByLikesCountDesc(title);
+
+        List<PlanMainPageDTO.PlanSearchResponseDTO> searchResponse = searchPlans.stream()
+                .map(plan -> PlanMainPageDTO.PlanSearchResponseDTO.builder()
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .planImageLink(plan.getPlanPosterImage().getImageLink())
+                        .build())
+                .collect(Collectors.toList());
+
+        return searchResponse;
+    }
+}
