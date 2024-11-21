@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import trend.project.domain.common.BaseEntity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
