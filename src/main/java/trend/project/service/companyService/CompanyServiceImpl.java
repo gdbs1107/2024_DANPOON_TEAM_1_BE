@@ -46,15 +46,6 @@ public class CompanyServiceImpl implements CompanyService {
 
         Company savedCompany = companyRepository.save(company);
 
-        Address newAddress = Address.builder()
-                .province(request.getProvince())  // 시도
-                .city(request.getCity())
-                .member(null)
-                .company(savedCompany)          // 주소를 회원과 연결
-                .build();
-
-        addressRepository.save(newAddress);
-
         return CompanyJoinDTO.CompanyJoinResponseDTO.builder()
                 .companyId(savedCompany.getId())
                 .build();
