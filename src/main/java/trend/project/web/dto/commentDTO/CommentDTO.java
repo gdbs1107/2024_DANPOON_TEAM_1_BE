@@ -53,6 +53,7 @@ public class CommentDTO {
     @AllArgsConstructor
     @Getter
     public static class CommentLikesCountResponseDTO {
-        Integer likesCount;
+        private Integer likesCount;
+        private Boolean checkLike;
     }
 }

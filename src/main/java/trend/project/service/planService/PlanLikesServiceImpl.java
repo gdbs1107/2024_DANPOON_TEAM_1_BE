@@ -37,6 +37,7 @@ public class PlanLikesServiceImpl implements PlanLikesService {
         
         PlanLikes likes = planLikesRepository.findByMemberAndPlan(findMember, findPlan).orElse(null);
         
+        Boolean checkLike = false;
         if (likes == null) {
             
             PlanLikes newPlanLikes = PlanLikes.builder()
@@ -49,6 +50,7 @@ public class PlanLikesServiceImpl implements PlanLikesService {
             entityManager.flush();
             
             findPlan.updateLikesCount();
+            checkLike = true;
         } else {
             
             planLikesRepository.delete(likes);
@@ -56,10 +58,11 @@ public class PlanLikesServiceImpl implements PlanLikesService {
             entityManager.flush();
             
             findPlan.updateLikesCount();
-            
+            checkLike = false;
         }
         return PlanDTO.PlanLikesCountResponseDTO.builder()
                 .likesCount(findPlan.getLikesCount())
+                .checkLike(checkLike)
                 .build();
     }
     
