@@ -62,8 +62,6 @@ public class MemberProfileFindDTO {
         @Schema(description = "회원 이메일입니다")
         String email;
 
-        @Schema(description = "새로운 이메일 입니다")
-        String password;
 
     }
 
