@@ -37,14 +37,6 @@ public class CompanyJoinDTO {
         String companyName;
 
 
-
-        /* ---------- 주소 ---------- */
-        @Schema(description = "시/도 입니다")
-        String province;
-
-        @Schema(description = "시/군/구 입니다")
-        String city;
-
     }
 
 
