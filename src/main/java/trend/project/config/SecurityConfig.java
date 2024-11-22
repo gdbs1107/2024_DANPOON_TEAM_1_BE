@@ -93,7 +93,7 @@ public class SecurityConfig {
                 .requestMatchers("/health").permitAll()
                 .requestMatchers("/members/profiles/**","/mails/**").permitAll()
                 .requestMatchers("members/join","/login","/companies/join").permitAll()
-                .requestMatchers("/members/find-usernames/emails","/members/find-usernames/phoneNumbers","/companies/find-passwords","/companies/find-usernames").permitAll()
+                .requestMatchers("/members/find-usernames/emails","/members/find-usernames/phoneNumbers","/companies/find-passwords","/companies/find-usernames","/members/find-passwords").permitAll()
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()// Swagger 관련 경로를 허용
                 .requestMatchers(HttpMethod.GET, "/plans/detail/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/detail/{planId}/similar").permitAll()
