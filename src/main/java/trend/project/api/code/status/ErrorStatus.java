@@ -26,6 +26,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEMBER_VALID_EMAIL(HttpStatus.MULTI_STATUS,"MEMBER4004","email이 유효하지 않습니다."),
     MEMBER_VALID_PASSWORD(HttpStatus.MULTI_STATUS,"MEMBER4005","비밀번호가 변경되지 않았습니다"),
     MEMBER_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "MEMBER4006", "권한이 없습니다."),
+    LOGIN_MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER4007", "현재 로그인한 사용자를 찾을 수 없습니다."),
 
 
     // 기획서 관련 오류
