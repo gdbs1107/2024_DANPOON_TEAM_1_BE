@@ -17,9 +17,13 @@ public class PlanMainConverter {
                         .commentsCount(plan.getCommentCount())
                         .startDate(plan.getStartDate())
                         .endDate(plan.getEndDate())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
         return planBanners;
+    }
+    
+    private static String getImageLink(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
     }
 }
