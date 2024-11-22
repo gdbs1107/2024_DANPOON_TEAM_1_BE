@@ -64,7 +64,7 @@ public class SecurityConfig {
                         CorsConfiguration configuration = new CorsConfiguration();
 
                         configuration.setAllowedOrigins(Arrays.asList(
-                                "http://localhost:3000",
+                                "http://localhost:3000/",
                                 "https://www.yuhang.store:8080/",
                                 "https://goormyuhang.shop"
                         ));
