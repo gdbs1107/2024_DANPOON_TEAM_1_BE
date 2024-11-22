@@ -9,4 +9,5 @@ public interface PlanLikesRepository extends JpaRepository<PlanLikes, Long> {
     
     Optional<PlanLikes> findByMemberAndPlan(Member member, Plan plan);
     
+    boolean existsByMemberAndPlanId(Member member, Long planId);
 }
