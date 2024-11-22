@@ -61,7 +61,7 @@ public class PlanPosterServiceImpl implements PlanPosterService {
         removeNewFile(uploadFile);
         
         // Save metadata to the database
-        saveFileMetadata(originalFileName, uploadImageUrl, multipartFile.getSize(), multipartFile.getContentType(), plan);
+        saveFileMetadata(originalFileName, uniqueFileName, multipartFile.getSize(), multipartFile.getContentType(), plan);
         
         return uploadImageUrl;
     }
