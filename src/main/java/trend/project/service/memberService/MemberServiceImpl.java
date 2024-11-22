@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -214,14 +215,11 @@ public class MemberServiceImpl implements MemberService {
             throw new MemberCategoryHandler(ErrorStatus.MEMBER_VALID_EMAIL);
         }
 
-        if (request.getPassword().equals(byUsername.getPassword())) {
-            // 비밀번호 중복 오류
-            throw new MemberCategoryHandler(ErrorStatus.MEMBER_VALID_PASSWORD);
-        }
 
-        String newPassword = encodePassword(request.getPassword());
+        // 새로운 비밀번호 생성 (UUID 활용)
+        String newPasswordByBcrypt = encodePassword("tempPassword");
 
-        byUsername.setPassword(newPassword);
+        byUsername.setPassword(newPasswordByBcrypt);
 
         return MemberProfileFindDTO.FindMemberPasswordResponseDTO.builder()
                 .password(byUsername.getPassword())
