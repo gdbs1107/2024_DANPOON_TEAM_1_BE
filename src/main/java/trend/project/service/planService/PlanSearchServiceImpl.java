@@ -33,14 +33,18 @@ public class PlanSearchServiceImpl implements PlanSearchService {
                 .map(plan -> PlanMainPageDTO.PlanSearchResponseDTO.builder()
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
-                        .planImageLink(plan.getPlanPosterImage().getImageLink())
+                        .planImageLink(getPlanImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
         return searchResponse;
     }
-
-
+    
+    private static String getPlanImageLink(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
+    }
+    
+    
     @Override
     public List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title, String province){
 
@@ -48,7 +52,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
                         .startDate(plan.getStartDate())
@@ -69,7 +73,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
                         .startDate(plan.getStartDate())
@@ -89,7 +93,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
                         .startDate(plan.getStartDate())
@@ -110,7 +114,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
                         .startDate(plan.getStartDate())
@@ -132,7 +136,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
                         .startDate(plan.getStartDate())

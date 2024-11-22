@@ -38,11 +38,15 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
                         .name(plan.getMember().getName())
                         .likesCount(plan.getLikesCount())
                         .commentsCount(plan.getCommentCount())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
         return planCategoryBanner;
+    }
+    
+    private static String getImageLink(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
     }
 
 
@@ -88,7 +92,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
@@ -109,7 +113,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
@@ -130,7 +134,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
