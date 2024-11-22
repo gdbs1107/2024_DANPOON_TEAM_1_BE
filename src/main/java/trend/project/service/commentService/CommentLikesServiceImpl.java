@@ -37,6 +37,8 @@ public class CommentLikesServiceImpl implements CommentLikesService {
         
         CommentLikes likes = commentLikesRepository.findByMemberAndComment(findMember, findComment).orElse(null);
         
+        Boolean checkLike = false;
+        
         if (likes == null) {
             
             CommentLikes newCommentLikes = CommentLikes.builder()
@@ -49,6 +51,7 @@ public class CommentLikesServiceImpl implements CommentLikesService {
             entityManager.flush();
             
             findComment.updateLikesCount();
+            checkLike = true;
         } else {
             
             commentLikesRepository.delete(likes);
@@ -56,10 +59,12 @@ public class CommentLikesServiceImpl implements CommentLikesService {
             entityManager.flush();
             
             findComment.updateLikesCount();
+            checkLike = false;
             
         }
         return CommentDTO.CommentLikesCountResponseDTO.builder()
                 .likesCount(findComment.getLikesCount())
+                .checkLike(checkLike)
                 .build();
     }
     

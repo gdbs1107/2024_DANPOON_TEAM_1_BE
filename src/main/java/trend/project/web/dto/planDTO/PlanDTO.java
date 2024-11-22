@@ -119,5 +119,6 @@ public class PlanDTO {
     @Getter
     public static class PlanLikesCountResponseDTO {
         Integer likesCount;
+        Boolean checkLike;
     }
 }
