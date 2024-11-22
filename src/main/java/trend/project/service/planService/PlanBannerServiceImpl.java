@@ -61,7 +61,7 @@ public class PlanBannerServiceImpl implements PlanBannerService {
         removeNewFile(uploadFile);
         
         // Save metadata to the database
-        saveFileMetadata(originalFileName, uniqueFileName, multipartFile.getSize(), multipartFile.getContentType(), plan);
+        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(), plan);
         
         return uploadImageUrl;
     }
