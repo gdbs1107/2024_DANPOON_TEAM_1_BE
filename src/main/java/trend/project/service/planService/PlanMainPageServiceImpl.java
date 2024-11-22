@@ -69,15 +69,18 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
-                        .imageLink(plan.getPlanPosterImage().getImageLink())
+                        .imageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
         return planHottiest;
     }
-
-
-
+    
+    private static String getImageLink(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
+    }
+    
+    
     @Override
     public List<PlanMainPageDTO.PlanCategoryResponseDTO> getTopPlanByCategory() {
 
@@ -92,7 +95,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
                         .title(topPlan.getTitle()) // 제목
                         .category(topPlan.getCategory().name())
                         .likesCount(topPlan.getLikesCount())
-                        .imageLink(topPlan.getPlanPosterImage() != null ? topPlan.getPlanPosterImage().getImageLink() : null) // 포스터 이미지 링크
+                        .imageLink(getImageLink(topPlan)) // 포스터 이미지 링크
                         .build();
 
                 topPlans.add(responseDTO);
@@ -121,7 +124,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
                                 : plan.getMember().getMemberProfileImages().get(0).getImageLink())
                         .town(plan.getLocation().getTown())
                         .likesCount(plan.getLikesCount())
-                        .planImageLink(plan.getPlanPosterImage().getImageLink())
+                        .planImageLink(getImageLink(plan))
                         .build())
                 .collect(Collectors.toList());
 
