@@ -31,6 +31,9 @@ public class PlanMainPageDTO {
         @Schema(description = "포스터 이미지 링크입니다")
         String imageLink;
 
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
+
     }
 
 
@@ -56,6 +59,8 @@ public class PlanMainPageDTO {
         @Schema(description = "포스터 이미지 링크입니다")
         String imageLink;
 
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
     }
 
 
@@ -64,6 +69,9 @@ public class PlanMainPageDTO {
     @AllArgsConstructor
     @Getter
     public static class PlanMainResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
 
         @Schema(description = "게시글 제목 입니다")
         String title;
@@ -85,6 +93,9 @@ public class PlanMainPageDTO {
     @AllArgsConstructor
     @Getter
     public static class PlanCategoryResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
 
         @Schema(description = "게시글 제목 입니다")
         String title;
@@ -109,6 +120,9 @@ public class PlanMainPageDTO {
     @Getter
     public static class PlanFavoriteMemberDTO{
 
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
+
         @Schema(description = "게시글 제목 입니다")
         String title;
 
@@ -130,6 +144,7 @@ public class PlanMainPageDTO {
         @Schema(description = "포스터 이미지 링크입니다")
         String planImageLink;
 
+
     }
 
     @Builder
@@ -137,6 +152,9 @@ public class PlanMainPageDTO {
     @AllArgsConstructor
     @Getter
     public static class PlanSearchResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
 
         @Schema(description = "게시글 제목 입니다")
         String title;

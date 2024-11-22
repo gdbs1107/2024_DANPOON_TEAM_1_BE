@@ -11,6 +11,7 @@ public class PlanMainConverter {
     public static List<PlanMainPageDTO.PlanBannerResponseDTO> PlanToPlanBannerDTO(List<Plan> topPlans) {
         List<PlanMainPageDTO.PlanBannerResponseDTO> planBanners = topPlans.stream()
                 .map(plan -> PlanMainPageDTO.PlanBannerResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getNickname())
                         .likesCount(plan.getLikesCount())

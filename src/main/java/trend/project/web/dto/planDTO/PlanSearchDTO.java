@@ -15,6 +15,9 @@ public class PlanSearchDTO {
     @Getter
     public static class PlanMainSearchResponseDTO{
 
+        @Schema(description = "기획서 PK입니다")
+        Long planId;
+
         @Schema(description = "포스터 이미지 링크 입니다")
         String imageLink;
 

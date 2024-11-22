@@ -31,6 +31,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanMainPageDTO.PlanSearchResponseDTO> searchResponse = searchPlans.stream()
                 .map(plan -> PlanMainPageDTO.PlanSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .planImageLink(getPlanImageLink(plan))
@@ -52,6 +53,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
@@ -73,6 +75,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
@@ -93,6 +96,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
@@ -114,6 +118,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())
@@ -136,6 +141,7 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
         List<PlanSearchDTO.PlanMainSearchResponseDTO> result = plans.stream()
                 .map(plan -> PlanSearchDTO.PlanMainSearchResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(getPlanImageLink(plan))
                         .category(plan.getCategory())
                         .title(plan.getTitle())

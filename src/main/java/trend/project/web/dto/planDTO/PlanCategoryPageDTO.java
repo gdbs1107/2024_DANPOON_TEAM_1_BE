@@ -12,6 +12,9 @@ public class PlanCategoryPageDTO {
     @Getter
     public static class PlanCategoryBannerResponseDTO{
 
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
+
         @Schema(description = "게시글 제목 입니다")
         String title;
 
@@ -35,6 +38,9 @@ public class PlanCategoryPageDTO {
     @AllArgsConstructor
     @Getter
     public static class PlanCategoryRankingResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
 
 
         @Schema(description = "게시글 제목 입니다")
@@ -61,6 +67,9 @@ public class PlanCategoryPageDTO {
     @AllArgsConstructor
     @Getter
     public static class PlanCategoryResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
 
         @Schema(description = "게시글 제목 입니다")
         String title;

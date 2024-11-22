@@ -46,6 +46,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
         List<PlanMainPageDTO.PlanRankingResponseDTO> planRankings = rankings.stream()
                 .map(ranking -> PlanMainPageDTO.PlanRankingResponseDTO.builder()
+                        .planId(ranking.getId())
                         .title(ranking.getTitle())
                         .name(ranking.getName())
                         .likesCount(ranking.getLikesCount())
@@ -66,6 +67,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
         List<PlanMainPageDTO.PlanMainResponseDTO> planHottiest = topPlans.stream()
                 .map(plan -> PlanMainPageDTO.PlanMainResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
@@ -92,6 +94,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
             if (topPlan != null) {
                 PlanMainPageDTO.PlanCategoryResponseDTO responseDTO = PlanMainPageDTO.PlanCategoryResponseDTO.builder()
+                        .planId(topPlan.getId())
                         .title(topPlan.getTitle()) // 제목
                         .category(topPlan.getCategory().name())
                         .likesCount(topPlan.getLikesCount())
@@ -117,6 +120,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
         List<PlanMainPageDTO.PlanFavoriteMemberDTO> planPopular = topPlans.stream()
                 .map(plan -> PlanMainPageDTO.PlanFavoriteMemberDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .followerCount(plan.getMember().getFollowerCount())
