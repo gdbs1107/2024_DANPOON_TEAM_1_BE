@@ -12,7 +12,8 @@ public class PlanDetailConverter {
                                                                               Member member,
                                                                               Location location,
                                                                               PlanPosterImage posterImage,
-                                                                              PlanBannerImage bannerImage) {
+                                                                              PlanBannerImage bannerImage,
+                                                                              Boolean checkLike) {
         return PlanDetailDTO.PlanDetailResponseDTO.builder()
                 .title(plan.getTitle())
                 .category(String.valueOf(plan.getCategory()))
@@ -23,6 +24,7 @@ public class PlanDetailConverter {
                 .content(plan.getContent())
                 .budget(plan.getBudget())
                 .likesCount(plan.getLikesCount())
+                .checkLike(checkLike)
                 .commentCount(plan.getCommentCount())
                 .bookmarkCount(plan.getBookmarkCount())
                 .status(plan.getStatus().name())

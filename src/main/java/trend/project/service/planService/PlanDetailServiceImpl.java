@@ -9,10 +9,7 @@ import trend.project.api.exception.handler.PlanCategoryHandler;
 import trend.project.converter.PlanDetailConverter;
 import trend.project.domain.*;
 import trend.project.repository.MemberRepository;
-import trend.project.repository.planRepository.BannerImageRepository;
-import trend.project.repository.planRepository.LocationRepository;
-import trend.project.repository.planRepository.PlanRepository;
-import trend.project.repository.planRepository.PosterImageRepository;
+import trend.project.repository.planRepository.*;
 import trend.project.web.dto.planDTO.PlanDetailDTO;
 
 import java.util.Collections;
@@ -28,9 +25,23 @@ public class PlanDetailServiceImpl implements PlanDetailService {
     private final PosterImageRepository posterImageRepository;
     private final BannerImageRepository bannerImageRepository;
     private final MemberRepository memberRepository;
+    private final PlanLikesRepository planLikesRepository;
     
     @Override
-    public PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId) {
+    public PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId, String username) {
+        
+        Boolean checkLike = false;
+        
+        if (username != null) {
+            Member loginMember = memberRepository.findByUsername(username).orElseThrow(
+                    () -> new MemberCategoryHandler(ErrorStatus.LOGIN_MEMBER_NOT_FOUND)
+            );
+            
+            checkLike = planLikesRepository.existsByMemberAndPlanId(loginMember, planId);
+        } else {
+            checkLike = false;
+        }
+        
         
         Plan findPlan = findPlanById(planId);
         Member findMember = findPlan.getMember();
@@ -39,7 +50,8 @@ public class PlanDetailServiceImpl implements PlanDetailService {
         PlanBannerImage bannerImage = getBannerImage(planId);
         findPlan.updateCommentCount();
         
-        return PlanDetailConverter.toPlanDetailResponseDTO(findPlan, findMember, planLocation, posterImage, bannerImage);
+        return PlanDetailConverter.toPlanDetailResponseDTO(findPlan, findMember, planLocation,
+                posterImage, bannerImage, checkLike);
     }
     
     @Override

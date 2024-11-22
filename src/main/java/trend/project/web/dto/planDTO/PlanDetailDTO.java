@@ -40,6 +40,9 @@ public class PlanDetailDTO {
         @Schema(description = "게시글 좋아요 수 입니다")
         private int likesCount;
         
+        @Schema(description = "현재 좋아요 여부입니다.")
+        private Boolean checkLike;
+        
         @Schema(description = "게시글 댓글 수 입니다")
         private int commentCount;
         
