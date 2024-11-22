@@ -17,6 +17,7 @@ public class PlanMainConverter {
                         .commentsCount(plan.getCommentCount())
                         .startDate(plan.getStartDate())
                         .endDate(plan.getEndDate())
+                        .imageLink(plan.getPlanPosterImage().getImageLink())
                         .build())
                 .collect(Collectors.toList());
         return planBanners;

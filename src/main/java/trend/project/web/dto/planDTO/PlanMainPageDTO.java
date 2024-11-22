@@ -28,6 +28,9 @@ public class PlanMainPageDTO {
 
         LocalDate endDate;
 
+        @Schema(description = "포스터 이미지 링크입니다")
+        String imageLink;
+
     }
 
 
