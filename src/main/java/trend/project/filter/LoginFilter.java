@@ -69,7 +69,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         // 토큰 생성
         String access = jwtUtil.createJwt("access", username, role, 600000L); // 10분
-        String refresh = jwtUtil.createJwt("refresh", username, role, 86400000L); // 24시간
+        String refresh = jwtUtil.createJwt("refresh", username, role, 9990000000000L); // 24시간
 
         // 액세스 토큰 헤더에 설정
         response.setHeader("access", access);
@@ -78,7 +78,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         createCookie(refresh, response);
 
         // Refresh 토큰 저장 로직
-        addRefreshEntity(username, refresh, 86400000L);
+        addRefreshEntity(username, refresh, 99900000L);
 
         response.setStatus(HttpStatus.OK.value());
     }
@@ -114,7 +114,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         // Cookie 객체 생성
         Cookie cookie = new Cookie("refresh", value);
-        cookie.setMaxAge(24 * 60 * 60); // 유효 기간 설정
+        cookie.setMaxAge(24 * 60 * 60*60*60); // 유효 기간 설정
         cookie.setSecure(true); // HTTPS 요청에서만 쿠키 전송
         cookie.setPath("/"); // 쿠키 유효 경로 설정
         cookie.setHttpOnly(true); // JS 접근 방지
