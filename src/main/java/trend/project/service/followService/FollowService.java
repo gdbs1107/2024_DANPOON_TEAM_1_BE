@@ -1,2 +1,8 @@
-package trend.project.service.followService;public interface FollowService {
+package trend.project.service.followService;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public interface FollowService {
+    void toggleFollowMember(String username, Long targetId);
 }

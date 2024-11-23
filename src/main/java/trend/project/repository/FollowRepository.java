@@ -1,2 +1,14 @@
-package trend.project.repository;public interface FollowRepository {
+package trend.project.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import trend.project.domain.Member;
+import trend.project.domain.MemberFollow;
+
+import java.util.List;
+
+public interface FollowRepository extends JpaRepository<MemberFollow,Long> {
+
+    void deleteByMemberAndFollowUser(Member member, Member followUser);
+
+    boolean existsByMemberAndFollowUser(Member member, Member followUser);
 }
