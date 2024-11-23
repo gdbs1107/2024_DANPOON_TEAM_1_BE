@@ -73,12 +73,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         // 액세스 토큰 헤더에 설정
         response.setHeader("access", access);
+        response.setHeader("refresh", refresh);
 
-        // 리프레시 토큰 쿠키 추가
-        createCookie(refresh, response);
+
+        /*// 리프레시 토큰 쿠키 추가
+        createCookie(refresh, response);*/
 
         // Refresh 토큰 저장 로직
-        addRefreshEntity(username, refresh, 99900000L);
+        addRefreshEntity(username, refresh, 9990000000000L);
 
         response.setStatus(HttpStatus.OK.value());
     }
@@ -109,7 +111,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
-    // 쿠키 생성
+    /*// 쿠키 생성
     private Cookie createCookie(String value, HttpServletResponse response) {
 
         // Cookie 객체 생성
@@ -129,6 +131,5 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         response.addHeader("Set-Cookie", cookieHeader);
 
         return cookie; // 기존 Cookie 객체 반환
-    }
-
+    }*/
 }
