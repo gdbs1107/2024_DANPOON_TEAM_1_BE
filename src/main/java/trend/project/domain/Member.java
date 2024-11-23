@@ -131,4 +131,22 @@ public class Member {
         this.address.add(address);
     }
 
+
+
+    public void addFollowCount(){
+        this.followCount++;
+    }
+    public void minusFollowCount(){
+        this.followCount--;
+    }
+
+
+
+    public void addFollowerCount(){
+        this.followerCount++;
+    }
+    public void minusFollowerCount(){
+        this.followerCount--;
+    }
+
 }

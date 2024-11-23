@@ -20,4 +20,10 @@ public class MemberFollower extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_follower_user_id")
+    private Member followerUser;
 }
