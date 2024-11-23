@@ -9,6 +9,8 @@ import java.util.List;
 
 @Service
 public interface PlanSearchService {
+    List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String title);
+
     List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title);
 
     List<PlanSearchDTO.PlanMainSearchResponseDTO> searchPlanByRegion(String title, String province);
