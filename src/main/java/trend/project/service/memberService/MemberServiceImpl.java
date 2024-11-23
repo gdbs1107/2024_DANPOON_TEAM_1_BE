@@ -166,8 +166,19 @@ public class MemberServiceImpl implements MemberService {
 
         Member findMember = getMemberByUsername(username);
 
-        findMember.setInactive();  // 객체의 status 필드 수정
+        findMember.setInactive();
 
+    }
+
+
+    @Override
+    public Long deleteRollBackMember(String username){
+
+        Member findMember = getMemberByUsername(username);
+
+        findMember.setActive();
+
+        return findMember.getId();
     }
 
 

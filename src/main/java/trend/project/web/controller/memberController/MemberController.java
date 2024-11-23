@@ -75,12 +75,22 @@ public class MemberController {
     // 회원 탈퇴 API
     @Operation(summary = "회원 탈퇴 API", description = "Authorization 헤더에 토큰을 넣어주세요 <br><br>" +
             "삭제 요청 후 30일 후에 최종 삭제됩니다")
-    @PatchMapping("")
+    @PatchMapping("/delete")
     public ApiResponse<String> deleteMember(@AuthenticationPrincipal UserDetails userDetails){
 
         memberService.deleteMember(userDetails.getUsername());
         return ApiResponse.onSuccess("성공적으로 삭제 되었습니다");
 
+    }
+
+
+    @Operation(summary = "회원 탈퇴 취소 API")
+    @PatchMapping("/delete/roll-back")
+    public ApiResponse<Long> rollBackMember(@RequestParam String username){
+
+        Long result = memberService.deleteRollBackMember(username);
+
+        return ApiResponse.onSuccess(result);
     }
 
 

@@ -17,6 +17,8 @@ public interface MemberService {
 
     void deleteMember(String username);
 
+    Long deleteRollBackMember(String username);
+
     MemberProfileFindDTO.FindMemberUsernameResponseDTO getUsernamesWithPhone(MemberProfileFindDTO.FindMemberUsernameWithPhoneNumbersRequestDTO request);
 
     MemberProfileFindDTO.FindMemberUsernameResponseDTO getUsernamesWithEmail(MemberProfileFindDTO.FindMemberUsernameWithEmailsRequestDTO request);
