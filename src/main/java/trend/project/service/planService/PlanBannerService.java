@@ -21,7 +21,7 @@ public interface PlanBannerService {
     void removeNewFile(File targetFile);
     
     void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType,
-                          Plan findplan);
+                          Plan findplan, String uploadImageUrl);
     
     byte[] download(Long planId) throws IOException;
     

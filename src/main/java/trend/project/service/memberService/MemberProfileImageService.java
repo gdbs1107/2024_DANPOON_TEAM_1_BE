@@ -22,7 +22,7 @@ public interface MemberProfileImageService {
     void removeNewFile(File targetFile);
 
     void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType,
-                          Member findMember);
+                          Member findMember, String uploadImageUrl);
 
     byte[] download(String username) throws IOException;
 

@@ -59,7 +59,7 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
         removeNewFile(uploadFile);
 
         // Save metadata to the database
-        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(),companyByUsername);
+        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(),companyByUsername, uploadImageUrl);
 
         return uploadImageUrl;
     }
@@ -107,13 +107,14 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
 
     @Override
     public void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType,
-                                 Company findCompany) {
+                                 Company findCompany, String uploadImageUrl) {
 
         String name = findCompany.getName();
 
 
         CompanyProfileImage image = CompanyProfileImage.builder()
-                .imageLink(uniqueFileName)
+                .imageLink(uploadImageUrl)
+                .fileName(uniqueFileName)
                 .imageName(originalFileName)
                 .company(findCompany)
                 .build();
@@ -137,7 +138,7 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
                 .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
 
-        String uniqueFileName = image.getImageLink();  // Use full path as S3 key
+        String uniqueFileName = image.getFileName();  // Use full path as S3 key
         log.info("Downloading file from S3 with key: {}", uniqueFileName);
 
         try {
@@ -172,7 +173,7 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
                 .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
 
-        String uniqueFileName = image.getImageLink();  // Use full path as S3 key
+        String uniqueFileName = image.getFileName();  // Use full path as S3 key
         log.info("Downloading file from S3 with key: {}", uniqueFileName);
 
         try {
@@ -208,7 +209,7 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
                     .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
             // 파일 경로(S3 키)
-            String uniqueFileName = image.getImageLink();
+            String uniqueFileName = image.getFileName();
             if (uniqueFileName != null) {
                 // AWS S3에서 파일 삭제
                 amazonS3.deleteObject(bucket, uniqueFileName);
@@ -256,7 +257,7 @@ public class CompanyProfileImageServiceImpl implements CompanyProfileImageServic
         removeNewFile(uploadFile);
 
         // 새로운 메타데이터 저장
-        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), companyByUsername);
+        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), companyByUsername, uploadImageUrl);
 
         return uploadImageUrl;
     }

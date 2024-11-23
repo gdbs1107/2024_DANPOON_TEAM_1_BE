@@ -18,6 +18,9 @@ public class MemberProfileImage extends BaseEntity {
     // 이미지가 저장된 주소 링크
     @Column(nullable = false)
     private String imageLink;
+    
+    @Column(nullable = false, columnDefinition = "text")
+    private String fileName;
 
     @Column(nullable = false)
     private String imageName;
