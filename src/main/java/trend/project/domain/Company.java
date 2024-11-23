@@ -84,6 +84,16 @@ public class Company {
     }
 
 
+
+    // status를 ACTIVE로 변경하는 메서드
+    public void setActive() {
+
+        this.status = Status.ACTIVE;
+        this.inactiveDate = LocalDateTime.now();  // 비활성화 날짜 기록
+
+    }
+
+
     public void setPassword(String password) {
         this.password = password;
     }

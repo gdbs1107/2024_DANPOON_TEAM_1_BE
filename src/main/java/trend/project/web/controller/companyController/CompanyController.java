@@ -53,11 +53,20 @@ public class CompanyController {
 
     // 기업 프로필 삭제
     @Operation(summary = "기업 회원탈퇴 API")
-    @PatchMapping("")
+    @PatchMapping("/delete")
     public ApiResponse<String> deleteCompany(@AuthenticationPrincipal UserDetails userDetails){
 
         companyService.deleteCompany(userDetails.getUsername());
         return ApiResponse.onSuccess("성공적으로 삭제 되었습니다");
+    }
+
+    @Operation(summary = "기업 회원탈퇴 복구 API")
+    @PatchMapping("/delete/roll-back")
+    public ApiResponse<String> rollbackCompany(@RequestParam String username){
+
+        String result = companyService.rollBackDelete(username);
+
+        return ApiResponse.onSuccess(result);
     }
 
 

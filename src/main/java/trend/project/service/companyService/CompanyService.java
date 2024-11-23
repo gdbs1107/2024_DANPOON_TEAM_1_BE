@@ -13,6 +13,8 @@ public interface CompanyService {
 
     CompanyProfileFindDTO.CompanyPasswordResponseDTO getPasswords(CompanyProfileFindDTO.CompanyPasswordRequestDTO request);
 
+    String rollBackDelete(String username);
+
     // 매일 자정에 실행
     @Scheduled(cron = "0 0 0 * * ?")
     void deleteOldInactiveCompanies();

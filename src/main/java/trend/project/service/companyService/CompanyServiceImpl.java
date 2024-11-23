@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import trend.project.api.code.status.ErrorStatus;
 import trend.project.api.exception.handler.CompanyCategoryHandler;
-import trend.project.domain.Address;
 import trend.project.domain.Company;
 import trend.project.domain.enumClass.Role;
 import trend.project.domain.enumClass.Status;
@@ -96,6 +95,19 @@ public class CompanyServiceImpl implements CompanyService {
         return CompanyProfileFindDTO.CompanyPasswordResponseDTO.builder()
                 .password(byCompanyName.getPassword())
                 .build();
+
+    }
+
+
+    @Override
+    public String rollBackDelete(String username){
+
+        Company companyByUsername = getCompanyByUsername(username);
+        companyByUsername.setInactive();
+
+        companyRepository.save(companyByUsername);
+
+        return companyByUsername.getUsername();
 
     }
 
