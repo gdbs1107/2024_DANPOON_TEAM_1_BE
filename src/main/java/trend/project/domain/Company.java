@@ -84,8 +84,48 @@ public class Company {
     }
 
 
+
+    // status를 ACTIVE로 변경하는 메서드
+    public void setActive() {
+
+        this.status = Status.ACTIVE;
+        this.inactiveDate = LocalDateTime.now();  // 비활성화 날짜 기록
+
+    }
+
+
     public void setPassword(String password) {
         this.password = password;
     }
 
+
+
+    public void setUsername(String username) {
+        if (username != null) {
+            this.username = username;
+        }
+    }
+
+
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        }
+    }
+
+
+    public void setCompanyName(String companyName) {
+        if (companyName != null) {
+            this.companyName=companyName;
+        }
+    }
+
+
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber != null) {
+            this.phoneNumber = phoneNumber;
+        }
+    }
 }
