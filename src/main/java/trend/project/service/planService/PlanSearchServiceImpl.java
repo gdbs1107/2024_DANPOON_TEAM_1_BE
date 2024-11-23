@@ -4,14 +4,19 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import trend.project.domain.Member;
 import trend.project.domain.Plan;
+import trend.project.domain.SearchHistory;
 import trend.project.domain.enumClass.Category;
+import trend.project.repository.MemberRepository;
+import trend.project.repository.SearchHistoryRepository;
 import trend.project.repository.planRepository.PlanRepository;
 import trend.project.web.dto.planDTO.PlanMainPageDTO;
 import trend.project.web.dto.planDTO.PlanSearchDTO;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,14 +27,16 @@ public class PlanSearchServiceImpl implements PlanSearchService {
 
 
     private final PlanRepository planRepository;
+    private final SearchHistoryRepository searchHistoryRepository;
+    private final MemberRepository memberRepository;
 
 
 
     @Override
-    public List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String title){
-
+    public List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String username, String title) {
         List<Plan> plans = planRepository.findAllByTitleContainingIgnoreCase(title);
 
+        // 공통된 검색 결과 매핑 로직
         List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchResponse = plans.stream()
                 .map(plan -> PlanMainPageDTO.PlanSearchAllResponseDTO.builder()
                         .planId(plan.getId())
@@ -42,13 +49,29 @@ public class PlanSearchServiceImpl implements PlanSearchService {
                         .build())
                 .collect(Collectors.toList());
 
-        return searchResponse;
+        // username이 null인 경우(익명 사용자)
+        if (username == null) {
+            return searchResponse; // 검색 기록 저장 없이 검색 결과만 반환
+        }
 
+        // username이 존재하는 경우
+        Member findMember = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다"));
+
+        // 검색 기록 저장
+        SearchHistory newSearchHistory = SearchHistory.builder()
+                .searchContent(title)
+                .member(findMember)
+                .build();
+        searchHistoryRepository.save(newSearchHistory);
+
+        return searchResponse;
     }
 
 
     @Override
     public List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title){
+
 
         List<Plan> searchPlans = planRepository.findTop4ByTitleContainingIgnoreCaseOrderByLikesCountDesc(title);
 
@@ -61,11 +84,9 @@ public class PlanSearchServiceImpl implements PlanSearchService {
                         .build())
                 .collect(Collectors.toList());
 
+
+
         return searchResponse;
-    }
-    
-    private static String getPlanImageLink(Plan plan) {
-        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
     }
     
     
@@ -177,4 +198,12 @@ public class PlanSearchServiceImpl implements PlanSearchService {
         return result;
     }
 
+
+
+
+
+
+    private static String getPlanImageLink(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
+    }
 }
