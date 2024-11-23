@@ -28,14 +28,13 @@ public class FollowServiceImpl implements FollowService {
 
 
     @Override
-    public void toggleFollowMember(String username, Long targetId) {
+    public void toggleFollowMember(String username, String targetUsername) {
 
         // 팔로우 신청하는 사람 -> follower
         Member follower = getMemberByUsername(username);
 
         // 팔로우 받는 사람 -> target
-        Member target = memberRepository.findById(targetId)
-                .orElseThrow(() -> new IllegalArgumentException("타겟 멤버를 찾을 수 없습니다"));
+        Member target = getMemberByUsername(targetUsername);
 
         // 이미 팔로우하고 있는지 확인
         boolean isFollowing = followRepository.existsByMemberAndFollowUser(follower, target);
