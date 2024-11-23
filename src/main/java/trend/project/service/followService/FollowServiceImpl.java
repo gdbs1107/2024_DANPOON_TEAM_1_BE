@@ -11,6 +11,10 @@ import trend.project.domain.MemberFollower;
 import trend.project.repository.FollowRepository;
 import trend.project.repository.FollowerRepository;
 import trend.project.repository.MemberRepository;
+import trend.project.web.dto.FollowDTO;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -61,6 +65,19 @@ public class FollowServiceImpl implements FollowService {
         }
     }
 
+
+    @Override
+    public List<FollowDTO.FollowResponseDTO> getFollowedUsers(String username) {
+        UserEntity user = findUser(username);
+
+        // 해당 유저가 팔로우하는 유저 목록 조회
+        List<Follow> follows = followRepository.findByUserEntity(user);
+
+        // Follow 객체에서 UserEntity를 추출하고, 이를 FollowResponseDTO로 변환
+        return follows.stream()
+                .map(follow -> FollowConverter.toFollowResponseDTO(follow.getFollowUser()))
+                .collect(Collectors.toList());
+    }
 
 
 

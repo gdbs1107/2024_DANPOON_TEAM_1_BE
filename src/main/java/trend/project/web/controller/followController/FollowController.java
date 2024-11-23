@@ -32,6 +32,8 @@ public class FollowController {
     @GetMapping("/follow")
     public void getFollow(@AuthenticationPrincipal UserDetails userDetails) {
 
+
+
     }
 
 
