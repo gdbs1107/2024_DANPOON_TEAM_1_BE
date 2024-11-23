@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.planService.PlanSearchService;
@@ -37,9 +39,15 @@ public class PlanSearchController {
 
     @GetMapping("{searchContent}/all")
     @Operation(summary = "게시글 전체 검색 API", description = "제목을 기반으로 전체 검색합니다")
-    public ApiResponse<List<PlanMainPageDTO.PlanSearchAllResponseDTO>> searchAllPlans(@PathVariable String searchContent){
+    public ApiResponse<List<PlanMainPageDTO.PlanSearchAllResponseDTO>> searchAllPlans(
+            @AuthenticationPrincipal UserDetails user,
+            @PathVariable String searchContent) {
 
-        List<PlanMainPageDTO.PlanSearchAllResponseDTO> result = planSearchService.searchAllPlan(searchContent);
+        // 토큰이 없을 경우 user는 null일 수 있으므로 null 체크
+        String username = (user != null) ? user.getUsername() : null;
+
+        // username이 null인 경우 익명 사용자의 검색으로 처리
+        List<PlanMainPageDTO.PlanSearchAllResponseDTO> result = planSearchService.searchAllPlan(username, searchContent);
 
         return ApiResponse.onSuccess(result);
     }

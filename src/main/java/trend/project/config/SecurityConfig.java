@@ -103,7 +103,6 @@ public class SecurityConfig {
                 .requestMatchers("/plans/main/**","/plans/ranking","/plans/themes/**","plans/search/**","/test").permitAll()
                 .requestMatchers("/members/search/{name}").permitAll()
                 
-                
                 .anyRequest().authenticated());
 
         http
