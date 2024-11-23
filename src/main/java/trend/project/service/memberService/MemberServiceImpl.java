@@ -228,6 +228,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
+    // N+1 발생
     @Override
     public List<MemberSearchDTO.MemberSearchResponseDTO> searchMember(String name){
 
