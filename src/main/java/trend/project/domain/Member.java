@@ -95,4 +95,40 @@ public class Member {
         this.password = password;
     }
 
+
+
+
+    public void setUsername(String username) {
+        if (username != null) {
+            this.username = username;
+        }
+    }
+
+
+
+    public void setName(String name) {
+        if (name != null) {
+            this.name = name;
+        }
+    }
+
+
+    public void setEmail(String email) {
+        if (email != null) {
+            this.email = email;
+        }
+    }
+
+
+    public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber != null) {
+            this.phoneNumber = phoneNumber;
+        }
+    }
+
+
+    public void setAddress(Address address) {
+        this.address.add(address);
+    }
+
 }
