@@ -46,7 +46,7 @@ public class PlanMainPageServiceImpl implements PlanMainPageService {
 
         List<PlanMainPageDTO.PlanRankingResponseDTO> planRankings = rankings.stream()
                 .map(ranking -> PlanMainPageDTO.PlanRankingResponseDTO.builder()
-                        .planId(ranking.getId())
+                        .planId(ranking.getPlanId())
                         .title(ranking.getTitle())
                         .name(ranking.getName())
                         .likesCount(ranking.getLikesCount())
