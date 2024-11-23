@@ -11,6 +11,7 @@ import trend.project.api.code.status.ErrorStatus;
 import trend.project.api.exception.handler.MemberCategoryHandler;
 import trend.project.domain.Address;
 import trend.project.domain.Member;
+import trend.project.domain.Plan;
 import trend.project.domain.enumClass.Role;
 import trend.project.domain.enumClass.Status;
 import trend.project.repository.AddressRepository;
@@ -94,6 +95,7 @@ public class MemberServiceImpl implements MemberService {
                         .endDate(plan.getEndDate())
                         .likeCount(plan.getLikesCount())
                         .commentCount(plan.getCommentCount())
+                        .imageLink(getImageLinks(plan))
                         .build())
                 .collect(Collectors.toList());
 
@@ -127,6 +129,7 @@ public class MemberServiceImpl implements MemberService {
                         .endDate(plan.getEndDate())
                         .likeCount(plan.getLikesCount())
                         .commentCount(plan.getCommentCount())
+                        .imageLink(getImageLinks(plan))
                         .build())
                 .collect(Collectors.toList());
 
@@ -298,4 +301,11 @@ public class MemberServiceImpl implements MemberService {
         // Plan 개수 반환
         return findMember.getPlan().size();
     }
+
+
+    private static String getImageLinks(Plan plan) {
+        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
+    }
+
+
 }
