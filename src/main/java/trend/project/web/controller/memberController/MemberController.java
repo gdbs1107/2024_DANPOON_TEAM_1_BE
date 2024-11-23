@@ -119,4 +119,13 @@ public class MemberController {
     }
 
 
+
+    //회원 검색
+    @Operation(summary = "회원 검색 API")
+    @GetMapping("/search/{name}")
+    public void searchMember(@PathVariable String name){
+
+    }
+
+
 }
