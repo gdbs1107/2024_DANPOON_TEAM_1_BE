@@ -4,9 +4,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import trend.project.api.ApiResponse;
 import trend.project.service.memberService.MemberService;
 import trend.project.web.dto.memberDTO.*;
@@ -124,8 +126,13 @@ public class MemberController {
     @GetMapping("/search/{name}")
     public ApiResponse<List<MemberSearchDTO.MemberSearchResponseDTO>> searchMember(@PathVariable String name) {
 
-        // 입력된 name에서 '@' 제거
-        String pureName = name.startsWith("@") ? name.substring(1) : name;
+        // 입력된 name에 '@'가 없는 경우 예외 발생
+        if (!name.startsWith("@")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "입력 값은 '@'로 시작해야 합니다.");
+        }
+
+        // '@' 제거
+        String pureName = name.substring(1);
 
         List<MemberSearchDTO.MemberSearchResponseDTO> result = memberService.searchMember(pureName);
 
