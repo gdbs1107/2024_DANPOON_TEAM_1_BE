@@ -9,10 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import trend.project.api.ApiResponse;
 import trend.project.service.memberService.MemberService;
-import trend.project.web.dto.memberDTO.MemberGetProfileDTO;
-import trend.project.web.dto.memberDTO.MemberJoinDTO;
-import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
-import trend.project.web.dto.memberDTO.MemberProfileUpdateDTO;
+import trend.project.web.dto.memberDTO.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -123,7 +122,11 @@ public class MemberController {
     //회원 검색
     @Operation(summary = "회원 검색 API")
     @GetMapping("/search/{name}")
-    public void searchMember(@PathVariable String name){
+    public ApiResponse<List<MemberSearchDTO.MemberSearchResponseDTO>> searchMember(@PathVariable String name){
+
+        List<MemberSearchDTO.MemberSearchResponseDTO> result = memberService.searchMember(name);
+
+        return ApiResponse.onSuccess(result);
 
     }
 
