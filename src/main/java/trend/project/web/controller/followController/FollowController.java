@@ -24,9 +24,9 @@ public class FollowController {
     @Operation(summary = "팔로우 토글 API", description = "토글 형식으로 팔로우를 구현하였습니다")
     @PostMapping("/follow")
     public ApiResponse<String> follow(@AuthenticationPrincipal UserDetails userDetails,
-                              @RequestParam Long targetId) {
+                              @RequestParam String targetUsername) {
 
-        followService.toggleFollowMember(userDetails.getUsername(), targetId);
+        followService.toggleFollowMember(userDetails.getUsername(), targetUsername);
 
         return ApiResponse.onSuccess("팔로우가 성공적으로 수정되었습니다");
     }
