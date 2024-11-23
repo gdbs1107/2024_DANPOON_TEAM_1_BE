@@ -11,9 +11,9 @@ import java.util.List;
 public interface MemberService {
     MemberJoinDTO.MemberJoinResponseDTO joinMember(MemberJoinDTO.MemberJoinRequestDTO request);
 
-    MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(Long userId);
+    MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(String username);
 
-    MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(Long userId);
+    MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(String username);
 
     void deleteMember(String username);
 
