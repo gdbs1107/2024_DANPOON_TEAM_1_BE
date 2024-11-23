@@ -128,10 +128,9 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
 
     @Override
-    public List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByTown(String categoryName,String town){
+    public List<PlanCategoryPageDTO.PlanCategoryResponseDTO> getPlanByTown(String categoryName,String province){
 
-        List<Plan> byCategory = planRepository.
-                findByCategoryAndLocationTownOrderByLikesCountDesc(Category.valueOf(categoryName), town);
+        List<Plan> byCategory = planRepository.findByCategoryAndLocationProvince(Category.valueOf(categoryName),province);
 
         List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
                 .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
