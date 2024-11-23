@@ -64,6 +64,9 @@ public class PlanDetailDTO {
         @Schema(description = "기획자 이름입니다")
         private String name;
         
+        @Schema(description = "기획자 아이디입니다")
+        private String username;
+        
         @Schema(description = "기획자 팔로워 수 입니다")
         private int followerCount;
         

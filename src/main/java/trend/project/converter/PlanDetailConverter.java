@@ -33,6 +33,7 @@ public class PlanDetailConverter {
                 .bannerUrl(bannerImage != null ? bannerImage.getImageLink() : null)
                 .checkPlanner(checkPlanner)
                 .name(member.getName())
+                .username(member.getUsername())
                 .followerCount(member.getFollowerCount())
                 .province(location.getProvince())
                 .city(location.getCity())
