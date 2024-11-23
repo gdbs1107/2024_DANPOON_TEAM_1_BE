@@ -12,6 +12,8 @@ import trend.project.repository.AddressRepository;
 import trend.project.repository.MemberRepository;
 import trend.project.web.dto.memberDTO.MemberProfileFixDTO;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -80,19 +82,34 @@ public class MemberProfileFixServiceImpl implements MemberProfileFixService {
 
 
     @Override
-    public void fixAddress(String username, MemberProfileFixDTO.MemberProfileRequestDTO request){
-
+    public void fixAddress(String username, MemberProfileFixDTO.MemberProfileRequestDTO request) {
+        // 1. 사용자 가져오기
         Member memberByUsername = getMemberByUsername(username);
 
+        // 2. 기존 주소 가져오기
+        List<Address> addresses = memberByUsername.getAddress();
+
+        if (addresses == null || addresses.isEmpty()) {
+            throw new IllegalArgumentException("해당 사용자는 주소 정보가 없습니다.");
+        }
+
+        // 3. 첫 번째 주소 가져오기
+        Address currentAddress = addresses.get(0);
+
+        // 4. 새로운 주소 생성
         Address newAddress = Address.builder()
                 .province(request.getProvince())
                 .city(request.getCity())
                 .build();
 
-        addressRepository.delete((Address) memberByUsername.getAddress());
-        memberByUsername.setAddress(null);
-        memberByUsername.setAddress(newAddress);
+        // 5. 기존 주소 삭제 및 리스트에서 제거
+        addressRepository.delete(currentAddress); // DB에서 삭제
+        addresses.remove(0); // 리스트에서 삭제
 
+        // 6. 새로운 주소 추가
+        addresses.add(0, newAddress); // 새 주소를 0번째에 추가
+
+        // 7. 변경된 사용자 정보 저장
         memberRepository.save(memberByUsername);
     }
 
