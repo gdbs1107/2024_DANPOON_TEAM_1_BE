@@ -23,8 +23,11 @@ public class PlanMainConverter {
                 .collect(Collectors.toList());
         return planBanners;
     }
-    
+
     private static String getImageLink(Plan plan) {
-        return plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null;
+        if (plan.getPlanBannerImages() == null || plan.getPlanBannerImages().isEmpty()) {
+            return null; // null 또는 빈 리스트일 경우 null 반환
+        }
+        return plan.getPlanBannerImages().get(0).getImageLink();
     }
 }

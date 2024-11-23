@@ -83,7 +83,10 @@ public class Plan extends BaseEntity {
     
     @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private Location location;
-    
+
+    @OneToMany(mappedBy = "plan",cascade = CascadeType.ALL)
+    private List<PlanBannerImage> planBannerImages=new ArrayList<>();
+
     public void setLocation(Location location) {
         this.location = location;
         location.setPlan(this);
