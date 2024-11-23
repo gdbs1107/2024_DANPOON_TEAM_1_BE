@@ -18,12 +18,12 @@ import trend.project.repository.MemberRepository;
 import trend.project.web.dto.memberDTO.MemberGetProfileDTO;
 import trend.project.web.dto.memberDTO.MemberJoinDTO;
 import trend.project.web.dto.memberDTO.MemberProfileFindDTO;
+import trend.project.web.dto.memberDTO.MemberSearchDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -201,7 +201,7 @@ public class MemberServiceImpl implements MemberService {
 
     // 비밀번호 재설정 메서드
     @Override
-    public MemberProfileFindDTO.FindMemberPasswordResponseDTO getPassword(MemberProfileFindDTO.FindMemberPasswordRequestDTO request){
+    public MemberProfileFindDTO.FindMemberPasswordResponseDTO getPassword(MemberProfileFindDTO.FindMemberPasswordRequestDTO request) {
 
         Member byUsername = getMemberByUsername(request.getUsername());
 
@@ -228,7 +228,26 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
+    @Override
+    public List<MemberSearchDTO.MemberSearchResponseDTO> searchMember(String name){
 
+        List<Member> searchMembers = memberRepository.findAllByNameContainingIgnoreCase(name);
+
+        List<MemberSearchDTO.MemberSearchResponseDTO> searchMember = searchMembers.stream()
+                .map(member -> MemberSearchDTO.MemberSearchResponseDTO.builder()
+                        .name(member.getName())
+                        .followerCount(member.getFollowerCount())
+                        .imageLink(
+                                member.getMemberProfileImages() != null && !member.getMemberProfileImages().isEmpty()
+                                        ? member.getMemberProfileImages().get(0).getImageLink()
+                                        : null
+                        )
+                        .build())
+                .collect(Collectors.toList());
+
+        return searchMember;
+
+    }
 
 
 
