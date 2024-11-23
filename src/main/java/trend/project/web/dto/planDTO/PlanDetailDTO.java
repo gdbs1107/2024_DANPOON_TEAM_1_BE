@@ -41,7 +41,7 @@ public class PlanDetailDTO {
         private int likesCount;
         
         @Schema(description = "현재 좋아요 여부입니다.")
-        private Boolean checkLike;
+        private boolean checkLike;
         
         @Schema(description = "게시글 댓글 수 입니다")
         private int commentCount;
@@ -58,11 +58,11 @@ public class PlanDetailDTO {
         @Schema(description = "배너 이미지 주소입니다")
         private String bannerUrl;
         
-        @Schema(description = "작성자 회원 아이디 입니다")
-        private Long memberId;
+        @Schema(description = "기획자인지 확인하는 필드입니다")
+        private boolean checkPlanner;
         
         @Schema(description = "기획자 이름입니다")
-        private String username;
+        private String name;
         
         @Schema(description = "기획자 팔로워 수 입니다")
         private int followerCount;

@@ -30,19 +30,8 @@ public class PlanDetailServiceImpl implements PlanDetailService {
     @Override
     public PlanDetailDTO.PlanDetailResponseDTO getPlanDetail(Long planId, String username) {
         
-        Boolean checkLike = false;
-        
-        if (username != null) {
-            Member loginMember = memberRepository.findByUsername(username).orElseThrow(
-                    () -> new MemberCategoryHandler(ErrorStatus.LOGIN_MEMBER_NOT_FOUND)
-            );
-            
-            checkLike = planLikesRepository.existsByMemberAndPlanId(loginMember, planId);
-        } else {
-            checkLike = false;
-        }
-        
-        
+        boolean checkLike;
+        boolean checkPlanner;
         Plan findPlan = findPlanById(planId);
         Member findMember = findPlan.getMember();
         Location planLocation = getLocation(planId);
@@ -50,14 +39,30 @@ public class PlanDetailServiceImpl implements PlanDetailService {
         PlanBannerImage bannerImage = getBannerImage(planId);
         findPlan.updateCommentCount();
         
-        return PlanDetailConverter.toPlanDetailResponseDTO(findPlan, findMember, planLocation,
+        if (username != null) {
+            Member loginMember = getLoginMember(username);
+            
+            checkLike = planLikesRepository.existsByMemberAndPlanId(loginMember, planId);
+            checkPlanner = loginMember.getUsername().equals(findMember.getUsername());
+        } else {
+            checkLike = false;
+            checkPlanner = false;
+        }
+        
+        return PlanDetailConverter.toPlanDetailResponseDTO(findPlan, findMember, checkPlanner, planLocation,
                 posterImage, bannerImage, checkLike);
+    }
+    
+    private Member getLoginMember(String username) {
+        return memberRepository.findByUsername(username).orElseThrow(
+                () -> new MemberCategoryHandler(ErrorStatus.LOGIN_MEMBER_NOT_FOUND)
+        );
     }
     
     @Override
     public List<PlanDetailDTO.SameProvinceOtherPlanResponseDTO> getSameProvinceOtherPlans(Long planId) {
         Plan findPlan = findPlanById(planId);
-        List<Plan> sameProvincePlans = null;
+        List<Plan> sameProvincePlans;
         try {
             sameProvincePlans = planRepository.findTop5ByProvinceAndNotCurrentPlanOrderByLikesCountDesc(
                     findPlan.getLocation().getProvince(),

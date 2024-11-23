@@ -10,6 +10,7 @@ public class PlanDetailConverter {
     
     public static PlanDetailDTO.PlanDetailResponseDTO toPlanDetailResponseDTO(Plan plan,
                                                                               Member member,
+                                                                              Boolean checkPlanner,
                                                                               Location location,
                                                                               PlanPosterImage posterImage,
                                                                               PlanBannerImage bannerImage,
@@ -30,8 +31,8 @@ public class PlanDetailConverter {
                 .status(plan.getStatus().name())
                 .posterUrl(posterImage != null ? posterImage.getImageLink() : null)
                 .bannerUrl(bannerImage != null ? bannerImage.getImageLink() : null)
-                .memberId(member.getId())
-                .username(member.getName())
+                .checkPlanner(checkPlanner)
+                .name(member.getName())
                 .followerCount(member.getFollowerCount())
                 .province(location.getProvince())
                 .city(location.getCity())
