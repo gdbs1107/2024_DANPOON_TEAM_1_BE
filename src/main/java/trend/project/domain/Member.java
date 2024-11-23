@@ -80,6 +80,9 @@ public class Member {
     @OneToMany(mappedBy = "member",cascade = CascadeType.ALL)
     private List<Plan> plan=new ArrayList<>();
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<SearchHistory> searchHistory=new ArrayList<>();
+
 
 
     /* 연관관계 메서드 */

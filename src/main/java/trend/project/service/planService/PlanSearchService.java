@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface PlanSearchService {
-    List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String title);
+    List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String username,String title);
 
     List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title);
 
