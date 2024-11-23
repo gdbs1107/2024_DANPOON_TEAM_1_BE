@@ -34,6 +34,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
         List<PlanCategoryPageDTO.PlanCategoryBannerResponseDTO> planCategoryBanner = byCategory.stream()
                 .map(plan -> PlanCategoryPageDTO.PlanCategoryBannerResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .likesCount(plan.getLikesCount())
@@ -68,6 +69,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
         List<PlanCategoryPageDTO.PlanCategoryRankingResponseDTO> planRankings = rankings.stream()
                 .map(ranking -> PlanCategoryPageDTO.PlanCategoryRankingResponseDTO.builder()
+                        .planId(ranking.getPlanId())
                         .title(ranking.getTitle())
                         .name(ranking.getName())
                         .likesCount(ranking.getLikesCount())
@@ -89,6 +91,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
         List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
                 .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
@@ -110,6 +113,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
         List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
                 .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
@@ -131,6 +135,7 @@ public class PlanByCategoryServiceImpl implements PlanByCategoryService {
 
         List<PlanCategoryPageDTO.PlanCategoryResponseDTO> planByCategory = byCategory.stream()
                 .map(plan -> PlanCategoryPageDTO.PlanCategoryResponseDTO.builder()
+                        .planId(plan.getId())
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
                         .town(plan.getLocation().getTown())
