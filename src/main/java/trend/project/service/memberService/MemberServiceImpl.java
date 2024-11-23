@@ -96,6 +96,7 @@ public class MemberServiceImpl implements MemberService {
                         .likeCount(plan.getLikesCount())
                         .commentCount(plan.getCommentCount())
                         .imageLink(getImageLinks(plan))
+                        .planId(plan.getId())
                         .build())
                 .collect(Collectors.toList());
 
@@ -130,6 +131,7 @@ public class MemberServiceImpl implements MemberService {
                         .likeCount(plan.getLikesCount())
                         .commentCount(plan.getCommentCount())
                         .imageLink(getImageLinks(plan))
+                        .planId(plan.getId())
                         .build())
                 .collect(Collectors.toList());
 

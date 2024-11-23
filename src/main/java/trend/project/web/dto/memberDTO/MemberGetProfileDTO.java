@@ -78,6 +78,8 @@ public class MemberGetProfileDTO {
 
         String imageLink;
 
+        Long planId;
+
 
     }
 }
