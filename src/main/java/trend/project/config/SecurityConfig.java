@@ -101,6 +101,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/plans/poster/{planId}").permitAll()
                 .requestMatchers(HttpMethod.GET, "/plans/banner/{planId}").permitAll()
                 .requestMatchers("/plans/main/**","/plans/ranking","/plans/themes/**","plans/search/**","/test").permitAll()
+                .requestMatchers("/members/search/{name}").permitAll()
                 
                 
                 .anyRequest().authenticated());
