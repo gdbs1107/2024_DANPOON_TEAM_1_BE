@@ -140,4 +140,14 @@ public class MemberController {
     }
 
 
+
+
+
+    // 회원 username 수정
+    // 회원 password 수정
+    // 회원 name 수정
+    // 회원 phoneNumber 수정
+    // 회원 email 수정
+    // 회원 지역 수정
+
 }
