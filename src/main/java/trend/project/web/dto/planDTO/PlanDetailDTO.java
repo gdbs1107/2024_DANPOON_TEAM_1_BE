@@ -81,6 +81,9 @@ public class PlanDetailDTO {
     @Getter
     public static class SameProvinceOtherPlanResponseDTO {
         
+        @Schema(description = "기획서 아이디입니다.")
+        private Long planId;
+        
         @Schema(description = "기획자 이름입니다.")
         private String name;
         
