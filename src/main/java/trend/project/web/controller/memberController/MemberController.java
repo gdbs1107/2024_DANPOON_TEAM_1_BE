@@ -122,12 +122,14 @@ public class MemberController {
     //회원 검색
     @Operation(summary = "회원 검색 API")
     @GetMapping("/search/{name}")
-    public ApiResponse<List<MemberSearchDTO.MemberSearchResponseDTO>> searchMember(@PathVariable String name){
+    public ApiResponse<List<MemberSearchDTO.MemberSearchResponseDTO>> searchMember(@PathVariable String name) {
 
-        List<MemberSearchDTO.MemberSearchResponseDTO> result = memberService.searchMember(name);
+        // 입력된 name에서 '@' 제거
+        String pureName = name.startsWith("@") ? name.substring(1) : name;
+
+        List<MemberSearchDTO.MemberSearchResponseDTO> result = memberService.searchMember(pureName);
 
         return ApiResponse.onSuccess(result);
-
     }
 
 
