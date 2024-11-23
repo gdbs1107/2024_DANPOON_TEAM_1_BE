@@ -30,6 +30,7 @@ public class PlanDetailConverter {
                 .status(plan.getStatus().name())
                 .posterUrl(posterImage != null ? posterImage.getImageLink() : null)
                 .bannerUrl(bannerImage != null ? bannerImage.getImageLink() : null)
+                .memberId(member.getId())
                 .username(member.getName())
                 .followerCount(member.getFollowerCount())
                 .province(location.getProvince())

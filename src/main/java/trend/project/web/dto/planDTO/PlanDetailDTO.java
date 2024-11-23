@@ -58,6 +58,9 @@ public class PlanDetailDTO {
         @Schema(description = "배너 이미지 주소입니다")
         private String bannerUrl;
         
+        @Schema(description = "작성자 회원 아이디 입니다")
+        private Long memberId;
+        
         @Schema(description = "기획자 이름입니다")
         private String username;
         
