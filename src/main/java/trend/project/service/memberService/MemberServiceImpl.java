@@ -81,10 +81,9 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(Long userId) {
+    public MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO getMemberProfileSortUpdateDate(String username) {
 
-        Member findMember = memberRepository.findById(userId)
-                .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Member findMember = getMemberByUsername(username);
 
         // Plan 리스트를 DTO 리스트로 변환
         List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
@@ -102,7 +101,7 @@ public class MemberServiceImpl implements MemberService {
 
         return MemberGetProfileDTO.MemberGetProfileResponseByRecentDTO.builder()
                 .name(findMember.getName())
-                .planCount(getPlanCountByMemberId(userId))
+                .planCount(getPlanCountByMemberId(findMember.getId()))
                 .followingCount(findMember.getFollowCount())
                 .followerCount(findMember.getFollowerCount())
                 .planListByUpdateDate(planResponseDTOList)
@@ -115,10 +114,9 @@ public class MemberServiceImpl implements MemberService {
 
     // N+1 발생
     @Override
-    public MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(Long userId) {
+    public MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO getMemberProfileSortLikeCount(String username) {
 
-        Member findMember = memberRepository.findById(userId)
-                .orElseThrow(() -> new MemberCategoryHandler(ErrorStatus.MEMBER_NOT_FOUND));
+        Member findMember = getMemberByUsername(username);
 
         // Plan 리스트를 DTO 리스트로 변환
         List<MemberGetProfileDTO.MemberGetProfilePlanResponseDTO> planResponseDTOList = findMember.getPlan().stream()
@@ -142,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
 
         return MemberGetProfileDTO.MemberGetProfileResponseByLikeCountDTO.builder()
                 .name(findMember.getName())
-                .planCount(getPlanCountByMemberId(userId))
+                .planCount(getPlanCountByMemberId(findMember.getId()))
                 .followingCount(findMember.getFollowCount())
                 .followerCount(findMember.getFollowerCount())
                 .planListByLikeCount(planResponseDTOListByLikeCount)
