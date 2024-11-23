@@ -76,6 +76,8 @@ public class MemberGetProfileDTO {
 
         Integer commentCount;
 
+        String imageLink;
+
 
     }
 }
