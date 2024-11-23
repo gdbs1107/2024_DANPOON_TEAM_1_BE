@@ -14,8 +14,4 @@ public class HealthCheckController {
         return "health check";
     }
 
-    @RequestMapping("/test")
-    public void test() {
-        throw new RuntimeException("Error!!");
-    }
 }

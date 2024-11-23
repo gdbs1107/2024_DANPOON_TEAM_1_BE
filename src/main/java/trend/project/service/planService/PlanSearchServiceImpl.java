@@ -24,6 +24,29 @@ public class PlanSearchServiceImpl implements PlanSearchService {
     private final PlanRepository planRepository;
 
 
+
+    @Override
+    public List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchAllPlan(String title){
+
+        List<Plan> plans = planRepository.findAllByTitleContainingIgnoreCase(title);
+
+        List<PlanMainPageDTO.PlanSearchAllResponseDTO> searchResponse = plans.stream()
+                .map(plan -> PlanMainPageDTO.PlanSearchAllResponseDTO.builder()
+                        .planId(plan.getId())
+                        .title(plan.getTitle())
+                        .name(plan.getMember().getName())
+                        .planImageLink(getPlanImageLink(plan))
+                        .category(plan.getCategory())
+                        .startDate(plan.getStartDate())
+                        .endDate(plan.getEndDate())
+                        .build())
+                .collect(Collectors.toList());
+
+        return searchResponse;
+
+    }
+
+
     @Override
     public List<PlanMainPageDTO.PlanSearchResponseDTO> searchPlan(String title){
 
