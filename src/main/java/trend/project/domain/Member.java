@@ -101,11 +101,11 @@ public class Member {
         this.inactiveDate = LocalDateTime.now();  // 비활성화 날짜 기록
     }
 
+
+
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
 
     public void setUsername(String username) {
