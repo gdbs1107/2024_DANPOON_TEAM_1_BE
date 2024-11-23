@@ -42,6 +42,7 @@ public class PlanDetailConverter {
             List<Plan> plans) {
         return plans.stream()
                 .map(plan -> PlanDetailDTO.SameProvinceOtherPlanResponseDTO.builder()
+                        .planId(plan.getId())
                         .imageLink(plan.getPlanPosterImage() != null ? plan.getPlanPosterImage().getImageLink() : null)
                         .title(plan.getTitle())
                         .name(plan.getMember().getName())
