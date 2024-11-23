@@ -59,7 +59,7 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
         removeNewFile(uploadFile);
 
         // Save metadata to the database
-        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(),memberByUsername);
+        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(),memberByUsername, uploadImageUrl);
 
         return uploadImageUrl;
     }
@@ -107,13 +107,14 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
 
     @Override
     public void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType,
-                                 Member findMember) {
+                                 Member findMember, String uploadImageUrl) {
 
         String name = findMember.getName();
 
 
         MemberProfileImage image = MemberProfileImage.builder()
-                .imageLink(uniqueFileName)
+                .imageLink(uploadImageUrl)
+                .fileName(uniqueFileName)
                 .imageName(originalFileName)
                 .member(findMember)
                 .build();
@@ -137,7 +138,7 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
                 .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
 
-        String uniqueFileName = image.getImageLink();  // Use full path as S3 key
+        String uniqueFileName = image.getFileName();  // Use full path as S3 key
         log.info("Downloading file from S3 with key: {}", uniqueFileName);
 
         try {
@@ -169,7 +170,7 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
                 .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
 
-        String uniqueFileName = image.getImageLink();  // Use full path as S3 key
+        String uniqueFileName = image.getFileName();  // Use full path as S3 key
         log.info("Downloading file from S3 with key: {}", uniqueFileName);
 
         try {
@@ -206,7 +207,7 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
                     .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
 
             // 파일 경로(S3 키)
-            String uniqueFileName = image.getImageLink();
+            String uniqueFileName = image.getFileName();
             if (uniqueFileName != null) {
                 // AWS S3에서 파일 삭제
                 amazonS3.deleteObject(bucket, uniqueFileName);
@@ -254,7 +255,7 @@ public class MemberProfileImageServiceImpl implements MemberProfileImageService 
         removeNewFile(uploadFile);
 
         // 새로운 메타데이터 저장
-        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), memberByUsername);
+        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), memberByUsername, uploadImageUrl);
 
         return uploadImageUrl;
     }

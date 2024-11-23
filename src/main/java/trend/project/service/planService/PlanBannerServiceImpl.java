@@ -61,7 +61,7 @@ public class PlanBannerServiceImpl implements PlanBannerService {
         removeNewFile(uploadFile);
         
         // Save metadata to the database
-        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(), plan);
+        saveFileMetadata(originalFileName, fileName, multipartFile.getSize(), multipartFile.getContentType(), plan, uploadImageUrl);
         
         return uploadImageUrl;
     }
@@ -103,10 +103,11 @@ public class PlanBannerServiceImpl implements PlanBannerService {
     }
     
     @Override
-    public void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType, Plan findplan) {
+    public void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType, Plan findplan, String uploadImageUrl) {
         
         PlanBannerImage image = PlanBannerImage.builder()
-                .imageLink(uniqueFileName)
+                .imageLink(uploadImageUrl)
+                .fileName(uniqueFileName)
                 .imageName(originalFileName)
                 .plan(findplan)
                 .build();
@@ -120,7 +121,7 @@ public class PlanBannerServiceImpl implements PlanBannerService {
         PlanBannerImage planBannerImage = bannerImageRepository.findImagesByPlanId(planId)
                 .orElseThrow(()->new ImageCategoryHandler(ErrorStatus.IMAGE_NOT_FOUND));
         
-        String uniqueFileName = planBannerImage.getImageLink();  // Use full path as S3 key
+        String uniqueFileName = planBannerImage.getFileName();  // Use full path as S3 key
         log.info("Downloading file from S3 with key: {}", uniqueFileName);
         
         try {
@@ -150,7 +151,7 @@ public class PlanBannerServiceImpl implements PlanBannerService {
             Long planBannerImageId = planBannerImage.getId();
             
             // 파일 경로(S3 키)
-            String uniqueFileName = planBannerImage.getImageLink();
+            String uniqueFileName = planBannerImage.getFileName();
             if (uniqueFileName != null) {
                 // AWS S3에서 파일 삭제
                 amazonS3.deleteObject(bucket, uniqueFileName);
@@ -200,7 +201,7 @@ public class PlanBannerServiceImpl implements PlanBannerService {
         removeNewFile(uploadFile);
         
         // 새로운 메타데이터 저장
-        saveFileMetadata(originalFileName, uploadImageUrl, newImageFile.getSize(), newImageFile.getContentType(), findPlan);
+        saveFileMetadata(originalFileName, fileName, newImageFile.getSize(), newImageFile.getContentType(), findPlan, uploadImageUrl);
         
         return uploadImageUrl;
     }

@@ -19,7 +19,7 @@ public interface CompanyProfileImageService {
     void removeNewFile(File targetFile);
 
     void saveFileMetadata(String originalFileName, String uniqueFileName, long fileSize, String contentType,
-                          Company findCompany);
+                          Company findCompany, String uploadImageUrl);
 
     byte[] download(String username) throws IOException;
 

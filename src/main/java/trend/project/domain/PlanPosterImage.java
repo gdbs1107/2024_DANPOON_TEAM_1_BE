@@ -18,6 +18,9 @@ public class PlanPosterImage extends BaseEntity {
     @Column(nullable = false, columnDefinition = "text")
     private String imageLink;
     
+    @Column(nullable = false, columnDefinition = "text")
+    private String fileName;
+    
     @Column(nullable = false, length = 50)
     private String imageName;
     
