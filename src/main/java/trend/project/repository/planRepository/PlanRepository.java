@@ -67,4 +67,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
             @Param("title") String title,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
+
+    List<Plan> findAllByTitleContainingIgnoreCase(String title);
 }
