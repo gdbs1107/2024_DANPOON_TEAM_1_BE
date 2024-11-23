@@ -49,8 +49,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
     // N+1 발생
     List<Plan> findByCategoryOrderByLikesCountDesc(Category category);
 
-    List<Plan> findByCategoryAndLocationTownOrderByLikesCountDesc(Category category, String town);
-
     List<Plan> findByTitleContainingIgnoreCaseAndLocationProvince(String title,String province);
 
     List<Plan> findByTitleContainingIgnoreCaseAndCategory(String title,Category category);
@@ -69,4 +67,6 @@ public interface PlanRepository extends JpaRepository<Plan, Long> {
             @Param("endDate") LocalDate endDate);
 
     List<Plan> findAllByTitleContainingIgnoreCase(String title);
+
+    List<Plan> findByCategoryAndLocationProvince(Category category,String province);
 }
