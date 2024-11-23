@@ -19,7 +19,7 @@ public class FollowDTO {
 
         Integer followerCount;
 
-
+        String imageLink;
 
     }
 }

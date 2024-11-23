@@ -66,17 +66,50 @@ public class FollowServiceImpl implements FollowService {
     }
 
 
+    // N+1 발생
     @Override
     public List<FollowDTO.FollowResponseDTO> getFollowedUsers(String username) {
-        UserEntity user = findUser(username);
+        Member findmember = getMemberByUsername(username);
 
         // 해당 유저가 팔로우하는 유저 목록 조회
-        List<Follow> follows = followRepository.findByUserEntity(user);
+        List<MemberFollow> follows = followRepository.findByMember(findmember);
 
-        // Follow 객체에서 UserEntity를 추출하고, 이를 FollowResponseDTO로 변환
-        return follows.stream()
-                .map(follow -> FollowConverter.toFollowResponseDTO(follow.getFollowUser()))
+        List<FollowDTO.FollowResponseDTO> result = follows.stream()
+                .map(follow -> FollowDTO.FollowResponseDTO.builder()
+                        .name(follow.getFollowUser().getName())
+                        .memberId(follow.getFollowUser().getId())
+                        .followerCount(follow.getFollowUser().getFollowerCount())
+                        .imageLink(follow.getFollowUser().getMemberProfileImages() != null && ! follow.getFollowUser().getMemberProfileImages().isEmpty()
+                                ? follow.getFollowUser().getMemberProfileImages().get(0).getImageLink()
+                                : null)
+                        .build())
                 .collect(Collectors.toList());
+
+        return result;
+    }
+
+
+
+    @Override
+    public List<FollowDTO.FollowResponseDTO> getFollowers(String username) {
+
+        Member findmember = getMemberByUsername(username);
+
+        // 해당 유저가 팔로우하는 유저 목록 조회
+        List<MemberFollower> followers = followerRepository.findByMember(findmember);
+
+        List<FollowDTO.FollowResponseDTO> result = followers.stream()
+                .map(follower -> FollowDTO.FollowResponseDTO.builder()
+                        .name(follower.getFollowerUser().getName())
+                        .memberId(follower.getFollowerUser().getId())
+                        .followerCount(follower.getFollowerUser().getFollowerCount())
+                        .imageLink(follower.getFollowerUser().getMemberProfileImages() != null && ! follower.getFollowerUser().getMemberProfileImages().isEmpty()
+                                ? follower.getFollowerUser().getMemberProfileImages().get(0).getImageLink()
+                                : null)
+                        .build())
+                .collect(Collectors.toList());
+
+        return result;
     }
 
 
