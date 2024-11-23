@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
+import trend.project.domain.enumClass.Category;
 
 import java.time.LocalDate;
 
@@ -165,7 +166,35 @@ public class PlanMainPageDTO {
         @Schema(description = "포스터 이미지 링크입니다")
         String planImageLink;
 
+
     }
 
+
+    @Builder
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @AllArgsConstructor
+    @Getter
+    public static class PlanSearchAllResponseDTO{
+
+        @Schema(description = "기획서 PK 입니다")
+        Long planId;
+
+        @Schema(description = "게시글 제목 입니다")
+        String title;
+
+        @Schema(description = "게시글 작성자 닉네임 입니다")
+        String name;
+
+        @Schema(description = "포스터 이미지 링크입니다")
+        String planImageLink;
+
+        @Schema(description = "게시글 카테고리 입니다")
+        Category category;
+
+        LocalDate startDate;
+
+        LocalDate endDate;
+
+    }
 
 }

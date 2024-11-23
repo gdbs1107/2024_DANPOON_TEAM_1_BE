@@ -26,10 +26,20 @@ public class PlanSearchController {
 
     // 검색 API
     @GetMapping("{searchContent}")
-    @Operation(summary = "게시글 검색창 API", description = "제목을 기반으로 검색합니다")
+    @Operation(summary = "게시글 검색창 API", description = "제목을 기반으로 상위 네개의 게시글을 검색합니다")
     public ApiResponse<List<PlanMainPageDTO.PlanSearchResponseDTO>> searchPlans(@PathVariable String searchContent){
 
         List<PlanMainPageDTO.PlanSearchResponseDTO> result = planSearchService.searchPlan(searchContent);
+
+        return ApiResponse.onSuccess(result);
+    }
+
+
+    @GetMapping("{searchContent}/all")
+    @Operation(summary = "게시글 전체 검색 API", description = "제목을 기반으로 전체 검색합니다")
+    public ApiResponse<List<PlanMainPageDTO.PlanSearchAllResponseDTO>> searchAllPlans(@PathVariable String searchContent){
+
+        List<PlanMainPageDTO.PlanSearchAllResponseDTO> result = planSearchService.searchAllPlan(searchContent);
 
         return ApiResponse.onSuccess(result);
     }
