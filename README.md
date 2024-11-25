@@ -1,6 +1,11 @@
 # 2024 kakao X goorm 단풍톤] 🌠 유행: 내가 만드는 지역 행사
 <br>
 
+![유행1](https://github.com/user-attachments/assets/36571728-638a-4db1-8286-e731a296e7a3)
+![유행2](https://github.com/user-attachments/assets/29013f34-74f7-402d-90d9-83b8dcb3d096)
+![유행3](https://github.com/user-attachments/assets/333fe1c3-29c7-4f45-ae89-2bfe435d913c)
+
+
 
 
 ## 주요 기능
