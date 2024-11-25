@@ -51,3 +51,11 @@
 ## ERD
 <img width="1217" alt="image" src="https://github.com/user-attachments/assets/fd12c609-d5c4-4cf2-a6f5-091af04ada1e">
 
+<br>
+<br>
+
+## APIs
+
+![api](https://github.com/user-attachments/assets/b5ecfa10-d482-4641-b665-52c978bc3de0)
+
+
